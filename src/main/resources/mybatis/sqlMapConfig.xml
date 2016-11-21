@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <!--全局配置参数-->
+    <!--<settings>
+    </settings>-->
+
+    <!--定义别名-->
+    <typeAliases>
+        <!--<typeAlias type="com.simple.mybatis_mapper.pojo.User" alias="User"></typeAlias> --><!--大小写不区分--> <!--定义一个别名-->
+        <!--批量定义别名-->
+        <package name="com.simple.loveDingZhi.po"></package>
+    </typeAliases>
+
+    <!--加载映射文件-->
+    <mappers>
+        <!--不区分大小写-->
+        <mapper resource="mapper/UserMapper.xml"/>
+    </mappers>
+
+</configuration>

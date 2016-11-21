@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.simple.loveDingZhi.mapper.UserMapper" >
+  <resultMap id="BaseResultMap" type="com.simple.loveDingZhi.po.User" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="real_name" property="realName" jdbcType="VARCHAR" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="phone_number" property="phoneNumber" jdbcType="VARCHAR" />
+    <result column="is_designer" property="isDesigner" jdbcType="BIT" />
+    <result column="is_business" property="isBusiness" jdbcType="BIT" />
+    <result column="tou_xiang_url" property="touXiangUrl" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, real_name, user_name, phone_number, is_designer, is_business, tou_xiang_url, 
+    address
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.simple.loveDingZhi.po.UserExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.simple.loveDingZhi.po.UserExample" >
+    delete from user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.simple.loveDingZhi.po.User" >
+    insert into user (id, real_name, user_name, 
+      phone_number, is_designer, is_business, 
+      tou_xiang_url, address)
+    values (#{id,jdbcType=INTEGER}, #{realName,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, 
+      #{phoneNumber,jdbcType=VARCHAR}, #{isDesigner,jdbcType=BIT}, #{isBusiness,jdbcType=BIT}, 
+      #{touXiangUrl,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.simple.loveDingZhi.po.User" >
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="realName != null" >
+        real_name,
+      </if>
+      <if test="userName != null" >
+        user_name,
+      </if>
+      <if test="phoneNumber != null" >
+        phone_number,
+      </if>
+      <if test="isDesigner != null" >
+        is_designer,
+      </if>
+      <if test="isBusiness != null" >
+        is_business,
+      </if>
+      <if test="touXiangUrl != null" >
+        tou_xiang_url,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="realName != null" >
+        #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneNumber != null" >
+        #{phoneNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="isDesigner != null" >
+        #{isDesigner,jdbcType=BIT},
+      </if>
+      <if test="isBusiness != null" >
+        #{isBusiness,jdbcType=BIT},
+      </if>
+      <if test="touXiangUrl != null" >
+        #{touXiangUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.simple.loveDingZhi.po.UserExample" resultType="java.lang.Integer" >
+    select count(*) from user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update user
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.realName != null" >
+        real_name = #{record.realName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userName != null" >
+        user_name = #{record.userName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phoneNumber != null" >
+        phone_number = #{record.phoneNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isDesigner != null" >
+        is_designer = #{record.isDesigner,jdbcType=BIT},
+      </if>
+      <if test="record.isBusiness != null" >
+        is_business = #{record.isBusiness,jdbcType=BIT},
+      </if>
+      <if test="record.touXiangUrl != null" >
+        tou_xiang_url = #{record.touXiangUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null" >
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update user
+    set id = #{record.id,jdbcType=INTEGER},
+      real_name = #{record.realName,jdbcType=VARCHAR},
+      user_name = #{record.userName,jdbcType=VARCHAR},
+      phone_number = #{record.phoneNumber,jdbcType=VARCHAR},
+      is_designer = #{record.isDesigner,jdbcType=BIT},
+      is_business = #{record.isBusiness,jdbcType=BIT},
+      tou_xiang_url = #{record.touXiangUrl,jdbcType=VARCHAR},
+      address = #{record.address,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.simple.loveDingZhi.po.User" >
+    update user
+    <set >
+      <if test="realName != null" >
+        real_name = #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null" >
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneNumber != null" >
+        phone_number = #{phoneNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="isDesigner != null" >
+        is_designer = #{isDesigner,jdbcType=BIT},
+      </if>
+      <if test="isBusiness != null" >
+        is_business = #{isBusiness,jdbcType=BIT},
+      </if>
+      <if test="touXiangUrl != null" >
+        tou_xiang_url = #{touXiangUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.simple.loveDingZhi.po.User" >
+    update user
+    set real_name = #{realName,jdbcType=VARCHAR},
+      user_name = #{userName,jdbcType=VARCHAR},
+      phone_number = #{phoneNumber,jdbcType=VARCHAR},
+      is_designer = #{isDesigner,jdbcType=BIT},
+      is_business = #{isBusiness,jdbcType=BIT},
+      tou_xiang_url = #{touXiangUrl,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
