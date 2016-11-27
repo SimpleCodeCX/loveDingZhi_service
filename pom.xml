@@ -43,6 +43,9 @@
         <!--springMvc加入json支持-->
         <jackson-core-asl.version>1.9.11</jackson-core-asl.version>
         <jackson-mapper-asl.version>1.9.11</jackson-mapper-asl.version>
+        <!--配置logback日志插件-->
+        <logback-classic.version>1.1.7</logback-classic.version>
+        <jcl-over-slf4j.version>1.7.21</jcl-over-slf4j.version>
     </properties>
 
     <dependencies>
@@ -168,23 +171,23 @@
             <version>${javassist.version}</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/log4j/log4j -->
-        <dependency>
+       <!-- <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
             <version>${log4j.version}</version>
-        </dependency>
+        </dependency>-->
         <!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-api -->
-        <dependency>
+       <!-- <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-api</artifactId>
             <version>${log4j-api.version}</version>
-        </dependency>
+        </dependency>-->
         <!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core -->
-        <dependency>
+     <!--   <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-core</artifactId>
             <version>${log4j-core.version}</version>
-        </dependency>
+        </dependency>-->
         <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -192,11 +195,11 @@
             <version>${slf4j-api.version}</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-log4j12 -->
-        <dependency>
+       <!-- <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
             <version>${slf4j-log4j12.version}</version>
-        </dependency>
+        </dependency>-->
         <!--mybatis依赖包 End-->
         <!--mysql驱动包-->
         <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
@@ -262,6 +265,19 @@
             <groupId>org.codehaus.jackson</groupId>
             <artifactId>jackson-mapper-asl</artifactId>
             <version>${jackson-mapper-asl.version}</version>
+        </dependency>
+
+
+        <!--配置logback日志插件-->
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>${logback-classic.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jcl-over-slf4j</artifactId>
+            <version>${jcl-over-slf4j.version}</version>
         </dependency>
     </dependencies>
 </project>

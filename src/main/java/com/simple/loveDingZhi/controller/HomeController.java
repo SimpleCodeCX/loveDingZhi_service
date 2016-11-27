@@ -1,11 +1,15 @@
 package com.simple.loveDingZhi.controller;
 
+import com.mysql.jdbc.log.LogFactory;
 import com.simple.loveDingZhi.po.User;
 import com.simple.loveDingZhi.service.IUserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,10 +26,12 @@ public class HomeController {
     private IUserService userService;
 
     @RequestMapping("/index")
-    public void index(HttpServletResponse response) throws Exception {
-        //        返回json字符串
-        User user=userService.findUserById(1);
-        response.getWriter().write(user.getId().toString());
+    public ModelAndView index(HttpServletResponse response){
+        ModelAndView modelAndView=new ModelAndView();
+        modelAndView.setViewName("jsp1");
+        Logger logger= LoggerFactory.getLogger(HomeController.class);
+        logger.info("ddddddd");
+        return modelAndView;
     }
 
     @RequestMapping("/getUser")

@@ -10,6 +10,7 @@ import sun.misc.BASE64Encoder;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.nio.channels.SelectableChannel;
@@ -94,7 +95,8 @@ public class AccountController {
      *登录成功，返回{flat:true},否则返回{flat:false}
      */
     @RequestMapping("/login")
-    public @ResponseBody String login(HttpServletResponse response,HttpServletRequest request) throws NoSuchAlgorithmException, UnsupportedEncodingException {
+    public @ResponseBody String login(HttpServletResponse response,HttpServletRequest request)
+            throws NoSuchAlgorithmException, UnsupportedEncodingException {
         response.addHeader("Access-Control-Allow-Origin", "*");
         String phoneNumber=request.getParameter("phoneNumber");
         String password=request.getParameter("password");
@@ -109,6 +111,9 @@ public class AccountController {
         int count=userService.countBySelective(user);
         boolean flat;
         if(count==1){
+            HttpSession session=request.getSession();
+            session.setAttribute("name","dong");
+            System.out.println(session.getAttribute("name"));
             flat=true;
         }
         else{
@@ -117,6 +122,8 @@ public class AccountController {
 
         return "{\"flat\":"+flat+"}";
     }
+
+
 
 
 }

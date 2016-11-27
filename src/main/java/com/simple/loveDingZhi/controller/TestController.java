@@ -7,8 +7,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -84,6 +87,49 @@ public class TestController {
         return "flightHandler({name:'hello'})";
     }
 
+    /*----------------------------测试session------------------------------------------*/
+    /**
+     * Created by simple on 2016/11/27.
+     */
+    @RequestMapping("/login1")
+    public @ResponseBody String login1(HttpServletResponse response,HttpServletRequest request) throws UnsupportedEncodingException {
+        request.setCharacterEncoding("UTF-8");
+        response.setHeader("Access-Control-Allow-Origin", "*");
+        HttpSession session=request.getSession();
+        session.setAttribute("name","dong");
+
+       /* Cookie cookie=new Cookie("aa","123");
+        *//*cookie.setPath("/");*//*
+        Cookie cookie2=new Cookie("aa2","123");
+        cookie2.setPath("/");
+        response.addCookie(cookie);
+        response.addCookie(cookie2);
+        Cookie cookie3=new Cookie("ttt","123");
+        cookie3.setPath("/");
+        response.addCookie(cookie3);
+        response.addHeader("Set-Cookie", "uid=112; Path=/; Secure; HttpOnly=false");*/
+
+        Cookie[] cookies = request.getCookies();//这样便可以获取一个cookie数组
+        System.out.println("------------------------"+cookies.length+"----------------------------");
+        return "设置session成功";
+        /*for(Cookie cookiee : cookies){
+            System.out.println(cookiee.getName()+" "+cookiee.getValue());
+        }
+        return "设置session成功";*/
+
+    }
+
+    /**
+     * Created by simple on 2016/11/27.
+     */
+    @RequestMapping("/login2")
+    public @ResponseBody String login2(HttpServletResponse response,HttpServletRequest request) {
+        response.setHeader("Access-Control-Allow-Origin", "*");
+        HttpSession session=request.getSession();
+        System.out.println(session.getAttribute("name"));
+        return session.getAttribute("name").toString();
+
+    }
 
 
 }
