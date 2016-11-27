@@ -2,8 +2,9 @@ package com.simple.loveDingZhi.mapper;
 
 import com.simple.loveDingZhi.po.CustomOrdersDetail;
 import com.simple.loveDingZhi.po.CustomOrdersDetailExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface CustomOrdersDetailMapper {
     int countByExample(CustomOrdersDetailExample example);

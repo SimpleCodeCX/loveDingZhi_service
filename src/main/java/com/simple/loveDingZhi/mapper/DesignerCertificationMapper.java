@@ -2,8 +2,9 @@ package com.simple.loveDingZhi.mapper;
 
 import com.simple.loveDingZhi.po.DesignerCertification;
 import com.simple.loveDingZhi.po.DesignerCertificationExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface DesignerCertificationMapper {
     int countByExample(DesignerCertificationExample example);

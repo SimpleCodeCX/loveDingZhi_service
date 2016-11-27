@@ -15,7 +15,7 @@
       $("#btn1").click(function(){
         $.ajax({
           type:"post",
-          url: "/home/getUser",
+          url: "/account/register",
           contentType:"application/json;charset=utf-8",
           success: function (data) {
             alert(data);

@@ -2,8 +2,9 @@ package com.simple.loveDingZhi.mapper;
 
 import com.simple.loveDingZhi.po.BusinessCloth;
 import com.simple.loveDingZhi.po.BusinessClothExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface BusinessClothMapper {
     int countByExample(BusinessClothExample example);

@@ -2,8 +2,9 @@ package com.simple.loveDingZhi.mapper;
 
 import com.simple.loveDingZhi.po.BusinessLogo;
 import com.simple.loveDingZhi.po.BusinessLogoExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface BusinessLogoMapper {
     int countByExample(BusinessLogoExample example);

@@ -2,8 +2,9 @@ package com.simple.loveDingZhi.mapper;
 
 import com.simple.loveDingZhi.po.Business;
 import com.simple.loveDingZhi.po.BusinessExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface BusinessMapper {
     int countByExample(BusinessExample example);

@@ -5,6 +5,8 @@ public class User {
 
     private String realName;
 
+    private String password;
+
     private String userName;
 
     private String phoneNumber;
@@ -31,6 +33,14 @@ public class User {
 
     public void setRealName(String realName) {
         this.realName = realName == null ? null : realName.trim();
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password == null ? null : password.trim();
     }
 
     public String getUserName() {

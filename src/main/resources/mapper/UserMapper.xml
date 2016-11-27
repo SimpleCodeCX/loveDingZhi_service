@@ -4,6 +4,7 @@
   <resultMap id="BaseResultMap" type="com.simple.loveDingZhi.po.User" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="real_name" property="realName" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
     <result column="user_name" property="userName" jdbcType="VARCHAR" />
     <result column="phone_number" property="phoneNumber" jdbcType="VARCHAR" />
     <result column="is_designer" property="isDesigner" jdbcType="BIT" />
@@ -70,7 +71,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, real_name, user_name, phone_number, is_designer, is_business, tou_xiang_url, 
+    id, real_name, password, user_name, phone_number, is_designer, is_business, tou_xiang_url, 
     address
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.simple.loveDingZhi.po.UserExample" >
@@ -104,12 +105,14 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.simple.loveDingZhi.po.User" >
-    insert into user (id, real_name, user_name, 
-      phone_number, is_designer, is_business, 
-      tou_xiang_url, address)
-    values (#{id,jdbcType=INTEGER}, #{realName,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, 
-      #{phoneNumber,jdbcType=VARCHAR}, #{isDesigner,jdbcType=BIT}, #{isBusiness,jdbcType=BIT}, 
-      #{touXiangUrl,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR})
+    insert into user (id, real_name, password, 
+      user_name, phone_number, is_designer, 
+      is_business, tou_xiang_url, address
+      )
+    values (#{id,jdbcType=INTEGER}, #{realName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{userName,jdbcType=VARCHAR}, #{phoneNumber,jdbcType=VARCHAR}, #{isDesigner,jdbcType=BIT}, 
+      #{isBusiness,jdbcType=BIT}, #{touXiangUrl,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.simple.loveDingZhi.po.User" >
     insert into user
@@ -119,6 +122,9 @@
       </if>
       <if test="realName != null" >
         real_name,
+      </if>
+      <if test="password != null" >
+        password,
       </if>
       <if test="userName != null" >
         user_name,
@@ -145,6 +151,9 @@
       </if>
       <if test="realName != null" >
         #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
       </if>
       <if test="userName != null" >
         #{userName,jdbcType=VARCHAR},
@@ -181,6 +190,9 @@
       <if test="record.realName != null" >
         real_name = #{record.realName,jdbcType=VARCHAR},
       </if>
+      <if test="record.password != null" >
+        password = #{record.password,jdbcType=VARCHAR},
+      </if>
       <if test="record.userName != null" >
         user_name = #{record.userName,jdbcType=VARCHAR},
       </if>
@@ -208,6 +220,7 @@
     update user
     set id = #{record.id,jdbcType=INTEGER},
       real_name = #{record.realName,jdbcType=VARCHAR},
+      password = #{record.password,jdbcType=VARCHAR},
       user_name = #{record.userName,jdbcType=VARCHAR},
       phone_number = #{record.phoneNumber,jdbcType=VARCHAR},
       is_designer = #{record.isDesigner,jdbcType=BIT},
@@ -223,6 +236,9 @@
     <set >
       <if test="realName != null" >
         real_name = #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
       </if>
       <if test="userName != null" >
         user_name = #{userName,jdbcType=VARCHAR},
@@ -248,6 +264,7 @@
   <update id="updateByPrimaryKey" parameterType="com.simple.loveDingZhi.po.User" >
     update user
     set real_name = #{realName,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
       user_name = #{userName,jdbcType=VARCHAR},
       phone_number = #{phoneNumber,jdbcType=VARCHAR},
       is_designer = #{isDesigner,jdbcType=BIT},
@@ -256,4 +273,42 @@
       address = #{address,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+
+  <!--****************************************************************************************************-->
+  <select id="countByPhoneNumber" resultType="java.lang.Integer" parameterType="java.lang.String">
+    select count(*) from user where phone_number=#{phoneNumber}
+  </select>
+  <select id="countBySelective" resultType="java.lang.Integer" parameterType="com.simple.loveDingZhi.po.User">
+    select count(*) from user
+   <where>
+     <if test="id != null" >
+       id = #{id,jdbcType=INTEGER}
+     </if>
+     <if test="realName != null" >
+       and real_name = #{realName,jdbcType=VARCHAR},
+     </if>
+     <if test="password != null" >
+       and password = #{password,jdbcType=VARCHAR}
+     </if>
+     <if test="userName != null" >
+       and user_name = #{userName,jdbcType=VARCHAR}
+     </if>
+     <if test="phoneNumber != null" >
+       and phone_number = #{phoneNumber,jdbcType=VARCHAR}
+     </if>
+     <if test="isDesigner != null" >
+       and is_designer = #{isDesigner,jdbcType=BIT}
+     </if>
+     <if test="isBusiness != null" >
+       and is_business = #{isBusiness,jdbcType=BIT}
+     </if>
+     <if test="touXiangUrl != null" >
+       and tou_xiang_url = #{touXiangUrl,jdbcType=VARCHAR}
+     </if>
+     <if test="address != null" >
+       and address = #{address,jdbcType=VARCHAR}
+     </if>
+   </where>
+  </select>
 </mapper>

@@ -10,14 +10,16 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
- * Created by simple on 2016/11/16.
+ * Created by simple on 2016/11/26.
  */
 @Controller
-@RequestMapping("/home")
-public class HomeController {
+@RequestMapping("/test")
+public class TestController {
     @Autowired
     private IUserService userService;
 
@@ -28,8 +30,15 @@ public class HomeController {
         response.getWriter().write(user.getId().toString());
     }
 
-    @RequestMapping("/getUser")
-    public @ResponseBody User request_json(HttpServletResponse response,HttpServletRequest request) throws Exception {
+    @RequestMapping("/jsonData1")
+    public @ResponseBody String jsonData1(HttpServletResponse response){
+        response.setHeader("Access-Control-Allow-Origin", "*");
+        return "{\"name\":\"dong\",\"age\":2}";
+    }
+
+    @RequestMapping("/jsonData2")
+    public @ResponseBody
+    User jsonData2(HttpServletResponse response,HttpServletRequest request) throws Exception {
         User user1=userService.findUserById(1);
         response.setHeader("Access-Control-Allow-Origin", "*");
         // 这个可以用过滤器统一处理
@@ -40,12 +49,20 @@ public class HomeController {
             response.addHeader("Access-Control-Allow-Headers", "accept, content-type, x-pingother");
             *//*response.addHeader("Access-Control-Max-Age", "1800");//30 min*//*
         }*/
+
+         /*   if("OPTIONS".equals(request.getMethod())){
+            //设置Access-Control-Allow相关头
+            response.getWriter().flush();
+
+            return "";
+        }*/
         /*Access-Control-Max-Age: 86400*/
         return user1;
     }
 
-    @RequestMapping("/getUserList")
-    public @ResponseBody List<User> request_jsonList(HttpServletResponse response,HttpServletRequest request) throws Exception {
+    @RequestMapping("/jsonData3")
+    public @ResponseBody
+    List<User> jsonData3(HttpServletResponse response,HttpServletRequest request) throws Exception {
         List<User> userList=new ArrayList<User>();
         User user1=userService.findUserById(1);
         userList.add(user1);
@@ -54,14 +71,19 @@ public class HomeController {
         return userList;
     }
 
+    @RequestMapping("/jsonData4")
+    public @ResponseBody Map jsonData4(HttpServletResponse response){
+        response.setHeader("Access-Control-Allow-Origin", "*");
+        Map params =  new HashMap();
+         params.put("username", "1213");
+         params.put("user_json", "2222");
+        return params;
+    }
     @RequestMapping("/getUser2")
     public @ResponseBody String request_json2(HttpServletResponse response) throws Exception {
-     /*   response.setHeader("Access-Control-Allow-Origin", "*");
-        User user1=userService.findUserById(1);
-        //return user1;
-     */
         return "flightHandler({name:'hello'})";
     }
 
-}
 
+
+}

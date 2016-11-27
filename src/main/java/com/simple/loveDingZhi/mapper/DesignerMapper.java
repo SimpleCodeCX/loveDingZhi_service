@@ -2,8 +2,9 @@ package com.simple.loveDingZhi.mapper;
 
 import com.simple.loveDingZhi.po.Designer;
 import com.simple.loveDingZhi.po.DesignerExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface DesignerMapper {
     int countByExample(DesignerExample example);
