@@ -9,16 +9,17 @@
 <html>
 <head>
     <title></title>
-  <script src="./scripts/jquery-1.8.2.js"></script>
+  <script src="scripts/jquery-1.8.2.js"></script>
   <script type="text/javascript">
+
     $(document).ready(function(){
-      console.log(document.cookie);
       $("#btn1").click(function(){
         $.ajax({
           type:"post",
           url: "/test/login1",
           contentType:"application/json;charset=utf-8",
           success: function (data) {
+            alert(data)
           }
         });
       });
@@ -38,7 +39,7 @@
   </script>
 </head>
 <body>
-index
+index2
 <input type="button" id="btn1" value="Ajax请求login1">
 <input type="button" id="btn2" value="Ajax请求login2">
 </body>

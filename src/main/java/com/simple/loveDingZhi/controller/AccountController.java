@@ -31,13 +31,11 @@ public class AccountController {
     /**
      * Created by simple on 2016/11/27.
      * 实现注册功能
-     *注册成功，返回{flat:true},否则返回{flat:false}
+     * 注册成功，返回{flat:true},否则返回{flat:false}
      */
     @RequestMapping("/register")
     public @ResponseBody String register(HttpServletResponse response,HttpServletRequest request)
             throws IOException, NoSuchAlgorithmException {
-        /*request.setCharacterEncoding("UTF-8");*/
-        response.addHeader("Access-Control-Allow-Origin", "*");
         String phoneNumber=request.getParameter("phoneNumber");//手机号码即账号
         String password=request.getParameter("password");//密码
         String userName=phoneNumber;//用户名初始化为手机号码
@@ -76,7 +74,6 @@ public class AccountController {
     @RequestMapping("/phoneNumberIsExist")
     public @ResponseBody String phoneNumberIsExist(HttpServletResponse response
             ,HttpServletRequest request){
-        response.addHeader("Access-Control-Allow-Origin", "*");
         String phoneNumber=request.getParameter("phoneNumber");//手机号码即账号
         int count=userService.countByPhoneNumber(phoneNumber);
         boolean flat;
@@ -92,12 +89,11 @@ public class AccountController {
     /**
      * Created by simple on 2016/11/27.
      * 实现登录功能
-     *登录成功，返回{flat:true},否则返回{flat:false}
+     * 登录成功，返回{flat:true},否则返回{flat:false}
      */
     @RequestMapping("/login")
     public @ResponseBody String login(HttpServletResponse response,HttpServletRequest request)
             throws NoSuchAlgorithmException, UnsupportedEncodingException {
-        response.addHeader("Access-Control-Allow-Origin", "*");
         String phoneNumber=request.getParameter("phoneNumber");
         String password=request.getParameter("password");
         //确定计算方法

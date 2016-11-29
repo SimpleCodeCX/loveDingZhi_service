@@ -30,6 +30,7 @@ public class HomeController {
         ModelAndView modelAndView=new ModelAndView();
         modelAndView.setViewName("jsp1");
         Logger logger= LoggerFactory.getLogger(HomeController.class);
+        logger.error("错误");
         logger.info("ddddddd");
         return modelAndView;
     }
