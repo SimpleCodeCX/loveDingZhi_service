@@ -42,7 +42,7 @@ public class TestController {
     @RequestMapping("/jsonData2")
     public @ResponseBody
     User jsonData2(HttpServletResponse response,HttpServletRequest request) throws Exception {
-        User user1=userService.findUserById(1);
+        User user1=userService.findUserById(231);
         response.setHeader("Access-Control-Allow-Origin", "*");
         // 这个可以用过滤器统一处理
        /* if (request.getHeader("Access-Control-Request-Method") != null && "OPTIONS".equals(request.getMethod())) {
@@ -67,16 +67,15 @@ public class TestController {
     public @ResponseBody
     List<User> jsonData3(HttpServletResponse response,HttpServletRequest request) throws Exception {
         List<User> userList=new ArrayList<User>();
-        User user1=userService.findUserById(1);
+        User user1=userService.findUserById(231);
         userList.add(user1);
         userList.add(user1);
-        response.setHeader("Access-Control-Allow-Origin", "*");
         return userList;
     }
 
     @RequestMapping("/jsonData4")
     public @ResponseBody Map jsonData4(HttpServletResponse response){
-        response.setHeader("Access-Control-Allow-Origin", "*");
+
         Map params =  new HashMap();
          params.put("username", "1213");
          params.put("user_json", "2222");

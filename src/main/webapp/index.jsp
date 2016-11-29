@@ -16,10 +16,13 @@
       $("#btn1").click(function(){
         $.ajax({
           type:"post",
-          url: "/test/login1",
+          url: "/account/login",
           contentType:"application/json;charset=utf-8",
           success: function (data) {
-            alert(data)
+            console.log(data);
+            /*console.log(JSON.parse(data));*/
+
+            /*alert(data[0].password);*/
           }
         });
       });

@@ -16,6 +16,9 @@ import java.io.UnsupportedEncodingException;
 import java.nio.channels.SelectableChannel;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -89,12 +92,29 @@ public class AccountController {
     /**
      * Created by simple on 2016/11/27.
      * 实现登录功能
-     * 登录成功，返回{flat:true},否则返回{flat:false}
+     * 登录成功，返回:
+     *    userData=
+             {
+             isLogin:true,    //登录是否成功
+             userName:"simple", //用户名
+             realName:"dong",  //真实姓名
+             phoneNumber:"15767973362", //手机号码
+             address:"惠州学院"     /收货地址
+             }
+     * 登录失败，返回:
+     *   userData=
+            {
+                isLogin:false,
+                userName:"",
+                realName:"",
+                phoneNumber:"",
+                address:""
+            }
      */
     @RequestMapping("/login")
-    public @ResponseBody String login(HttpServletResponse response,HttpServletRequest request)
-            throws NoSuchAlgorithmException, UnsupportedEncodingException {
-        String phoneNumber=request.getParameter("phoneNumber");
+    public @ResponseBody Map<String,Map> login(HttpServletResponse response,HttpServletRequest request)
+            throws Exception {
+      /*  String phoneNumber=request.getParameter("phoneNumber");
         String password=request.getParameter("password");
         //确定计算方法
         MessageDigest md5=MessageDigest.getInstance("MD5");
@@ -107,16 +127,28 @@ public class AccountController {
         int count=userService.countBySelective(user);
         boolean flat;
         if(count==1){
-            HttpSession session=request.getSession();
-            session.setAttribute("name","dong");
-            System.out.println(session.getAttribute("name"));
             flat=true;
         }
         else{
             flat=false;
-        }
+        }*/
+        Map map = new HashMap();
+        map.put("isLogin",true);
+        map.put("userName","simple");
+        map.put("realName","dong");
+        map.put("phoneNumber","15767973362");
+        map.put("address","惠州学院");
+        Map<String,Map> userData=new HashMap<String, Map>();
+        userData.put("userData",map);
+        userData.put("userData2",map);
+       /* List<Map> userData=new ArrayList<Map>();
+        userData.add(map);*/
 
-        return "{\"flat\":"+flat+"}";
+        /*List<User> userList=new ArrayList<User>();
+        User user1=userService.findUserById(234);
+        System.out.println(user1.getPassword());
+        userList.add(user1);*/
+        return userData;
     }
 
 
