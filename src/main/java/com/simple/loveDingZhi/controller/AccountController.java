@@ -114,41 +114,36 @@ public class AccountController {
     @RequestMapping("/login")
     public @ResponseBody Map<String,Map> login(HttpServletResponse response,HttpServletRequest request)
             throws Exception {
-      /*  String phoneNumber=request.getParameter("phoneNumber");
+        String phoneNumber=request.getParameter("phoneNumber");
         String password=request.getParameter("password");
         //确定计算方法
         MessageDigest md5=MessageDigest.getInstance("MD5");
         BASE64Encoder base64en = new BASE64Encoder();
         //加密后的密码
         String newPassword=base64en.encode(md5.digest(password.getBytes("utf-8")));
-        User user=new User();
-        user.setPhoneNumber(phoneNumber);
-        user.setPassword(newPassword);
-        int count=userService.countBySelective(user);
-        boolean flat;
+        //前端传回来的用户数据
+        User userView=new User();
+        userView.setPhoneNumber(phoneNumber);
+        userView.setPassword(newPassword);
+        int count=userService.countBySelective(userView);
+        Map map = new HashMap();
         if(count==1){
-            flat=true;
+            //从数据库取出的用户数据
+            User userData=new User();
+            userData=userService.selectBySelective(userView);
+            map.put("isLogin",true);
+            map.put("userName",userData.getUserName());
+            map.put("realName",userData.getRealName());
+            map.put("phoneNumber",userData.getPhoneNumber());
+            map.put("address",userData.getAddress());
         }
         else{
-            flat=false;
-        }*/
-        Map map = new HashMap();
-        map.put("isLogin",true);
-        map.put("userName","simple");
-        map.put("realName","dong");
-        map.put("phoneNumber","15767973362");
-        map.put("address","惠州学院");
-        Map<String,Map> userData=new HashMap<String, Map>();
-        userData.put("userData",map);
-        userData.put("userData2",map);
-       /* List<Map> userData=new ArrayList<Map>();
-        userData.add(map);*/
+            map.put("isLogin",false);
+        }
 
-        /*List<User> userList=new ArrayList<User>();
-        User user1=userService.findUserById(234);
-        System.out.println(user1.getPassword());
-        userList.add(user1);*/
-        return userData;
+        Map<String,Map> userDataMap=new HashMap<String, Map>();
+        userDataMap.put("userData",map);
+        return userDataMap;
     }
 
 

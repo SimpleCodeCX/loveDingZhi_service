@@ -38,6 +38,13 @@ public class UserServiceImpl implements IUserService {
     public int countBySelective(User user_){
         return  userMapper.countBySelective(user_);
     }
+    /**
+     * Created by simple on 2016/12/03.
+     * 根据User查询用户数据
+     */
+    public User selectBySelective(User user_){
+        return userMapper.selectBySelective(user_);
+    }
 
 
 

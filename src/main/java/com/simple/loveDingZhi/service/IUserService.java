@@ -10,4 +10,5 @@ public interface IUserService {
     public int insertSelective(User user_);
     public int countByPhoneNumber(String phoneNumber_);
     public int countBySelective(User user);
+    public User selectBySelective(User user);
 }

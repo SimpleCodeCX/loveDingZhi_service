@@ -311,4 +311,38 @@
      </if>
    </where>
   </select>
+  <select id="selectBySelective" resultMap="BaseResultMap" parameterType="com.simple.loveDingZhi.po.User">
+    select
+    <include refid="Base_Column_List" />
+    from user
+    <where>
+      <if test="id != null" >
+        id = #{id,jdbcType=INTEGER}
+      </if>
+      <if test="realName != null" >
+        and real_name = #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        and password = #{password,jdbcType=VARCHAR}
+      </if>
+      <if test="userName != null" >
+        and user_name = #{userName,jdbcType=VARCHAR}
+      </if>
+      <if test="phoneNumber != null" >
+        and phone_number = #{phoneNumber,jdbcType=VARCHAR}
+      </if>
+      <if test="isDesigner != null" >
+        and is_designer = #{isDesigner,jdbcType=BIT}
+      </if>
+      <if test="isBusiness != null" >
+        and is_business = #{isBusiness,jdbcType=BIT}
+      </if>
+      <if test="touXiangUrl != null" >
+        and tou_xiang_url = #{touXiangUrl,jdbcType=VARCHAR}
+      </if>
+      <if test="address != null" >
+        and address = #{address,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </select>
 </mapper>

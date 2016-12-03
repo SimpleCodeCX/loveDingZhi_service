@@ -32,4 +32,5 @@ public interface UserMapper {
     /**************************************************************************************************/
     int countByPhoneNumber(String phoneNumber);
     int countBySelective(User user);
+    User selectBySelective(User user);
 }
