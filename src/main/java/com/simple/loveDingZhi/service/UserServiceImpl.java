@@ -26,10 +26,17 @@ public class UserServiceImpl implements IUserService {
     }
     /**
      * Created by simple on 2016/11/27.
-     * 查询手机号码（账号）是否存在
+     * 查询手机号码是否存在
      */
      public int countByPhoneNumber(String phoneNumber_){
-        return  userMapper.countByPhoneNumber(phoneNumber_);
+         return  userMapper.countByPhoneNumber(phoneNumber_);
+    }
+    /**
+     * Created by simple on 2016/12/03.
+     * 查询账号是否存在
+     */
+    public int countByAccountNumber(String accountNumber_){
+        return  userMapper.countByAccountNumber(accountNumber_);
     }
     /**
      * Created by simple on 2016/11/27.
@@ -45,7 +52,13 @@ public class UserServiceImpl implements IUserService {
     public User selectBySelective(User user_){
         return userMapper.selectBySelective(user_);
     }
-
+    /**
+     * Created by simple on 2016/12/03.
+     * 根据账号更新用户数据
+     */
+    public int updateUserName(User user_){
+        return userMapper.updateByAccountNumberSelective(user_);
+    }
 
 
 }

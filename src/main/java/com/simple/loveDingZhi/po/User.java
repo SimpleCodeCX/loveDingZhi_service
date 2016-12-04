@@ -3,6 +3,8 @@ package com.simple.loveDingZhi.po;
 public class User {
     private Integer id;
 
+    private String accountNumber;
+
     private String realName;
 
     private String password;
@@ -25,6 +27,14 @@ public class User {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getAccountNumber() {
+        return accountNumber;
+    }
+
+    public void setAccountNumber(String accountNumber) {
+        this.accountNumber = accountNumber == null ? null : accountNumber.trim();
     }
 
     public String getRealName() {

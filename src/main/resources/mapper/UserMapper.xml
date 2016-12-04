@@ -3,6 +3,7 @@
 <mapper namespace="com.simple.loveDingZhi.mapper.UserMapper" >
   <resultMap id="BaseResultMap" type="com.simple.loveDingZhi.po.User" >
     <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="account_number" property="accountNumber" jdbcType="VARCHAR" />
     <result column="real_name" property="realName" jdbcType="VARCHAR" />
     <result column="password" property="password" jdbcType="VARCHAR" />
     <result column="user_name" property="userName" jdbcType="VARCHAR" />
@@ -71,8 +72,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, real_name, password, user_name, phone_number, is_designer, is_business, tou_xiang_url, 
-    address
+    id, account_number, real_name, password, user_name, phone_number, is_designer, is_business,
+    tou_xiang_url, address
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.simple.loveDingZhi.po.UserExample" >
     select
@@ -89,7 +90,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
+    select
     <include refid="Base_Column_List" />
     from user
     where id = #{id,jdbcType=INTEGER}
@@ -105,20 +106,23 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.simple.loveDingZhi.po.User" >
-    insert into user (id, real_name, password, 
-      user_name, phone_number, is_designer, 
-      is_business, tou_xiang_url, address
-      )
-    values (#{id,jdbcType=INTEGER}, #{realName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{userName,jdbcType=VARCHAR}, #{phoneNumber,jdbcType=VARCHAR}, #{isDesigner,jdbcType=BIT}, 
-      #{isBusiness,jdbcType=BIT}, #{touXiangUrl,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}
-      )
+    insert into user (id, account_number, real_name,
+    password, user_name, phone_number,
+    is_designer, is_business, tou_xiang_url,
+    address)
+    values (#{id,jdbcType=INTEGER}, #{accountNumber,jdbcType=VARCHAR}, #{realName,jdbcType=VARCHAR},
+    #{password,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{phoneNumber,jdbcType=VARCHAR},
+    #{isDesigner,jdbcType=BIT}, #{isBusiness,jdbcType=BIT}, #{touXiangUrl,jdbcType=VARCHAR},
+    #{address,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.simple.loveDingZhi.po.User" >
     insert into user
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
+      </if>
+      <if test="accountNumber != null" >
+        account_number,
       </if>
       <if test="realName != null" >
         real_name,
@@ -148,6 +152,9 @@
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         #{id,jdbcType=INTEGER},
+      </if>
+      <if test="accountNumber != null" >
+        #{accountNumber,jdbcType=VARCHAR},
       </if>
       <if test="realName != null" >
         #{realName,jdbcType=VARCHAR},
@@ -187,6 +194,9 @@
       <if test="record.id != null" >
         id = #{record.id,jdbcType=INTEGER},
       </if>
+      <if test="record.accountNumber != null" >
+        account_number = #{record.accountNumber,jdbcType=VARCHAR},
+      </if>
       <if test="record.realName != null" >
         real_name = #{record.realName,jdbcType=VARCHAR},
       </if>
@@ -219,14 +229,15 @@
   <update id="updateByExample" parameterType="map" >
     update user
     set id = #{record.id,jdbcType=INTEGER},
-      real_name = #{record.realName,jdbcType=VARCHAR},
-      password = #{record.password,jdbcType=VARCHAR},
-      user_name = #{record.userName,jdbcType=VARCHAR},
-      phone_number = #{record.phoneNumber,jdbcType=VARCHAR},
-      is_designer = #{record.isDesigner,jdbcType=BIT},
-      is_business = #{record.isBusiness,jdbcType=BIT},
-      tou_xiang_url = #{record.touXiangUrl,jdbcType=VARCHAR},
-      address = #{record.address,jdbcType=VARCHAR}
+    account_number = #{record.accountNumber,jdbcType=VARCHAR},
+    real_name = #{record.realName,jdbcType=VARCHAR},
+    password = #{record.password,jdbcType=VARCHAR},
+    user_name = #{record.userName,jdbcType=VARCHAR},
+    phone_number = #{record.phoneNumber,jdbcType=VARCHAR},
+    is_designer = #{record.isDesigner,jdbcType=BIT},
+    is_business = #{record.isBusiness,jdbcType=BIT},
+    tou_xiang_url = #{record.touXiangUrl,jdbcType=VARCHAR},
+    address = #{record.address,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -234,6 +245,9 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.simple.loveDingZhi.po.User" >
     update user
     <set >
+      <if test="accountNumber != null" >
+        account_number = #{accountNumber,jdbcType=VARCHAR},
+      </if>
       <if test="realName != null" >
         real_name = #{realName,jdbcType=VARCHAR},
       </if>
@@ -263,27 +277,32 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.simple.loveDingZhi.po.User" >
     update user
-    set real_name = #{realName,jdbcType=VARCHAR},
-      password = #{password,jdbcType=VARCHAR},
-      user_name = #{userName,jdbcType=VARCHAR},
-      phone_number = #{phoneNumber,jdbcType=VARCHAR},
-      is_designer = #{isDesigner,jdbcType=BIT},
-      is_business = #{isBusiness,jdbcType=BIT},
-      tou_xiang_url = #{touXiangUrl,jdbcType=VARCHAR},
-      address = #{address,jdbcType=VARCHAR}
+    set account_number = #{accountNumber,jdbcType=VARCHAR},
+    real_name = #{realName,jdbcType=VARCHAR},
+    password = #{password,jdbcType=VARCHAR},
+    user_name = #{userName,jdbcType=VARCHAR},
+    phone_number = #{phoneNumber,jdbcType=VARCHAR},
+    is_designer = #{isDesigner,jdbcType=BIT},
+    is_business = #{isBusiness,jdbcType=BIT},
+    tou_xiang_url = #{touXiangUrl,jdbcType=VARCHAR},
+    address = #{address,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
-
-
   <!--****************************************************************************************************-->
   <select id="countByPhoneNumber" resultType="java.lang.Integer" parameterType="java.lang.String">
     select count(*) from user where phone_number=#{phoneNumber}
+  </select>
+  <select id="countByAccountNumber" resultType="java.lang.Integer" parameterType="java.lang.String">
+    select count(*) from user where account_number=#{accountNumber}
   </select>
   <select id="countBySelective" resultType="java.lang.Integer" parameterType="com.simple.loveDingZhi.po.User">
     select count(*) from user
    <where>
      <if test="id != null" >
        id = #{id,jdbcType=INTEGER}
+     </if>
+     <if test="accountNumber != null" >
+       account_number = #{accountNumber,jdbcType=VARCHAR}
      </if>
      <if test="realName != null" >
        and real_name = #{realName,jdbcType=VARCHAR},
@@ -319,6 +338,9 @@
       <if test="id != null" >
         id = #{id,jdbcType=INTEGER}
       </if>
+      <if test="accountNumber != null" >
+        account_number = #{accountNumber,jdbcType=VARCHAR}
+      </if>
       <if test="realName != null" >
         and real_name = #{realName,jdbcType=VARCHAR},
       </if>
@@ -345,4 +367,34 @@
       </if>
     </where>
   </select>
+  <update id="updateByAccountNumberSelective" parameterType="com.simple.loveDingZhi.po.User" >
+    update user
+    <set >
+      <if test="realName != null" >
+        real_name = #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null" >
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneNumber != null" >
+        phone_number = #{phoneNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="isDesigner != null" >
+        is_designer = #{isDesigner,jdbcType=BIT},
+      </if>
+      <if test="isBusiness != null" >
+        is_business = #{isBusiness,jdbcType=BIT},
+      </if>
+      <if test="touXiangUrl != null" >
+        tou_xiang_url = #{touXiangUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where account_number = #{accountNumber,jdbcType=VARCHAR}
+  </update>
 </mapper>

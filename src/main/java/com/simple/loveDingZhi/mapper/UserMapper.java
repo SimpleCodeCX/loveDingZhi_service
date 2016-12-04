@@ -31,6 +31,9 @@ public interface UserMapper {
     int updateByPrimaryKey(User record);
     /**************************************************************************************************/
     int countByPhoneNumber(String phoneNumber);
+    int countByAccountNumber(String accountNumber);
     int countBySelective(User user);
     User selectBySelective(User user);
+    //通过账号更新用户数据
+    int updateByAccountNumberSelective(User user);
 }

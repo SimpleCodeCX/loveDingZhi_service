@@ -9,6 +9,8 @@ public interface IUserService {
     public User findUserById(int id_)throws Exception;
     public int insertSelective(User user_);
     public int countByPhoneNumber(String phoneNumber_);
+    public int countByAccountNumber(String accountNumber_);
     public int countBySelective(User user);
     public User selectBySelective(User user);
+    int updateUserName(User user);
 }

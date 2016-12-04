@@ -15,19 +15,20 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         //获得session
         HttpSession session=request.getSession();
+        /*System.out.println(session.getAttribute("ID"));*/
         //验证用户是否登录
-        if(session.getAttribute("userName")!=null){
+        if(session.getAttribute("ID")!=null){
             //身份存在，放行
             return true;
         }
         //执行到这里说明用户还未登录，需要登录
-        /*if(request.getHeader("x-requested-with")!=null && request.getHeader("x-requested-with").equalsIgnoreCase("XMLHttpRequest"))//如果请求头包含x-requested-with，说明是ajax请求，
+     /*   if(request.getHeader("x-requested-with")!=null && request.getHeader("x-requested-with").equalsIgnoreCase("XMLHttpRequest"))//如果请求头包含x-requested-with，说明是ajax请求，
         {
             response.getWriter().println(originUrl);
             return false;
         }*/
 
-        response.getWriter().println("{\"flat\":\"true\"}");
+        response.getWriter().println("{\"message\":\"还未登录\"}");
         return false;
     }
 

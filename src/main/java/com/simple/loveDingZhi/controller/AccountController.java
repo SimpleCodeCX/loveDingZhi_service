@@ -39,7 +39,8 @@ public class AccountController {
     @RequestMapping("/register")
     public @ResponseBody String register(HttpServletResponse response,HttpServletRequest request)
             throws IOException, NoSuchAlgorithmException {
-        String phoneNumber=request.getParameter("phoneNumber");//手机号码即账号
+        String phoneNumber=request.getParameter("accountNumber");//手机号码
+        String accountNumber=phoneNumber;//手机号码作为账号
         String password=request.getParameter("password");//密码
         String userName=phoneNumber;//用户名初始化为手机号码
 
@@ -52,6 +53,7 @@ public class AccountController {
         //保存到数据库
         User user=new User();
         user.setUserName(userName);
+        user.setAccountNumber(accountNumber);
         user.setPassword(newPassword);
         user.setPhoneNumber(phoneNumber);
         user.setIsBusiness(false);//初始化为未开通商家功能
@@ -71,14 +73,14 @@ public class AccountController {
 
     /**
      * Created by simple on 2016/11/27.
-     * 检查手机号码即账号是否存在
+     * 检查账号是否存在
      *如果存在，返回{flat:true},否则返回{flat:false}
      */
-    @RequestMapping("/phoneNumberIsExist")
-    public @ResponseBody String phoneNumberIsExist(HttpServletResponse response
+    @RequestMapping("/accountNumberIsExist")
+    public @ResponseBody String accountNumberIsExist(HttpServletResponse response
             ,HttpServletRequest request){
-        String phoneNumber=request.getParameter("phoneNumber");//手机号码即账号
-        int count=userService.countByPhoneNumber(phoneNumber);
+        String accountNumber=request.getParameter("accountNumber");//手机号码即账号
+        int count=userService.countByAccountNumber(accountNumber);
         boolean flat;
         if(count==1){
             flat=true;
@@ -114,7 +116,7 @@ public class AccountController {
     @RequestMapping("/login")
     public @ResponseBody Map<String,Map> login(HttpServletResponse response,HttpServletRequest request)
             throws Exception {
-        String phoneNumber=request.getParameter("phoneNumber");
+        String accountNumber=request.getParameter("accountNumber");
         String password=request.getParameter("password");
         //确定计算方法
         MessageDigest md5=MessageDigest.getInstance("MD5");
@@ -123,7 +125,7 @@ public class AccountController {
         String newPassword=base64en.encode(md5.digest(password.getBytes("utf-8")));
         //前端传回来的用户数据
         User userView=new User();
-        userView.setPhoneNumber(phoneNumber);
+        userView.setAccountNumber(accountNumber);
         userView.setPassword(newPassword);
         int count=userService.countBySelective(userView);
         Map map = new HashMap();
@@ -133,9 +135,11 @@ public class AccountController {
             userData=userService.selectBySelective(userView);
             map.put("isLogin",true);
             map.put("userName",userData.getUserName());
+            map.put("accountNumber",userData.getAccountNumber());
             map.put("realName",userData.getRealName());
             map.put("phoneNumber",userData.getPhoneNumber());
             map.put("address",userData.getAddress());
+            request.getSession().setAttribute("ID",userData.getAccountNumber());
         }
         else{
             map.put("isLogin",false);
@@ -144,6 +148,27 @@ public class AccountController {
         Map<String,Map> userDataMap=new HashMap<String, Map>();
         userDataMap.put("userData",map);
         return userDataMap;
+    }
+
+    /**
+     * Created by simple on 2016/12/03.
+     * 实现修改用户名
+     * 修改成功，返回{flat:true},否则返回{flat:false}
+     */
+    @RequestMapping("/updateUserName_authority")
+    public @ResponseBody String updateUserName(HttpServletRequest request){
+        String accountNumber=request.getParameter("accountNumber");//账号
+        String userName=request.getParameter("userName");//用户名
+        //前端传回来的用户数据
+        User user=new User();
+        user.setAccountNumber(accountNumber);
+        user.setUserName(userName);
+        if(userService.updateUserName(user)!=1){
+            return "{\"flat\":false}";
+        }
+        return "{\"flat\":true}";
+
+
     }
 
 
