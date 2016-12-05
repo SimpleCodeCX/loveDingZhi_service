@@ -139,6 +139,9 @@ public class AccountController {
             map.put("realName",userData.getRealName());
             map.put("phoneNumber",userData.getPhoneNumber());
             map.put("address",userData.getAddress());
+            map.put("isDesigner",userData.getIsDesigner());
+            map.put("isBusiness",userData.getIsBusiness());
+            map.put("touXiangUrl",userData.getTouXiangUrl());
             request.getSession().setAttribute("ID",userData.getAccountNumber());
         }
         else{
@@ -149,6 +152,22 @@ public class AccountController {
         userDataMap.put("userData",map);
         return userDataMap;
     }
+
+    /**
+     * Created by simple on 2016/12/05.
+     * 实现退出登录
+     * 修改成功，返回{flat:true},否则返回{flat:false}
+     */
+    @RequestMapping("/loginOut_authority")
+    public @ResponseBody String loginOut(HttpServletRequest request){
+        HttpSession httpSession=request.getSession();
+        httpSession.setAttribute("ID", null);
+        if(httpSession.getAttribute("ID")==null){
+            return "{\"flat\":true}";
+        }
+        return "{\"flat\":false}";
+    }
+
 
     /**
      * Created by simple on 2016/12/03.

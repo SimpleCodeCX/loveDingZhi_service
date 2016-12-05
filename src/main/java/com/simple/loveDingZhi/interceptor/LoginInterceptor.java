@@ -15,7 +15,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         //获得session
         HttpSession session=request.getSession();
-        /*System.out.println(session.getAttribute("ID"));*/
+        System.out.println("session ID is "+session.getAttribute("ID"));
         //验证用户是否登录
         if(session.getAttribute("ID")!=null){
             //身份存在，放行
