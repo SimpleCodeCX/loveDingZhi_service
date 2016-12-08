@@ -12,5 +12,5 @@ public interface IUserService {
     public int countByAccountNumber(String accountNumber_);
     public int countBySelective(User user);
     public User selectBySelective(User user);
-    int updateUserName(User user);
+    int updateByAccountNumberSelective(User user);
 }

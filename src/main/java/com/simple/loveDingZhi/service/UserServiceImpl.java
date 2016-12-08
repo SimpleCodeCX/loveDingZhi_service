@@ -56,7 +56,7 @@ public class UserServiceImpl implements IUserService {
      * Created by simple on 2016/12/03.
      * 根据账号更新用户数据
      */
-    public int updateUserName(User user_){
+    public int updateByAccountNumberSelective(User user_){
         return userMapper.updateByAccountNumberSelective(user_);
     }
 

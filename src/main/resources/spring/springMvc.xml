@@ -11,6 +11,7 @@
 
        <!--对静态资源的访问-->
        <mvc:resources location="/scripts/" mapping="/scripts/**"/>
+       <mvc:resources location="/images/" mapping="/images/**"/>
 
        <!-- 视图解析器
        解析jsp解析

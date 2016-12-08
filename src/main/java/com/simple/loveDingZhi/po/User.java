@@ -21,6 +21,8 @@ public class User {
 
     private String address;
 
+    private String nickname;
+
     public Integer getId() {
         return id;
     }
@@ -99,5 +101,13 @@ public class User {
 
     public void setAddress(String address) {
         this.address = address == null ? null : address.trim();
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname == null ? null : nickname.trim();
     }
 }

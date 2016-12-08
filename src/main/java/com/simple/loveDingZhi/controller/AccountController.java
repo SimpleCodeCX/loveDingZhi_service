@@ -2,6 +2,9 @@ package com.simple.loveDingZhi.controller;
 
 import com.simple.loveDingZhi.po.User;
 import com.simple.loveDingZhi.service.IUserService;
+import com.simple.loveDingZhi.service.ImageApi;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -116,6 +119,9 @@ public class AccountController {
     @RequestMapping("/login")
     public @ResponseBody Map<String,Map> login(HttpServletResponse response,HttpServletRequest request)
             throws Exception {
+      /*  Logger logger = LoggerFactory.getLogger(AccountController.class);
+        logger.info("登录控制器");*/
+        /*System.out.println(request.getSession().getServletContext().getRealPath("images"));*/
         String accountNumber=request.getParameter("accountNumber");
         String password=request.getParameter("password");
         //确定计算方法
@@ -136,13 +142,18 @@ public class AccountController {
             map.put("isLogin",true);
             map.put("userName",userData.getUserName());
             map.put("accountNumber",userData.getAccountNumber());
+            /*map.put("password",userData.getPassword());*/
             map.put("realName",userData.getRealName());
             map.put("phoneNumber",userData.getPhoneNumber());
             map.put("address",userData.getAddress());
             map.put("isDesigner",userData.getIsDesigner());
             map.put("isBusiness",userData.getIsBusiness());
-            map.put("touXiangUrl",userData.getTouXiangUrl());
+            map.put("touXiangUrl","data:image/jpeg;base64,"+ImageApi.GetImageStr(ImageApi.getImgAbsolutePath()+userData.getTouXiangUrl()));
+            /*头像url:"http://"+request.getServerName()+":"+request.getServerPort()+"/"+userData.getTouXiangUrl()*/
+            /*map.put("touXiangUrl","../img/sjg/sjg3.jpg");*/
+            map.put("nickname",userData.getNickname());
             request.getSession().setAttribute("ID",userData.getAccountNumber());
+
         }
         else{
             map.put("isLogin",false);
@@ -182,12 +193,33 @@ public class AccountController {
         User user=new User();
         user.setAccountNumber(accountNumber);
         user.setUserName(userName);
-        if(userService.updateUserName(user)!=1){
+        if(userService.updateByAccountNumberSelective(user)!=1){
             return "{\"flat\":false}";
         }
         return "{\"flat\":true}";
+    }
 
-
+    /**
+     * Created by simple on 2016/12/08.
+     * 实现修改用户头像
+     * 修改成功，返回{flat:true},否则返回{flat:false}
+     */
+    @RequestMapping("/updateUserTouXiang_authority")
+    public @ResponseBody String updateUserTouXiang(HttpServletRequest request){
+        String accountNumber=request.getParameter("accountNumber");//账号
+        String touXiangBase64=request.getParameter("touXiang");//用户头像base64位编码
+        String relativeTouXiangUrl="images/touXiang/"+accountNumber+".jpg";//相对路径image/touXiang/账号.jpg
+        String absoluteTouXiangUrl=ImageApi.getImgAbsolutePath()+relativeTouXiangUrl;//绝对路径
+        ImageApi.GenerateImage(touXiangBase64,absoluteTouXiangUrl);//保存图片
+        /*System.out.println("http://"+request.getServerName()+":"+request.getServerPort());*/
+        //前端传回来的用户数据
+        User user=new User();
+        user.setAccountNumber(accountNumber);
+        user.setTouXiangUrl(relativeTouXiangUrl);
+        if(userService.updateByAccountNumberSelective(user)!=1){
+            return "{\"flat\":false}";
+        }
+        return "{\"flat\":true}";
     }
 
 

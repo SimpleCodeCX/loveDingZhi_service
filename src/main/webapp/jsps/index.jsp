@@ -22,5 +22,6 @@
 </head>
 <body>
 index
+<img src="../images/touXiang/222.jpg">
 </body>
 </html>
