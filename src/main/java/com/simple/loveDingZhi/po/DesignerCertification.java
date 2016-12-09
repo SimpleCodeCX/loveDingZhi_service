@@ -3,6 +3,8 @@ package com.simple.loveDingZhi.po;
 public class DesignerCertification {
     private Integer id;
 
+    private Integer userId;
+
     private String eduLevel;
 
     private String schollName;
@@ -19,6 +21,14 @@ public class DesignerCertification {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
     public String getEduLevel() {

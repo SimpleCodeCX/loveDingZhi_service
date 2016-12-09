@@ -20,6 +20,7 @@
     <mappers>
         <!--不区分大小写-->
         <mapper resource="mapper/UserMapper.xml"/>
+        <mapper resource="mapper/DesignerCertificationMapper.xml"/>
     </mappers>
 
 </configuration>
