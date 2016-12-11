@@ -101,10 +101,15 @@ public class AccountController {
      *    userData=
              {
              isLogin:true,    //登录是否成功
+             accountNumber："",//账号
              userName:"simple", //用户名
              realName:"dong",  //真实姓名
              phoneNumber:"15767973362", //手机号码
-             address:"惠州学院"     /收货地址
+             address:"惠州学院" ,    /收货地址
+             isDesigner：true,//是否为设计师
+             isBusiness：true,//是否为商家
+             touXiangUrl:""，//头像的base64位
+             nickname:""//昵称
              }
      * 登录失败，返回:
      *   userData=
@@ -114,6 +119,7 @@ public class AccountController {
                 realName:"",
                 phoneNumber:"",
                 address:""
+                ......
             }
      */
     @RequestMapping("/login")

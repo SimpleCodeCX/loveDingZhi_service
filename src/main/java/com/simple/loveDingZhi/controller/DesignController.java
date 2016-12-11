@@ -1,11 +1,11 @@
 package com.simple.loveDingZhi.controller;
 
 import com.mysql.jdbc.jdbc2.optional.SuspendableXAConnection;
+import com.simple.loveDingZhi.po.DesignDrawing;
+import com.simple.loveDingZhi.po.DesignDrawingImg;
 import com.simple.loveDingZhi.po.DesignerCertification;
 import com.simple.loveDingZhi.po.User;
-import com.simple.loveDingZhi.service.IDesignerCertificationService;
-import com.simple.loveDingZhi.service.IUserService;
-import com.simple.loveDingZhi.service.ImageApi;
+import com.simple.loveDingZhi.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
+import java.util.UUID;
 
 /**
  * Created by simple on 2016/12/9.
@@ -27,13 +28,83 @@ public class DesignController {
     private IUserService userService;
     @Autowired
     private IDesignerCertificationService designerCertificationService;
+    @Autowired
+    private IDesignDrawingService designDrawingService;
+    @Autowired
+    private IDesignDrawingImgService designDrawingImgService;
+    /**
+     * Created by simple on 2016/12/11.
+     * 获得设计师数据,无需登录
+     * 返回：
+     *  designerList=
+     {
+     accountNumber："",//账号
+     userName:"simple", //用户名
+     nickname:"擅长衣服设计",//个性签名
+     worksCount:20//作品数
+     }
+     */
+    @RequestMapping("/getDesignerList")
+    public @ResponseBody String getDesigner(HttpServletResponse response,HttpServletRequest request)
+            throws IOException, NoSuchAlgorithmException {
+
+
+        return "{\"flat\":true}";
+    }
+
+    /**
+     * Created by simple on 2016/12/11.
+     * 上传设计稿
+     * 上传成功，返回{flat:true},否则返回{flat:false}
+     */
+    @RequestMapping("/designerUploadSjs_authority")
+    public @ResponseBody String designerUploadSjs(HttpServletResponse response,HttpServletRequest request)
+            throws IOException, NoSuchAlgorithmException {
+        String accountNumber=request.getParameter("accountNumber");//账号
+        String caption=request.getParameter("caption");//设计稿标题
+        String introduction=request.getParameter("introduction");//设计稿介绍（灵感）
+        String sjgImgsBase64=request.getParameter("sjgImgs");//设计稿base64,多张图片以&_&作为分隔符
+        String []sjgImgsBase64Strs=sjgImgsBase64.split("&_&");
+        //通过账号获得userId,保存在user里
+        User user=new User();
+        user.setAccountNumber(accountNumber);
+        user=userService.selectBySelective(user);
+        int userId=user.getId();
+        //保存设计稿
+        DesignDrawing designDrawing=new DesignDrawing();
+        designDrawing.setAuthor(userId);
+        designDrawing.setCaption(caption);
+        designDrawing.setIntroduction(introduction);
+        int count= designDrawingService.insertSelectiveReturnId(designDrawing);
+        if(count!=1){
+            return "{\"flat\":false}";
+        }
+        //保存图片
+        int designDrawingId=designDrawing.getId();
+        DesignDrawingImg designDrawingImg=new DesignDrawingImg();
+        designDrawingImg.setDesignDrawingId(designDrawingId);
+        String sjgRelativeUrl="";//相对路径image/designer/sjg/账号_序号.jpg
+        String sjgAbsoluteUrl;//绝对路径
+        String uuid=UUID.randomUUID().toString();//生成唯一值
+        for(int i=0;i<sjgImgsBase64Strs.length;i++){
+            sjgRelativeUrl="images/designer/sjg/"+uuid+"_"+i+".png";
+            sjgAbsoluteUrl= ImageApi.getImgAbsolutePath()+sjgRelativeUrl;//绝对路径
+            ImageApi.GenerateImage(sjgImgsBase64Strs[i],sjgAbsoluteUrl);//保存图片
+            designDrawingImg.setImgUrl(sjgRelativeUrl);
+            designDrawingImgService.insertSelective(designDrawingImg);
+            designDrawingImg.setImgUrl("");
+        }
+        return "{\"flat\":true}";
+    }
+
+
     /**
      * Created by simple on 2016/12/9.
      * 实现申请成为设计师的功能
      * 提交成功，返回{flat:true},否则返回{flat:false}
      */
     @RequestMapping("/applyDesigner_authority")
-    public @ResponseBody String register(HttpServletResponse response,HttpServletRequest request)
+    public @ResponseBody String applyDesigner(HttpServletResponse response,HttpServletRequest request)
             throws IOException, NoSuchAlgorithmException {
         request.setCharacterEncoding("UTF-8");
         String accountNumber=request.getParameter("accountNumber");//账号
@@ -46,8 +117,8 @@ public class DesignController {
         String majorRelativeUrl="images/applyDesigner/major/"+accountNumber+".jpg";//相对路径image/touXiang/账号.jpg
         String majorAbsoluteUrl= ImageApi.getImgAbsolutePath()+majorRelativeUrl;//绝对路径
         ImageApi.GenerateImage(majorImgBase64,majorAbsoluteUrl);//保存图片
-        //保存设计稿图片
 
+        //保存设计稿图片
         String sjgRelativeUrl="";//相对路径image/sjg/账号_序号.jpg
         String sjgRelativeUrlAll="";//将所有设计好的相对路径都存放在这里，以&_&作为分隔符
         String sjgAbsoluteUrl;//绝对路径

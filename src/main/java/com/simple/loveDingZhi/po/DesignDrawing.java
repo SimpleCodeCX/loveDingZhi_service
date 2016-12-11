@@ -5,8 +5,6 @@ public class DesignDrawing {
 
     private String caption;
 
-    private String imgUrl;
-
     private Integer author;
 
     private Integer price;
@@ -27,14 +25,6 @@ public class DesignDrawing {
 
     public void setCaption(String caption) {
         this.caption = caption == null ? null : caption.trim();
-    }
-
-    public String getImgUrl() {
-        return imgUrl;
-    }
-
-    public void setImgUrl(String imgUrl) {
-        this.imgUrl = imgUrl == null ? null : imgUrl.trim();
     }
 
     public Integer getAuthor() {

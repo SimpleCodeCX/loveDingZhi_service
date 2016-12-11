@@ -21,6 +21,8 @@
         <!--不区分大小写-->
         <mapper resource="mapper/UserMapper.xml"/>
         <mapper resource="mapper/DesignerCertificationMapper.xml"/>
+        <mapper resource="mapper/DesignDrawingMapper.xml"/>
+        <mapper resource="mapper/DesignDrawingImgMapper.xml"/>
     </mappers>
 
 </configuration>

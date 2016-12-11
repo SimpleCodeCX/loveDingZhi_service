@@ -5,4 +5,6 @@
 
        <bean id="userService" class="com.simple.loveDingZhi.service.UserServiceImpl"></bean>
        <bean id="designerCertificationService" class="com.simple.loveDingZhi.service.DesignerCertificationServiceImpl"></bean>
+       <bean id="designDrawingService" class="com.simple.loveDingZhi.service.DesignDrawingServiceImpl"></bean>
+       <bean id="designDrawingImgService" class="com.simple.loveDingZhi.service.DesignDrawingImgServiceImpl"></bean>
 </beans>
