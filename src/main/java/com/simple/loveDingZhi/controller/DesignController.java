@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -31,24 +32,26 @@ public class DesignController {
     private IDesignDrawingImgService designDrawingImgService;
     @Autowired
     private  IDesignerService designerService;
+    @Autowired
+    private  IDesignerCustomService designerCustomService;
     /**
      * Created by simple on 2016/12/11.
-     * 获得设计师数据,无需登录
+     * 获得设计师列表数据,无需登录
      * 返回：
-     *  designerList=
-     {
-     accountNumber："",//账号
+     *
+     [{
+     userId:21，//用户id
      userName:"simple", //用户名
      nickname:"擅长衣服设计",//个性签名
-     worksCount:20//作品数
-     }
+     worksCount:20，//作品数
+     touXiangUrl："images/touXiang/123.jpg"//头像url
+     }]
      */
     @RequestMapping("/getDesignerList")
-    public @ResponseBody String getDesigner(HttpServletResponse response,HttpServletRequest request)
+    public @ResponseBody List<DesignerCustom> getDesignerList(HttpServletResponse response,HttpServletRequest request)
             throws IOException, NoSuchAlgorithmException {
-
-
-        return "{\"flat\":true}";
+        List<DesignerCustom> designerCustomList = designerCustomService.selectDesignerList();
+        return designerCustomList;
     }
 
     /**
@@ -164,7 +167,7 @@ public class DesignController {
         //配置设计稿特有的信息
         Designer designer=new Designer();
         designer.setUserId(userId);//用户id
-        designer.setWordsCount(0);//作品数为0
+        designer.setWorksCount(0);//作品数为0
         designerService.insertSelective(designer);
         return "{\"flat\":true}";
     }

@@ -2,7 +2,6 @@ package com.simple.loveDingZhi.mapper;
 
 import com.simple.loveDingZhi.po.Designer;
 import com.simple.loveDingZhi.po.DesignerExample;
-import com.simple.loveDingZhi.po.User;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

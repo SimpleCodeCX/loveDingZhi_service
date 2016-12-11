@@ -4,6 +4,8 @@ import com.simple.loveDingZhi.mapper.DesignerMapper;
 import com.simple.loveDingZhi.po.Designer;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.List;
+
 /**
  * Created by simple on 2016/12/11.
  */

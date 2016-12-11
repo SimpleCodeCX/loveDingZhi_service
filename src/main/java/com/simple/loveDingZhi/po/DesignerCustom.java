@@ -1,28 +1,29 @@
 package com.simple.loveDingZhi.po;
 
-public class Designer {
+/**
+ * Created by simple on 2016/12/11.
+ */
+public class DesignerCustom extends User {
     private Integer id;
-
     private Integer userId;
-
-    private Integer worksCount;
-
     private String introduction;
-
+    private Integer worksCount;
+    @Override
     public Integer getId() {
         return id;
     }
 
+    @Override
     public void setId(Integer id) {
         this.id = id;
     }
 
-    public Integer getUserId() {
-        return userId;
+    public String getIntroduction() {
+        return introduction;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setIntroduction(String introduction) {
+        this.introduction = introduction;
     }
 
     public Integer getWorksCount() {
@@ -33,11 +34,11 @@ public class Designer {
         this.worksCount = worksCount;
     }
 
-    public String getIntroduction() {
-        return introduction;
+    public Integer getUserId() {
+        return userId;
     }
 
-    public void setIntroduction(String introduction) {
-        this.introduction = introduction == null ? null : introduction.trim();
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 }

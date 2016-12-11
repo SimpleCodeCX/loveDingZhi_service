@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="com.simple.loveDingZhi.po.Designer" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="user_id" property="userId" jdbcType="INTEGER" />
-    <result column="words_count" property="wordsCount" jdbcType="INTEGER" />
+    <result column="works_count" property="worksCount" jdbcType="INTEGER" />
   </resultMap>
   <resultMap id="ResultMapWithBLOBs" type="com.simple.loveDingZhi.po.Designer" extends="BaseResultMap" >
     <result column="introduction" property="introduction" jdbcType="LONGVARCHAR" />
@@ -68,7 +68,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, user_id, words_count
+    id, user_id, works_count
   </sql>
   <sql id="Blob_Column_List" >
     introduction
@@ -122,9 +122,9 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.simple.loveDingZhi.po.Designer" >
-    insert into designer (id, user_id, words_count, 
+    insert into designer (id, user_id, works_count, 
       introduction)
-    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{wordsCount,jdbcType=INTEGER}, 
+    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{worksCount,jdbcType=INTEGER}, 
       #{introduction,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.simple.loveDingZhi.po.Designer" >
@@ -136,8 +136,8 @@
       <if test="userId != null" >
         user_id,
       </if>
-      <if test="wordsCount != null" >
-        words_count,
+      <if test="worksCount != null" >
+        works_count,
       </if>
       <if test="introduction != null" >
         introduction,
@@ -150,8 +150,8 @@
       <if test="userId != null" >
         #{userId,jdbcType=INTEGER},
       </if>
-      <if test="wordsCount != null" >
-        #{wordsCount,jdbcType=INTEGER},
+      <if test="worksCount != null" >
+        #{worksCount,jdbcType=INTEGER},
       </if>
       <if test="introduction != null" >
         #{introduction,jdbcType=LONGVARCHAR},
@@ -173,8 +173,8 @@
       <if test="record.userId != null" >
         user_id = #{record.userId,jdbcType=INTEGER},
       </if>
-      <if test="record.wordsCount != null" >
-        words_count = #{record.wordsCount,jdbcType=INTEGER},
+      <if test="record.worksCount != null" >
+        works_count = #{record.worksCount,jdbcType=INTEGER},
       </if>
       <if test="record.introduction != null" >
         introduction = #{record.introduction,jdbcType=LONGVARCHAR},
@@ -188,7 +188,7 @@
     update designer
     set id = #{record.id,jdbcType=INTEGER},
       user_id = #{record.userId,jdbcType=INTEGER},
-      words_count = #{record.wordsCount,jdbcType=INTEGER},
+      works_count = #{record.worksCount,jdbcType=INTEGER},
       introduction = #{record.introduction,jdbcType=LONGVARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -198,7 +198,7 @@
     update designer
     set id = #{record.id,jdbcType=INTEGER},
       user_id = #{record.userId,jdbcType=INTEGER},
-      words_count = #{record.wordsCount,jdbcType=INTEGER}
+      works_count = #{record.worksCount,jdbcType=INTEGER}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -209,8 +209,8 @@
       <if test="userId != null" >
         user_id = #{userId,jdbcType=INTEGER},
       </if>
-      <if test="wordsCount != null" >
-        words_count = #{wordsCount,jdbcType=INTEGER},
+      <if test="worksCount != null" >
+        works_count = #{worksCount,jdbcType=INTEGER},
       </if>
       <if test="introduction != null" >
         introduction = #{introduction,jdbcType=LONGVARCHAR},
@@ -221,17 +221,18 @@
   <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.simple.loveDingZhi.po.Designer" >
     update designer
     set user_id = #{userId,jdbcType=INTEGER},
-      words_count = #{wordsCount,jdbcType=INTEGER},
+      works_count = #{worksCount,jdbcType=INTEGER},
       introduction = #{introduction,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.simple.loveDingZhi.po.Designer" >
     update designer
     set user_id = #{userId,jdbcType=INTEGER},
-      words_count = #{wordsCount,jdbcType=INTEGER}
+      works_count = #{worksCount,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
   <!--****************************************************************************************************-->
+
   <update id="updateCountByUserId" parameterType="java.lang.Integer" >
     update designer set words_count=words_count+1 where user_id=#{userId}
   </update>
