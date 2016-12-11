@@ -7,4 +7,5 @@
        <bean id="designerCertificationService" class="com.simple.loveDingZhi.service.DesignerCertificationServiceImpl"></bean>
        <bean id="designDrawingService" class="com.simple.loveDingZhi.service.DesignDrawingServiceImpl"></bean>
        <bean id="designDrawingImgService" class="com.simple.loveDingZhi.service.DesignDrawingImgServiceImpl"></bean>
+       <bean id="designerService" class="com.simple.loveDingZhi.service.DesignerServiceImpl"></bean>
 </beans>

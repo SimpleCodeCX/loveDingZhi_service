@@ -1,10 +1,7 @@
 package com.simple.loveDingZhi.controller;
 
 import com.mysql.jdbc.jdbc2.optional.SuspendableXAConnection;
-import com.simple.loveDingZhi.po.DesignDrawing;
-import com.simple.loveDingZhi.po.DesignDrawingImg;
-import com.simple.loveDingZhi.po.DesignerCertification;
-import com.simple.loveDingZhi.po.User;
+import com.simple.loveDingZhi.po.*;
 import com.simple.loveDingZhi.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -32,6 +29,8 @@ public class DesignController {
     private IDesignDrawingService designDrawingService;
     @Autowired
     private IDesignDrawingImgService designDrawingImgService;
+    @Autowired
+    private  IDesignerService designerService;
     /**
      * Created by simple on 2016/12/11.
      * 获得设计师数据,无需登录
@@ -70,7 +69,7 @@ public class DesignController {
         user.setAccountNumber(accountNumber);
         user=userService.selectBySelective(user);
         int userId=user.getId();
-        //保存设计稿
+        //保存设计稿描述
         DesignDrawing designDrawing=new DesignDrawing();
         designDrawing.setAuthor(userId);
         designDrawing.setCaption(caption);
@@ -79,7 +78,7 @@ public class DesignController {
         if(count!=1){
             return "{\"flat\":false}";
         }
-        //保存图片
+        //保存设计稿图片
         int designDrawingId=designDrawing.getId();
         DesignDrawingImg designDrawingImg=new DesignDrawingImg();
         designDrawingImg.setDesignDrawingId(designDrawingId);
@@ -94,6 +93,8 @@ public class DesignController {
             designDrawingImgService.insertSelective(designDrawingImg);
             designDrawingImg.setImgUrl("");
         }
+        //让设计师的作品数加1
+        designerService.updateCountByUserId(userId);
         return "{\"flat\":true}";
     }
 
@@ -137,17 +138,18 @@ public class DesignController {
 
 
 
-        //根据账号获得用户的数据
+        //根据账号获得用户的userId
         User user=new User();
         user.setAccountNumber(accountNumber);
         user=userService.selectBySelective(user);
+        int userId=user.getId();
         //将数据放在designerCertification model里
         DesignerCertification designerCertification=new DesignerCertification();
         designerCertification.setEduLevel(educationBackground);//学历
         designerCertification.setMajor(major);//专业名
         designerCertification.setMajorCertificationUrl(majorRelativeUrl);//专业证书
         designerCertification.setWorksUrl(sjgRelativeUrlAll);//设计稿图片
-        designerCertification.setUserId(user.getId());//用户id
+        designerCertification.setUserId(userId);//用户id
         int count=designerCertificationService.insertSelective(designerCertification);
         if(count!=1){
             return "{\"flat\":false}";
@@ -158,6 +160,12 @@ public class DesignController {
         user1.setAccountNumber(accountNumber);
         user1.setIsDesigner(true);
         userService.updateByAccountNumberSelective(user1);
+
+        //配置设计稿特有的信息
+        Designer designer=new Designer();
+        designer.setUserId(userId);//用户id
+        designer.setWordsCount(0);//作品数为0
+        designerService.insertSelective(designer);
         return "{\"flat\":true}";
     }
 }

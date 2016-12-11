@@ -23,6 +23,7 @@
         <mapper resource="mapper/DesignerCertificationMapper.xml"/>
         <mapper resource="mapper/DesignDrawingMapper.xml"/>
         <mapper resource="mapper/DesignDrawingImgMapper.xml"/>
+        <mapper resource="mapper/DesignerMapper.xml"/>
     </mappers>
 
 </configuration>

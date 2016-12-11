@@ -2,6 +2,7 @@ package com.simple.loveDingZhi.mapper;
 
 import com.simple.loveDingZhi.po.Designer;
 import com.simple.loveDingZhi.po.DesignerExample;
+import com.simple.loveDingZhi.po.User;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -34,4 +35,7 @@ public interface DesignerMapper {
     int updateByPrimaryKeyWithBLOBs(Designer record);
 
     int updateByPrimaryKey(Designer record);
+    /**************************************************************************************************/
+    //通过userId使设计稿的作品数加1
+    int updateCountByUserId(int userId);
 }

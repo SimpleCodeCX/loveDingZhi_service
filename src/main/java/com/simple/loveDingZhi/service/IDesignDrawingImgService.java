@@ -6,5 +6,5 @@ import com.simple.loveDingZhi.po.DesignDrawingImg;
  * Created by simple on 2016/12/11.
  */
 public interface IDesignDrawingImgService {
-    int insertSelective(DesignDrawingImg designDrawingImg);
+   public int insertSelective(DesignDrawingImg designDrawingImg);
 }

@@ -5,6 +5,8 @@ public class Designer {
 
     private Integer userId;
 
+    private Integer wordsCount;
+
     private String introduction;
 
     public Integer getId() {
@@ -21,6 +23,14 @@ public class Designer {
 
     public void setUserId(Integer userId) {
         this.userId = userId;
+    }
+
+    public Integer getWordsCount() {
+        return wordsCount;
+    }
+
+    public void setWordsCount(Integer wordsCount) {
+        this.wordsCount = wordsCount;
     }
 
     public String getIntroduction() {
