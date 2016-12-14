@@ -9,6 +9,8 @@ public class DesignDrawing {
 
     private Integer price;
 
+    private String firstImgUrl;
+
     private String introduction;
 
     public Integer getId() {
@@ -41,6 +43,14 @@ public class DesignDrawing {
 
     public void setPrice(Integer price) {
         this.price = price;
+    }
+
+    public String getFirstImgUrl() {
+        return firstImgUrl;
+    }
+
+    public void setFirstImgUrl(String firstImgUrl) {
+        this.firstImgUrl = firstImgUrl == null ? null : firstImgUrl.trim();
     }
 
     public String getIntroduction() {

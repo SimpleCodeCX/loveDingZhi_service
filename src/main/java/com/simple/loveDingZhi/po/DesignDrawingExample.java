@@ -234,76 +234,6 @@ public class DesignDrawingExample {
             return (Criteria) this;
         }
 
-        public Criteria andImgUrlIsNull() {
-            addCriterion("img_url is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andImgUrlIsNotNull() {
-            addCriterion("img_url is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andImgUrlEqualTo(String value) {
-            addCriterion("img_url =", value, "imgUrl");
-            return (Criteria) this;
-        }
-
-        public Criteria andImgUrlNotEqualTo(String value) {
-            addCriterion("img_url <>", value, "imgUrl");
-            return (Criteria) this;
-        }
-
-        public Criteria andImgUrlGreaterThan(String value) {
-            addCriterion("img_url >", value, "imgUrl");
-            return (Criteria) this;
-        }
-
-        public Criteria andImgUrlGreaterThanOrEqualTo(String value) {
-            addCriterion("img_url >=", value, "imgUrl");
-            return (Criteria) this;
-        }
-
-        public Criteria andImgUrlLessThan(String value) {
-            addCriterion("img_url <", value, "imgUrl");
-            return (Criteria) this;
-        }
-
-        public Criteria andImgUrlLessThanOrEqualTo(String value) {
-            addCriterion("img_url <=", value, "imgUrl");
-            return (Criteria) this;
-        }
-
-        public Criteria andImgUrlLike(String value) {
-            addCriterion("img_url like", value, "imgUrl");
-            return (Criteria) this;
-        }
-
-        public Criteria andImgUrlNotLike(String value) {
-            addCriterion("img_url not like", value, "imgUrl");
-            return (Criteria) this;
-        }
-
-        public Criteria andImgUrlIn(List<String> values) {
-            addCriterion("img_url in", values, "imgUrl");
-            return (Criteria) this;
-        }
-
-        public Criteria andImgUrlNotIn(List<String> values) {
-            addCriterion("img_url not in", values, "imgUrl");
-            return (Criteria) this;
-        }
-
-        public Criteria andImgUrlBetween(String value1, String value2) {
-            addCriterion("img_url between", value1, value2, "imgUrl");
-            return (Criteria) this;
-        }
-
-        public Criteria andImgUrlNotBetween(String value1, String value2) {
-            addCriterion("img_url not between", value1, value2, "imgUrl");
-            return (Criteria) this;
-        }
-
         public Criteria andAuthorIsNull() {
             addCriterion("author is null");
             return (Criteria) this;
@@ -421,6 +351,76 @@ public class DesignDrawingExample {
 
         public Criteria andPriceNotBetween(Integer value1, Integer value2) {
             addCriterion("price not between", value1, value2, "price");
+            return (Criteria) this;
+        }
+
+        public Criteria andFirstImgUrlIsNull() {
+            addCriterion("first_img_url is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFirstImgUrlIsNotNull() {
+            addCriterion("first_img_url is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFirstImgUrlEqualTo(String value) {
+            addCriterion("first_img_url =", value, "firstImgUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andFirstImgUrlNotEqualTo(String value) {
+            addCriterion("first_img_url <>", value, "firstImgUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andFirstImgUrlGreaterThan(String value) {
+            addCriterion("first_img_url >", value, "firstImgUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andFirstImgUrlGreaterThanOrEqualTo(String value) {
+            addCriterion("first_img_url >=", value, "firstImgUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andFirstImgUrlLessThan(String value) {
+            addCriterion("first_img_url <", value, "firstImgUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andFirstImgUrlLessThanOrEqualTo(String value) {
+            addCriterion("first_img_url <=", value, "firstImgUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andFirstImgUrlLike(String value) {
+            addCriterion("first_img_url like", value, "firstImgUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andFirstImgUrlNotLike(String value) {
+            addCriterion("first_img_url not like", value, "firstImgUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andFirstImgUrlIn(List<String> values) {
+            addCriterion("first_img_url in", values, "firstImgUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andFirstImgUrlNotIn(List<String> values) {
+            addCriterion("first_img_url not in", values, "firstImgUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andFirstImgUrlBetween(String value1, String value2) {
+            addCriterion("first_img_url between", value1, value2, "firstImgUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andFirstImgUrlNotBetween(String value1, String value2) {
+            addCriterion("first_img_url not between", value1, value2, "firstImgUrl");
             return (Criteria) this;
         }
     }

@@ -2,6 +2,7 @@ package com.simple.loveDingZhi.po;
 
 /**
  * Created by simple on 2016/12/11.
+ * 定制设计师的数据
  */
 public class DesignerCustom extends User {
     private Integer id;

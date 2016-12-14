@@ -34,6 +34,7 @@ public interface DesignDrawingMapper {
     int updateByPrimaryKeyWithBLOBs(DesignDrawing record);
 
     int updateByPrimaryKey(DesignDrawing record);
+
     /**************************************************************************************************/
     //插入数据，会返回自增主键id，存在designDrawing的id里
     int insertSelectiveReturnId(DesignDrawing designDrawing);

@@ -59,6 +59,7 @@ public class AccountController {
         user.setAccountNumber(accountNumber);
         user.setPassword(newPassword);
         user.setPhoneNumber(phoneNumber);
+        user.setTouXiangUrl("images/touXiang/default.jpg");//设置默认头像
         user.setIsBusiness(false);//初始化为未开通商家功能
         user.setIsDesigner(false);//初始化为未开通设计功能
 
@@ -125,6 +126,7 @@ public class AccountController {
     @RequestMapping("/login")
     public @ResponseBody Map<String,Map> login(HttpServletResponse response,HttpServletRequest request)
             throws Exception {
+        System.out.println("login....");
       /*  Logger logger = LoggerFactory.getLogger(AccountController.class);
         logger.info("登录控制器");*/
         /*System.out.println(request.getSession().getServletContext().getRealPath("images"));*/

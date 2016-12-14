@@ -1,7 +1,9 @@
 package com.simple.loveDingZhi.mapper;
 
 import com.simple.loveDingZhi.po.Designer;
+import com.simple.loveDingZhi.po.DesignerCustom;
 import com.simple.loveDingZhi.po.DesignerExample;
+import com.simple.loveDingZhi.po.DesignerVo;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -37,4 +39,7 @@ public interface DesignerMapper {
     /**************************************************************************************************/
     //通过userId使设计稿的作品数加1
     int updateCountByUserId(int userId);
+    List<DesignerCustom> selectDesignerList();
+    //通过userId获得设计师详情
+    DesignerVo selectDesignerDetailsByUserId(Integer userId);
 }

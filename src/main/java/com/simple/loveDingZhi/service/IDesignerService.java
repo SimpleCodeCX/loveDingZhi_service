@@ -1,6 +1,8 @@
 package com.simple.loveDingZhi.service;
 
 import com.simple.loveDingZhi.po.Designer;
+import com.simple.loveDingZhi.po.DesignerCustom;
+import com.simple.loveDingZhi.po.DesignerVo;
 
 import java.util.List;
 
@@ -10,4 +12,6 @@ import java.util.List;
 public interface IDesignerService {
     public int insertSelective(Designer designer);
     public  int updateCountByUserId(int userId);
+    public List<DesignerCustom> selectDesignerList();
+    public DesignerVo selectDesignerDetailsByUserId(Integer userId);
 }

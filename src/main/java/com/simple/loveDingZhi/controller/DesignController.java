@@ -32,8 +32,8 @@ public class DesignController {
     private IDesignDrawingImgService designDrawingImgService;
     @Autowired
     private  IDesignerService designerService;
-    @Autowired
-    private  IDesignerCustomService designerCustomService;
+
+
     /**
      * Created by simple on 2016/12/11.
      * 获得设计师列表数据,无需登录
@@ -50,9 +50,29 @@ public class DesignController {
     @RequestMapping("/getDesignerList")
     public @ResponseBody List<DesignerCustom> getDesignerList(HttpServletResponse response,HttpServletRequest request)
             throws IOException, NoSuchAlgorithmException {
-        List<DesignerCustom> designerCustomList = designerCustomService.selectDesignerList();
+        List<DesignerCustom> designerCustomList = designerService.selectDesignerList();
         return designerCustomList;
     }
+
+
+
+
+
+    /**
+     * Created by simple on 2016/12/14.
+     * 获得一个设计师的详情数据,无需登录
+     * 返回设计师的详情数据:DesignerVo数据结构
+     */
+    @RequestMapping("/getDesignerDetails")
+    public @ResponseBody DesignerVo getDesignerDetails(HttpServletResponse response,HttpServletRequest request)
+            throws IOException, NoSuchAlgorithmException {
+        Integer userId=Integer.parseInt(request.getParameter("userId"));//账号
+        DesignerVo designerVo = designerService.selectDesignerDetailsByUserId(userId);
+        return designerVo;
+    }
+
+
+
 
     /**
      * Created by simple on 2016/12/11.
@@ -73,10 +93,13 @@ public class DesignController {
         user=userService.selectBySelective(user);
         int userId=user.getId();
         //保存设计稿描述
+        String uuid=UUID.randomUUID().toString();//生成唯一值
+        String firstSjgUrl="images/designer/sjg/"+uuid+"_0.png";//使用第一张图片作为设计稿集封面
         DesignDrawing designDrawing=new DesignDrawing();
         designDrawing.setAuthor(userId);
         designDrawing.setCaption(caption);
         designDrawing.setIntroduction(introduction);
+        designDrawing.setFirstImgUrl(firstSjgUrl);
         int count= designDrawingService.insertSelectiveReturnId(designDrawing);
         if(count!=1){
             return "{\"flat\":false}";
@@ -87,7 +110,7 @@ public class DesignController {
         designDrawingImg.setDesignDrawingId(designDrawingId);
         String sjgRelativeUrl="";//相对路径image/designer/sjg/账号_序号.jpg
         String sjgAbsoluteUrl;//绝对路径
-        String uuid=UUID.randomUUID().toString();//生成唯一值
+
         for(int i=0;i<sjgImgsBase64Strs.length;i++){
             sjgRelativeUrl="images/designer/sjg/"+uuid+"_"+i+".png";
             sjgAbsoluteUrl= ImageApi.getImgAbsolutePath()+sjgRelativeUrl;//绝对路径

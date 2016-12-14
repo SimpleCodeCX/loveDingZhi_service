@@ -6,6 +6,7 @@
     <result column="caption" property="caption" jdbcType="VARCHAR" />
     <result column="author" property="author" jdbcType="INTEGER" />
     <result column="price" property="price" jdbcType="INTEGER" />
+    <result column="first_img_url" property="firstImgUrl" jdbcType="VARCHAR" />
   </resultMap>
   <resultMap id="ResultMapWithBLOBs" type="com.simple.loveDingZhi.po.DesignDrawing" extends="BaseResultMap" >
     <result column="introduction" property="introduction" jdbcType="LONGVARCHAR" />
@@ -69,7 +70,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, caption, author, price
+    id, caption, author, price, first_img_url
   </sql>
   <sql id="Blob_Column_List" >
     introduction
@@ -124,9 +125,11 @@
   </delete>
   <insert id="insert" parameterType="com.simple.loveDingZhi.po.DesignDrawing" >
     insert into design_drawing (id, caption, author, 
-      price, introduction)
+      price, first_img_url, introduction
+      )
     values (#{id,jdbcType=INTEGER}, #{caption,jdbcType=VARCHAR}, #{author,jdbcType=INTEGER}, 
-      #{price,jdbcType=INTEGER}, #{introduction,jdbcType=LONGVARCHAR})
+      #{price,jdbcType=INTEGER}, #{firstImgUrl,jdbcType=VARCHAR}, #{introduction,jdbcType=LONGVARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.simple.loveDingZhi.po.DesignDrawing" >
     insert into design_drawing
@@ -142,6 +145,9 @@
       </if>
       <if test="price != null" >
         price,
+      </if>
+      <if test="firstImgUrl != null" >
+        first_img_url,
       </if>
       <if test="introduction != null" >
         introduction,
@@ -159,6 +165,9 @@
       </if>
       <if test="price != null" >
         #{price,jdbcType=INTEGER},
+      </if>
+      <if test="firstImgUrl != null" >
+        #{firstImgUrl,jdbcType=VARCHAR},
       </if>
       <if test="introduction != null" >
         #{introduction,jdbcType=LONGVARCHAR},
@@ -186,6 +195,9 @@
       <if test="record.price != null" >
         price = #{record.price,jdbcType=INTEGER},
       </if>
+      <if test="record.firstImgUrl != null" >
+        first_img_url = #{record.firstImgUrl,jdbcType=VARCHAR},
+      </if>
       <if test="record.introduction != null" >
         introduction = #{record.introduction,jdbcType=LONGVARCHAR},
       </if>
@@ -200,6 +212,7 @@
       caption = #{record.caption,jdbcType=VARCHAR},
       author = #{record.author,jdbcType=INTEGER},
       price = #{record.price,jdbcType=INTEGER},
+      first_img_url = #{record.firstImgUrl,jdbcType=VARCHAR},
       introduction = #{record.introduction,jdbcType=LONGVARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -210,7 +223,8 @@
     set id = #{record.id,jdbcType=INTEGER},
       caption = #{record.caption,jdbcType=VARCHAR},
       author = #{record.author,jdbcType=INTEGER},
-      price = #{record.price,jdbcType=INTEGER}
+      price = #{record.price,jdbcType=INTEGER},
+      first_img_url = #{record.firstImgUrl,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -227,6 +241,9 @@
       <if test="price != null" >
         price = #{price,jdbcType=INTEGER},
       </if>
+      <if test="firstImgUrl != null" >
+        first_img_url = #{firstImgUrl,jdbcType=VARCHAR},
+      </if>
       <if test="introduction != null" >
         introduction = #{introduction,jdbcType=LONGVARCHAR},
       </if>
@@ -238,6 +255,7 @@
     set caption = #{caption,jdbcType=VARCHAR},
       author = #{author,jdbcType=INTEGER},
       price = #{price,jdbcType=INTEGER},
+      first_img_url = #{firstImgUrl,jdbcType=VARCHAR},
       introduction = #{introduction,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -245,10 +263,10 @@
     update design_drawing
     set caption = #{caption,jdbcType=VARCHAR},
       author = #{author,jdbcType=INTEGER},
-      price = #{price,jdbcType=INTEGER}
+      price = #{price,jdbcType=INTEGER},
+      first_img_url = #{firstImgUrl,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
-
   <!--****************************************************************************************************-->
   <insert id="insertSelectiveReturnId" parameterType="com.simple.loveDingZhi.po.DesignDrawing" >
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
@@ -271,6 +289,9 @@
       <if test="introduction != null" >
         introduction,
       </if>
+      <if test="firstImgUrl != null" >
+        first_img_url,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -287,6 +308,9 @@
       </if>
       <if test="introduction != null" >
         #{introduction,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="firstImgUrl != null" >
+        #{firstImgUrl,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
