@@ -15,7 +15,9 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         //获得session
         HttpSession session=request.getSession();
+        System.out.println("This is in:"+this.getClass().getName());
         System.out.println("session ID is "+session.getAttribute("ID"));
+
         //验证用户是否登录
         if(session.getAttribute("ID")!=null){
             //身份存在，放行
@@ -27,7 +29,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
             response.getWriter().println(originUrl);
             return false;
         }*/
-
+        System.out.println("还未登录，请先登录");
         response.getWriter().println("{\"message\":\"还未登录\"}");
         return false;
     }

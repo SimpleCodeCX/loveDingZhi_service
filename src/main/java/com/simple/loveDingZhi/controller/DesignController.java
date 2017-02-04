@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.jws.soap.SOAPBinding;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.Console;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
@@ -121,6 +122,8 @@ public class DesignController {
         }
         //让设计师的作品数加1
         designerService.updateCountByUserId(userId);
+
+
         return "{\"flat\":true}";
     }
 

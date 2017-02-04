@@ -283,7 +283,7 @@
     <result column="nickname" property="nickname" jdbcType="VARCHAR" />
   </resultMap>
   <update id="updateCountByUserId" parameterType="java.lang.Integer" >
-    update designer set words_count=words_count+1 where user_id=#{userId}
+    update designer set works_count=works_count+1 where user_id=#{userId}
   </update>
   <select id="selectDesignerList" resultMap="designerCustomResultMap">
     select a.*,b.nickname,b.tou_xiang_url,b.user_name
