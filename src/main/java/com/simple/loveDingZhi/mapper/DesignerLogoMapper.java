@@ -1,5 +1,6 @@
 package com.simple.loveDingZhi.mapper;
 
+import com.simple.loveDingZhi.po.DesignDrawing;
 import com.simple.loveDingZhi.po.DesignerLogo;
 import com.simple.loveDingZhi.po.DesignerLogoExample;
 import org.apache.ibatis.annotations.Param;
@@ -34,4 +35,7 @@ public interface DesignerLogoMapper {
     int updateByPrimaryKeyWithBLOBs(DesignerLogo record);
 
     int updateByPrimaryKey(DesignerLogo record);
+
+    /**************************************************************************************************/
+    List<DesignDrawing> selectListByUserName(String userName);//根据用户名获得用户的logo列表
 }

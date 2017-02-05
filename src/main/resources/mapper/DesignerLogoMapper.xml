@@ -248,4 +248,12 @@
       author = #{author,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <!--****************************************************************************************************-->
+  <select id="selectListByUserName" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String">
+    select designer_logo.* from designer_logo
+    LEFT JOIN user on user.id=designer_logo.author
+    where user.user_name=#{userName}
+  </select>
+
+
 </mapper>

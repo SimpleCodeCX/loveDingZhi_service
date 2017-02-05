@@ -65,7 +65,6 @@ public class DesignController {
     public @ResponseBody List<DesignDrawing> getSjgList(HttpServletResponse response,HttpServletRequest request)
             throws IOException, NoSuchAlgorithmException {
         Integer page=Integer.parseInt(request.getParameter("page"));
-        System.out.println("11111");
         List<DesignDrawing> designDrawingList = designDrawingService.selectListOnePage(page);
         return designDrawingList;
     }

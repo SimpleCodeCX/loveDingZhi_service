@@ -271,7 +271,11 @@
   <select id="selectListOnePage" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
     select * from design_drawing LIMIT #{pageFirst},10
   </select>
-
+  <select id="selectListByUserName" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String">
+    select design_drawing.* from design_drawing
+    LEFT JOIN user on user.id=design_drawing.author
+    where user.user_name=#{userName}
+  </select>
   <insert id="insertSelectiveReturnId" parameterType="com.simple.loveDingZhi.po.DesignDrawing" >
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
       select LAST_INSERT_ID()

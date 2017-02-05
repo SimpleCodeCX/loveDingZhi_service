@@ -1,7 +1,6 @@
 package com.simple.loveDingZhi.service;
 
 import com.simple.loveDingZhi.po.DesignDrawing;
-import com.simple.loveDingZhi.po.DesignDrawingImg;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -11,11 +10,12 @@ import java.util.List;
 /**
  * Created by simple on 2017/2/5.
  */
-public class TestIDesignDrawingService {
+public class TestDesignerLogoServiceImpl {
     @Test
-    public void testSelectListOnePage(){
+    public void testSelectListByUserName(){
         ApplicationContext applicationContext=new ClassPathXmlApplicationContext("classpath:spring/applicationContext-*.xml");
-        IDesignDrawingService designDrawingService=(IDesignDrawingService)applicationContext.getBean("designDrawingService");
-        List<DesignDrawing> designDrawingList = designDrawingService.selectListOnePage(2);
+        IDesignerLogoService designerLogoService=(IDesignerLogoService)applicationContext.getBean("designerLogoService");
+        designerLogoService.selectListByUserName("simple");
+
     }
 }

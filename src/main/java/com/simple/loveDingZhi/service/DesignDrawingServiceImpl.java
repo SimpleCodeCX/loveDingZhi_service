@@ -25,4 +25,8 @@ public class DesignDrawingServiceImpl implements IDesignDrawingService{
 
         return designDrawingMapper.selectListOnePage(pageFirst);
     }
+
+    public List<DesignDrawing> selectListByUserName(String userName) {
+        return designDrawingMapper.selectListByUserName(userName);
+    }
 }
