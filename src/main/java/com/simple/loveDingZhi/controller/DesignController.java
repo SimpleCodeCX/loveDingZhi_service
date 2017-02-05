@@ -72,6 +72,19 @@ public class DesignController {
         return designerVo;
     }
 
+    /**
+     * Created by simple on 2017/02/05.
+     * 获得一个设计稿的详情数据,无需登录
+     * 返回设计稿的详情数据:DesignDrawing数据结构
+     */
+    @RequestMapping("/getSjgDetails")
+    public @ResponseBody DesignDrawing getSjgDetails(HttpServletResponse response,HttpServletRequest request)
+            throws IOException, NoSuchAlgorithmException {
+        Integer sjgId=Integer.parseInt(request.getParameter("sjgId"));//账号
+        DesignDrawing designDrawing=designDrawingService.selectByPrimaryKey(sjgId);
+        return designDrawing;
+    }
+
 
 
 

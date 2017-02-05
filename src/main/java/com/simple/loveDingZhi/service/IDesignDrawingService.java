@@ -7,4 +7,5 @@ import com.simple.loveDingZhi.po.DesignDrawing;
  */
 public interface IDesignDrawingService {
     public int insertSelectiveReturnId(DesignDrawing designDrawing);
+    public DesignDrawing selectByPrimaryKey(Integer id);
 }

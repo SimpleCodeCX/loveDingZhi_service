@@ -126,7 +126,7 @@ public class AccountController {
     @RequestMapping("/login")
     public @ResponseBody Map<String,Map> login(HttpServletResponse response,HttpServletRequest request)
             throws Exception {
-        System.out.println("login....");
+        System.out.println("login成功....");
       /*  Logger logger = LoggerFactory.getLogger(AccountController.class);
         logger.info("登录控制器");*/
         /*System.out.println(request.getSession().getServletContext().getRealPath("images"));*/

@@ -13,4 +13,7 @@ public class DesignDrawingServiceImpl implements IDesignDrawingService{
     public int insertSelectiveReturnId(DesignDrawing designDrawing) {
         return designDrawingMapper.insertSelectiveReturnId(designDrawing);
     }
+    public DesignDrawing selectByPrimaryKey(Integer id) {
+        return designDrawingMapper.selectByPrimaryKey(id);
+    }
 }
