@@ -3,6 +3,7 @@ package com.simple.loveDingZhi.controller;
 import com.mysql.jdbc.jdbc2.optional.SuspendableXAConnection;
 import com.simple.loveDingZhi.po.*;
 import com.simple.loveDingZhi.service.*;
+import jdk.nashorn.internal.runtime.RewriteException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -54,6 +55,22 @@ public class DesignController {
         List<DesignerCustom> designerCustomList = designerService.selectDesignerList();
         return designerCustomList;
     }
+
+    /**
+     * Created by simple on 2017/02/05.
+     * 获得设计稿列表数据,无需登录
+     * 返回设计稿列表数据：List<DesignDrawing>
+     */
+    @RequestMapping("/getSjgList")
+    public @ResponseBody List<DesignDrawing> getSjgList(HttpServletResponse response,HttpServletRequest request)
+            throws IOException, NoSuchAlgorithmException {
+        Integer page=Integer.parseInt(request.getParameter("page"));
+        System.out.println("11111");
+        List<DesignDrawing> designDrawingList = designDrawingService.selectListOnePage(page);
+        return designDrawingList;
+    }
+
+
 
 
 
