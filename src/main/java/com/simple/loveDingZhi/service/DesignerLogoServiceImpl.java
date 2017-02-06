@@ -21,4 +21,8 @@ public class DesignerLogoServiceImpl implements IDesignerLogoService{
         int pageFirst=(page-1)*10;//计算出该页的第一条数据序号
         return designerLogoMapper.selectListOnePage(pageFirst);
     }
+
+    public int insertSelective(DesignerLogo record){
+        return designerLogoMapper.insertSelective(record);
+    }
 }

@@ -173,6 +173,49 @@ public class DesignController {
 
 
     /**
+     * Created by simple on 2017/02/06.
+     * 上传设计师logo
+     * 上传成功，返回{flat:true},否则返回{flat:false}
+     */
+    @RequestMapping("/designerUploadLogo_authority")
+    public @ResponseBody String designerUploadLogo(HttpServletResponse response,HttpServletRequest request)
+            throws IOException, NoSuchAlgorithmException {
+        String accountNumber=request.getParameter("accountNumber");//账号
+        String caption=request.getParameter("caption");//logo标题
+        String introduction=request.getParameter("introduction");//logo介绍（灵感）
+        String logoImgsBase64=request.getParameter("logoImgs");//logo base64
+
+        //保存logo图片
+        String uuid=UUID.randomUUID().toString();//生成唯一值
+        String logoRelativeUrl="";//相对路径image/designer/logo/账号_序号.jpg
+        String logoAbsoluteUrl;//绝对路径
+        logoRelativeUrl="images/designer/logo/"+uuid+"_0.png";
+        logoAbsoluteUrl= ImageApi.getImgAbsolutePath()+logoRelativeUrl;//绝对路径
+        ImageApi.GenerateImage(logoImgsBase64,logoAbsoluteUrl);//保存图片
+        //保存logo数据到数据库
+          //通过账号获得userId,保存在user里
+        User user=new User();
+        user.setAccountNumber(accountNumber);
+        user=userService.selectBySelective(user);
+        int userId=user.getId();
+        DesignerLogo designerLogo=new DesignerLogo();
+        designerLogo.setAuthor(userId);
+        designerLogo.setCaption(caption);
+        designerLogo.setIntroduction(introduction);
+        designerLogo.setImgUrl(logoRelativeUrl);
+        /*保存到数据库*/
+        int count= designerLogoService.insertSelective(designerLogo);
+        if(count!=1){
+            return "{\"flat\":false}";
+        }
+
+        //让设计师的logo数加1
+
+        return "{\"flat\":true}";
+    }
+
+
+    /**
      * Created by simple on 2016/12/9.
      * 实现申请成为设计师的功能
      * 提交成功，返回{flat:true},否则返回{flat:false}
