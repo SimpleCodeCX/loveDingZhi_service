@@ -1,6 +1,10 @@
 package com.simple.loveDingZhi.controller;
 
+import com.simple.loveDingZhi.po.DesignDrawing;
+import com.simple.loveDingZhi.po.DesignerLogo;
 import com.simple.loveDingZhi.po.User;
+import com.simple.loveDingZhi.service.IDesignDrawingService;
+import com.simple.loveDingZhi.service.IDesignerLogoService;
 import com.simple.loveDingZhi.service.IUserService;
 import com.simple.loveDingZhi.service.ImageApi;
 import org.slf4j.Logger;
@@ -33,6 +37,10 @@ public class AccountController {
 
     @Autowired
     private IUserService userService;
+    @Autowired
+    private IDesignDrawingService designDrawingService;
+    @Autowired
+    private IDesignerLogoService designerLogoService;
 
     /**
      * Created by simple on 2016/11/27.
@@ -228,6 +236,32 @@ public class AccountController {
             return "{\"flat\":false}";
         }
         return "{\"flat\":true}";
+    }
+
+    /**
+     * Created by simple on 2017/02/05.
+     * 获得我的设计稿列表数据,无需登录（注意：是我的）
+     * 返回我的设计稿列表数据：List<DesignDrawing>
+     */
+    @RequestMapping("/getMySjgList")
+    public @ResponseBody List<DesignDrawing> getMySjgList(HttpServletResponse response,HttpServletRequest request)
+            throws IOException, NoSuchAlgorithmException {
+        String userName= request.getParameter("userName");
+        List<DesignDrawing> designDrawingList = designDrawingService.selectListByUserName(userName);
+        return designDrawingList;
+    }
+
+    /**
+     * Created by simple on 2017/02/05.
+     * 获得我的logo列表数据,无需登录（注意：是我的）
+     * 返回我的logo列表数据：List<DesignerLogo>
+     */
+    @RequestMapping("/getMyLogoList")
+    public @ResponseBody List<DesignerLogo> getMyLogoList(HttpServletResponse response,HttpServletRequest request)
+            throws IOException, NoSuchAlgorithmException {
+        String userName= request.getParameter("userName");
+        List<DesignerLogo> designerLogoList = designerLogoService.selectListByUserName(userName);
+        return designerLogoList;
     }
 
 

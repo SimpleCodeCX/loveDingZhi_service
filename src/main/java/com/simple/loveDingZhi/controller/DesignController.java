@@ -31,6 +31,8 @@ public class DesignController {
     @Autowired
     private IDesignDrawingService designDrawingService;
     @Autowired
+    private IDesignerLogoService designerLogoService;
+    @Autowired
     private IDesignDrawingImgService designDrawingImgService;
     @Autowired
     private  IDesignerService designerService;
@@ -58,7 +60,7 @@ public class DesignController {
 
     /**
      * Created by simple on 2017/02/05.
-     * 获得设计稿列表数据,无需登录
+     * 获得设计师的设计稿列表数据,无需登录
      * 返回设计稿列表数据：List<DesignDrawing>
      */
     @RequestMapping("/getSjgList")
@@ -67,6 +69,19 @@ public class DesignController {
         Integer page=Integer.parseInt(request.getParameter("page"));
         List<DesignDrawing> designDrawingList = designDrawingService.selectListOnePage(page);
         return designDrawingList;
+    }
+
+    /**
+     * Created by simple on 2017/02/05.
+     * 获得设计师的logo列表数据,无需登录
+     * 返回logo列表数据：List<DesignerLogo>
+     */
+    @RequestMapping("/getDesignerLogoList")
+    public @ResponseBody List<DesignerLogo> getDesignerLogoList(HttpServletResponse response,HttpServletRequest request)
+            throws IOException, NoSuchAlgorithmException {
+        Integer page=Integer.parseInt(request.getParameter("page"));
+        List<DesignerLogo>designerLogoList=designerLogoService.selectListOnePage(page);
+        return designerLogoList;
     }
 
 

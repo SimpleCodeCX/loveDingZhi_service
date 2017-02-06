@@ -249,6 +249,9 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
   <!--****************************************************************************************************-->
+  <select id="selectListOnePage" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select * from designer_logo LIMIT #{pageFirst},10
+  </select>
   <select id="selectListByUserName" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String">
     select designer_logo.* from designer_logo
     LEFT JOIN user on user.id=designer_logo.author

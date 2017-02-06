@@ -37,5 +37,6 @@ public interface DesignerLogoMapper {
     int updateByPrimaryKey(DesignerLogo record);
 
     /**************************************************************************************************/
-    List<DesignDrawing> selectListByUserName(String userName);//根据用户名获得用户的logo列表
+    List<DesignerLogo> selectListOnePage(int pageFirst);//page为第几页
+    List<DesignerLogo> selectListByUserName(String userName);//根据用户名获得用户的logo列表
 }

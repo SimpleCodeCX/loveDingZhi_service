@@ -38,7 +38,7 @@ public interface DesignDrawingMapper {
     /**************************************************************************************************/
     //插入数据，会返回自增主键id，存在designDrawing的id里
     int insertSelectiveReturnId(DesignDrawing designDrawing);
-    List<DesignDrawing> selectListOnePage(int pageFirst);//page为第几页
     List<DesignDrawing> selectListByUserName(String userName);//根据用户名获得用户的设计稿列表
+    List<DesignDrawing> selectListOnePage(int pageFirst);//page为第几页
 
 }
