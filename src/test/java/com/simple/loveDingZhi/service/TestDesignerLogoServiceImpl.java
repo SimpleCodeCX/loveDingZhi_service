@@ -2,6 +2,7 @@ package com.simple.loveDingZhi.service;
 
 import com.simple.loveDingZhi.po.DesignDrawing;
 import com.simple.loveDingZhi.po.DesignerLogo;
+import com.simple.loveDingZhi.po.DesignerLogoVo;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -24,5 +25,11 @@ public class TestDesignerLogoServiceImpl {
         ApplicationContext applicationContext=new ClassPathXmlApplicationContext("classpath:spring/applicationContext-*.xml");
         IDesignerLogoService designerLogoService=(IDesignerLogoService)applicationContext.getBean("designerLogoService");
         List<DesignerLogo>designerLogoList= designerLogoService.selectListOnePage(1);
+    }
+    @Test
+    public void TestSelectDesignerLogoDetailsByDesignerLogoId(){
+        ApplicationContext applicationContext=new ClassPathXmlApplicationContext("classpath:spring/applicationContext-*.xml");
+        IDesignerLogoService designerLogoService=(IDesignerLogoService)applicationContext.getBean("designerLogoService");
+        DesignerLogoVo designerLogoVo=designerLogoService.selectDesignerLogoDetailsByDesignerLogoId(1);
     }
 }

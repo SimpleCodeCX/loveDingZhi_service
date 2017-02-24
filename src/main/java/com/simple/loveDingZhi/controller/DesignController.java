@@ -105,15 +105,29 @@ public class DesignController {
 
     /**
      * Created by simple on 2017/02/05.
-     * 获得一个设计稿的详情数据,无需登录
+     * 根据设计稿id获得一个设计稿的详情数据,无需登录
      * 返回设计稿的详情数据:DesignDrawing数据结构
      */
     @RequestMapping("/getSjgDetails")
     public @ResponseBody DesignDrawing getSjgDetails(HttpServletResponse response,HttpServletRequest request)
             throws IOException, NoSuchAlgorithmException {
-        Integer sjgId=Integer.parseInt(request.getParameter("sjgId"));//账号
+        Integer sjgId=Integer.parseInt(request.getParameter("sjgId"));//设计稿id
         DesignDrawing designDrawing=designDrawingService.selectByPrimaryKey(sjgId);
         return designDrawing;
+    }
+
+    /**
+     * Created by simple on 2017/02/22.
+     * 根据logo的id获得一个logo的详情数据,无需登录
+     * 返回logo的详情数据:DesignerLogoVo的数据结构
+     */
+    @RequestMapping("/getDesignerLogoDetails")
+    public @ResponseBody DesignerLogoVo getDesignerLogoDetails(HttpServletResponse response,HttpServletRequest request)
+            throws IOException, NoSuchAlgorithmException {
+        Integer designerLogoId=Integer.parseInt(request.getParameter("designerLogoId"));//logo的id
+        System.out.println(designerLogoId);
+        DesignerLogoVo designerLogoVo=designerLogoService.selectDesignerLogoDetailsByDesignerLogoId(designerLogoId);
+        return designerLogoVo;
     }
 
 
@@ -209,7 +223,7 @@ public class DesignController {
             return "{\"flat\":false}";
         }
 
-        //让设计师的logo数加1
+        //让设计师的logo数加1，目前暂时不需要这个功能，等到以后需要的时候再扩展
 
         return "{\"flat\":true}";
     }

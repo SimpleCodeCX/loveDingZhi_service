@@ -3,6 +3,7 @@ package com.simple.loveDingZhi.mapper;
 import com.simple.loveDingZhi.po.DesignDrawing;
 import com.simple.loveDingZhi.po.DesignerLogo;
 import com.simple.loveDingZhi.po.DesignerLogoExample;
+import com.simple.loveDingZhi.po.DesignerLogoVo;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -39,4 +40,6 @@ public interface DesignerLogoMapper {
     /**************************************************************************************************/
     List<DesignerLogo> selectListOnePage(int pageFirst);//page为第几页
     List<DesignerLogo> selectListByUserName(String userName);//根据用户名获得用户的logo列表
+
+    DesignerLogoVo selectDesignerLogoDetailsByDesignerLogoId(int designerLogoId);//根据设计师的logoId获得设计师的logo详细数据
 }

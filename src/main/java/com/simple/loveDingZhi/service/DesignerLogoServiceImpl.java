@@ -2,6 +2,7 @@ package com.simple.loveDingZhi.service;
 
 import com.simple.loveDingZhi.mapper.DesignerLogoMapper;
 import com.simple.loveDingZhi.po.DesignerLogo;
+import com.simple.loveDingZhi.po.DesignerLogoVo;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -24,5 +25,9 @@ public class DesignerLogoServiceImpl implements IDesignerLogoService{
 
     public int insertSelective(DesignerLogo record){
         return designerLogoMapper.insertSelective(record);
+    }
+
+    public DesignerLogoVo selectDesignerLogoDetailsByDesignerLogoId(int designerLogoId) {
+        return designerLogoMapper.selectDesignerLogoDetailsByDesignerLogoId(designerLogoId);
     }
 }

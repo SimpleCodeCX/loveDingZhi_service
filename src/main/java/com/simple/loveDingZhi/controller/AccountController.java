@@ -134,7 +134,7 @@ public class AccountController {
     @RequestMapping("/login")
     public @ResponseBody Map<String,Map> login(HttpServletResponse response,HttpServletRequest request)
             throws Exception {
-        System.out.println("login成功....");
+
       /*  Logger logger = LoggerFactory.getLogger(AccountController.class);
         logger.info("登录控制器");*/
         /*System.out.println(request.getSession().getServletContext().getRealPath("images"));*/
@@ -152,6 +152,7 @@ public class AccountController {
         int count=userService.countBySelective(userView);
         Map map = new HashMap();
         if(count==1){
+            System.out.println("login成功....");
             //从数据库取出的用户数据
             User userData=new User();
             userData=userService.selectBySelective(userView);
