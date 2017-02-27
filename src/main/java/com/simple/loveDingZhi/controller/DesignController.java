@@ -273,7 +273,7 @@ public class DesignController {
         user.setAccountNumber(accountNumber);
         user=userService.selectBySelective(user);
         int userId=user.getId();
-        //将数据放在designerCertification model里
+        //将设计师的申请数据保存到数据库
         DesignerCertification designerCertification=new DesignerCertification();
         designerCertification.setEduLevel(educationBackground);//学历
         designerCertification.setMajor(major);//专业名
@@ -291,7 +291,7 @@ public class DesignController {
         user1.setIsDesigner(true);
         userService.updateByAccountNumberSelective(user1);
 
-        //配置设计稿特有的信息
+        //配置设计师特有的信息
         Designer designer=new Designer();
         designer.setUserId(userId);//用户id
         designer.setWorksCount(0);//作品数为0
