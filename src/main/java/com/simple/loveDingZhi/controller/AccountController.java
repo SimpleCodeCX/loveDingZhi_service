@@ -42,6 +42,7 @@ public class AccountController {
     @Autowired
     private IDesignerLogoService designerLogoService;
 
+
     /**
      * Created by simple on 2016/11/27.
      * 实现注册功能

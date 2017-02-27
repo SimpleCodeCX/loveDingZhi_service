@@ -9,4 +9,5 @@
        <bean id="designDrawingImgService" class="com.simple.loveDingZhi.service.DesignDrawingImgServiceImpl"></bean>
        <bean id="designerService" class="com.simple.loveDingZhi.service.DesignerServiceImpl"></bean>
        <bean id="designerLogoService" class="com.simple.loveDingZhi.service.DesignerLogoServiceImpl"></bean>
+       <bean id="businessService" class="com.simple.loveDingZhi.service.BusinessServiceImpl"></bean>
 </beans>

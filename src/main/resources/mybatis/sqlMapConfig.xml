@@ -25,6 +25,7 @@
         <mapper resource="mapper/DesignDrawingImgMapper.xml"/>
         <mapper resource="mapper/DesignerMapper.xml"/>
         <mapper resource="mapper/DesignerLogoMapper.xml"/>
+        <mapper resource="mapper/BusinessMapper.xml"/>
     </mappers>
 
 </configuration>
