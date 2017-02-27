@@ -9,8 +9,8 @@ import java.io.*;
  * Created by simple on 2016/12/8.
  */
 public class ImageApi {
-    /*private static String imgAbsolutePath="G://loveDingZhi_service/src/main/webapp/";*/
-    private static String imgAbsolutePath="D://uidp5344/simple/myProject/loveDingZhi_service/src/main/webapp/";
+    private static String imgAbsolutePath="G://loveDingZhi_service/src/main/webapp/";
+   /* private static String imgAbsolutePath="D://uidp5344/simple/myProject/loveDingZhi_service/src/main/webapp/";*/
 
     //获取图片存放位置的绝对路径
     public static String getImgAbsolutePath(){

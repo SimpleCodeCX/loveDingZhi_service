@@ -2,8 +2,8 @@
 <configuration>
     <contextName>Logback Demo</contextName>
 
-    <!--<property name="LOG_HOME" value="G:/loveDingZhi_service/logs" />-->
-    <property name="LOG_HOME" value="D:/uidp5344/simple/myProject/loveDingZhi_service/logs" />
+    <property name="LOG_HOME" value="G:/loveDingZhi_service/logs" />
+    <!--<property name="LOG_HOME" value="D:/uidp5344/simple/myProject/loveDingZhi_service/logs" />-->
 
     <!-- 控制台输出 -->
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
