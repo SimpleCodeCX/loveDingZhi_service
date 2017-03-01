@@ -28,4 +28,7 @@ public interface BusinessLogoMapper {
     int updateByPrimaryKeySelective(BusinessLogo record);
 
     int updateByPrimaryKey(BusinessLogo record);
+    /**************************************************************************************************/
+    List<BusinessLogo> selectListOnePage(int pageFirst);//page为第几页
+    List<BusinessLogo> selectListByUserName(String userName);//根据用户名获得用户自己的商城的logo列表
 }

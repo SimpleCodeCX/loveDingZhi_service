@@ -8,6 +8,7 @@ public class BusinessLogo {
     private String imgUrl;
 
     private Integer businesser;
+    private String introduction;
 
     public Integer getId() {
         return id;
@@ -39,5 +40,12 @@ public class BusinessLogo {
 
     public void setBusinesser(Integer businesser) {
         this.businesser = businesser;
+    }
+    public String getIntroduction() {
+        return introduction;
+    }
+
+    public void setIntroduction(String introduction) {
+        this.introduction = introduction == null ? null : introduction.trim();
     }
 }

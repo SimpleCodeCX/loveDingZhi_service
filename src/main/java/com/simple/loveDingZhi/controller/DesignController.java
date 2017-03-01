@@ -295,6 +295,7 @@ public class DesignController {
         Designer designer=new Designer();
         designer.setUserId(userId);//用户id
         designer.setWorksCount(0);//作品数为0
+        designer.setIntroduction("暂无介绍");
         designerService.insertSelective(designer);
         return "{\"flat\":true}";
     }

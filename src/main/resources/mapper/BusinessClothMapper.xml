@@ -267,4 +267,13 @@
       price = #{price,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <!--****************************************************************************************************-->
+  <select id="selectListOnePage" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select * from business_cloth LIMIT #{pageFirst},10
+  </select>
+  <select id="selectListByUserName" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String">
+    select business_cloth.* from business_cloth
+    LEFT JOIN user on user.id=business_cloth.businesser
+    where user.user_name=#{userName}
+  </select>
 </mapper>

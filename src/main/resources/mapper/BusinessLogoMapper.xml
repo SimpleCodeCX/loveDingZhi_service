@@ -193,4 +193,13 @@
       businesser = #{businesser,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <!--****************************************************************************************************-->
+  <select id="selectListOnePage" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select * from business_logo LIMIT #{pageFirst},10
+  </select>
+  <select id="selectListByUserName" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select business_logo.* from business_logo
+    LEFT JOIN user on user.id=business_logo.businesser
+    where user.user_name=#{userName}
+  </select>
 </mapper>
