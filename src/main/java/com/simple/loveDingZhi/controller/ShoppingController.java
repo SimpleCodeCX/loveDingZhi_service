@@ -5,10 +5,7 @@ package com.simple.loveDingZhi.controller;
  */
 
 import com.simple.loveDingZhi.po.*;
-import com.simple.loveDingZhi.service.IBusinessClothService;
-import com.simple.loveDingZhi.service.IBusinessService;
-import com.simple.loveDingZhi.service.IUserService;
-import com.simple.loveDingZhi.service.ImageApi;
+import com.simple.loveDingZhi.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,6 +31,9 @@ public class ShoppingController {
 
     @Autowired
     private IBusinessClothService businessClothService;
+
+    @Autowired
+    private IBusinessLogoService businessLogoService;
 
     @RequestMapping("/jsonData3")
     public @ResponseBody
@@ -123,5 +123,43 @@ public class ShoppingController {
         ImageApi.GenerateImage(shangjiaClothImgBase64,clothImgAbsoluteUrl);//保存图片
         return "{\"flat\":true}";
     }
+
+
+    /**
+     * Created by simple on 2017/03/01.
+     * 上传商家logo
+     * 上传成功，返回{flat:true},否则返回{flat:false}
+     */
+    @RequestMapping("/shangjiaUploadLogo_authority")
+    public @ResponseBody String shangjiaUploadLogo(HttpServletResponse response,HttpServletRequest request)
+            throws IOException, NoSuchAlgorithmException {
+        String accountNumber=request.getParameter("accountNumber");//账号
+        String caption=request.getParameter("caption");//logo标题
+        String introduction=request.getParameter("introduction");//logo描述
+        String shangjiaLogoImgBase64=request.getParameter("shangjiaLogoImg");//商家logo图片base64
+        //通过账号获得userId,保存在user里
+        User user=new User();
+        user.setAccountNumber(accountNumber);
+        user=userService.selectBySelective(user);
+        int userId=user.getId();
+        //保存商家logo数据到数据库
+        String uuid= UUID.randomUUID().toString();//生成唯一值
+        String logoImgRelativeUrl="images/business/logo/"+uuid+"_"+accountNumber+".png";//商家logo保存的相对路径image/business/logo/uuid_账号.jpg
+        String logoImgAbsoluteUrl=ImageApi.getImgAbsolutePath()+logoImgRelativeUrl;//商家logo保存的绝对路径
+        BusinessLogo businessLogo=new BusinessLogo();
+        businessLogo.setBusinesser(userId);
+        businessLogo.setCaption(caption);
+        businessLogo.setImgUrl(logoImgRelativeUrl);
+
+        int count= businessLogoService.insertSelective(businessLogo);
+        if(count!=1){
+            return "{\"flat\":false}";
+        }
+        //保存商家衣服商品图片
+        ImageApi.GenerateImage(shangjiaLogoImgBase64,logoImgAbsoluteUrl);//保存图片
+        return "{\"flat\":true}";
+    }
+
+
 
 }
