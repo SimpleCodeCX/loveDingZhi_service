@@ -1,12 +1,7 @@
 package com.simple.loveDingZhi.controller;
 
-import com.simple.loveDingZhi.po.DesignDrawing;
-import com.simple.loveDingZhi.po.DesignerLogo;
-import com.simple.loveDingZhi.po.User;
-import com.simple.loveDingZhi.service.IDesignDrawingService;
-import com.simple.loveDingZhi.service.IDesignerLogoService;
-import com.simple.loveDingZhi.service.IUserService;
-import com.simple.loveDingZhi.service.ImageApi;
+import com.simple.loveDingZhi.po.*;
+import com.simple.loveDingZhi.service.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +36,12 @@ public class AccountController {
     private IDesignDrawingService designDrawingService;
     @Autowired
     private IDesignerLogoService designerLogoService;
+
+    @Autowired
+    private IBusinessClothService businessClothService;
+
+    @Autowired
+    private IBusinessLogoService businessLogoService;
 
 
     /**
@@ -242,10 +243,10 @@ public class AccountController {
 
     /**
      * Created by simple on 2017/02/05.
-     * 获得我的设计稿列表数据,无需登录（注意：是我的）
+     * 获得我的设计稿列表数据（注意：是我的）
      * 返回我的设计稿列表数据：List<DesignDrawing>
      */
-    @RequestMapping("/getMySjgList")
+    @RequestMapping("/getMySjgList_authority")
     public @ResponseBody List<DesignDrawing> getMySjgList(HttpServletResponse response,HttpServletRequest request)
             throws IOException, NoSuchAlgorithmException {
         String userName= request.getParameter("userName");
@@ -255,15 +256,41 @@ public class AccountController {
 
     /**
      * Created by simple on 2017/02/05.
-     * 获得我的logo列表数据,无需登录（注意：是我的）
+     * 获得我的logo列表数据（注意：是我的）
      * 返回我的logo列表数据：List<DesignerLogo>
      */
-    @RequestMapping("/getMyLogoList")
+    @RequestMapping("/getMyLogoList_authority")
     public @ResponseBody List<DesignerLogo> getMyLogoList(HttpServletResponse response,HttpServletRequest request)
             throws IOException, NoSuchAlgorithmException {
         String userName= request.getParameter("userName");
         List<DesignerLogo> designerLogoList = designerLogoService.selectListByUserName(userName);
         return designerLogoList;
+    }
+
+    /**
+     * Created by simple on 2017/03/01.
+     * 获得我的商城的衣服列表数据（注意：是我的）
+     * 返回衣服商品列表数据：List<BusinessCloth>
+     */
+    @RequestMapping("/getMyShangChengClothList_authority")
+    public @ResponseBody List<BusinessCloth> getMyShangChengClothList(HttpServletResponse response,HttpServletRequest request)
+            throws IOException, NoSuchAlgorithmException {
+        String userName= request.getParameter("userName");
+        List<BusinessCloth> businessClothList = businessClothService.selectListByUserName(userName);
+        return businessClothList;
+    }
+
+    /**
+     * Created by simple on 2017/03/01.
+     * 获得我的商城的衣服列表数据（注意：是我的）
+     * 返回衣服商品列表数据：List<BusinessLogo>
+     */
+    @RequestMapping("/getMyShangChengLogoList_authority")
+    public @ResponseBody List<BusinessLogo> getMyShangChengLogoList(HttpServletResponse response,HttpServletRequest request)
+            throws IOException, NoSuchAlgorithmException {
+        String userName= request.getParameter("userName");
+        List<BusinessLogo> businessClothList = businessLogoService.selectListByUserName(userName);
+        return businessClothList;
     }
 
 

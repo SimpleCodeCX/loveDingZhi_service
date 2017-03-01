@@ -35,15 +35,6 @@ public class ShoppingController {
     @Autowired
     private IBusinessLogoService businessLogoService;
 
-    @RequestMapping("/jsonData3")
-    public @ResponseBody
-    List<User> jsonData3(HttpServletResponse response,HttpServletRequest request) throws Exception {
-        List<User> userList=new ArrayList<User>();
-        User user1=userService.findUserById(263);
-        userList.add(user1);
-        userList.add(user1);
-        return userList;
-    }
 
     /**
      * Created by simple on 2017/2/27.
@@ -149,6 +140,8 @@ public class ShoppingController {
         BusinessLogo businessLogo=new BusinessLogo();
         businessLogo.setBusinesser(userId);
         businessLogo.setCaption(caption);
+        /*businessLogo.setIntroduction(introduction);*/
+        System.out.println(introduction);
         businessLogo.setImgUrl(logoImgRelativeUrl);
 
         int count= businessLogoService.insertSelective(businessLogo);
@@ -160,6 +153,32 @@ public class ShoppingController {
         return "{\"flat\":true}";
     }
 
+    /**
+     * Created by simple on 2017/03/01.
+     * 获得商城的衣服商品列表数据,无需登录
+     * 返回衣服商品列表数据：List<BusinessCloth>
+     */
+    @RequestMapping("/getShangChengClothList")
+    public @ResponseBody List<BusinessCloth> getShangChengClothList(HttpServletResponse response,HttpServletRequest request)
+            throws IOException, NoSuchAlgorithmException {
+        Integer page=Integer.parseInt(request.getParameter("page"));
+        List<BusinessCloth> businessClothList=businessClothService.selectListOnePage(page);
 
+        return businessClothList;
+    }
+
+    /**
+     * Created by simple on 2017/03/01.
+     * 获得商城的logo列表数据,无需登录
+     * 返回衣服商品列表数据：List<BusinessLogo>
+     */
+    @RequestMapping("/getShangChengLogoList")
+    public @ResponseBody List<BusinessLogo> getShangChengLogoList(HttpServletResponse response,HttpServletRequest request)
+            throws IOException, NoSuchAlgorithmException {
+        Integer page=Integer.parseInt(request.getParameter("page"));
+        List<BusinessLogo> businessLogoList=businessLogoService.selectListOnePage(page);
+
+        return businessLogoList;
+    }
 
 }

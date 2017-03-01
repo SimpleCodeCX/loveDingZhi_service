@@ -34,4 +34,7 @@ public interface BusinessClothMapper {
     int updateByPrimaryKeyWithBLOBs(BusinessCloth record);
 
     int updateByPrimaryKey(BusinessCloth record);
+    /**************************************************************************************************/
+    List<BusinessCloth> selectListOnePage(int pageFirst);//page为第几页
+    List<BusinessCloth> selectListByUserName(String userName);//根据用户名获得用户自己的商城的衣服列表
 }
