@@ -10,4 +10,5 @@
        <bean id="designerService" class="com.simple.loveDingZhi.service.DesignerServiceImpl"></bean>
        <bean id="designerLogoService" class="com.simple.loveDingZhi.service.DesignerLogoServiceImpl"></bean>
        <bean id="businessService" class="com.simple.loveDingZhi.service.BusinessServiceImpl"></bean>
+       <bean id="businessClothService" class="com.simple.loveDingZhi.service.BusinessClothServiceImpl"></bean>
 </beans>

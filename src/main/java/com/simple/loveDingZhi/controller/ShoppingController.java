@@ -4,10 +4,8 @@ package com.simple.loveDingZhi.controller;
  * Created by uidp5344 on 2017/2/27.
  */
 
-import com.simple.loveDingZhi.po.Business;
-import com.simple.loveDingZhi.po.Designer;
-import com.simple.loveDingZhi.po.DesignerCertification;
-import com.simple.loveDingZhi.po.User;
+import com.simple.loveDingZhi.po.*;
+import com.simple.loveDingZhi.service.IBusinessClothService;
 import com.simple.loveDingZhi.service.IBusinessService;
 import com.simple.loveDingZhi.service.IUserService;
 import com.simple.loveDingZhi.service.ImageApi;
@@ -22,6 +20,7 @@ import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 
 @Controller
@@ -32,6 +31,9 @@ public class ShoppingController {
 
     @Autowired
     private IBusinessService businessService;
+
+    @Autowired
+    private IBusinessClothService businessClothService;
 
     @RequestMapping("/jsonData3")
     public @ResponseBody
@@ -61,9 +63,6 @@ public class ShoppingController {
         String businessLicenseRelativeUrl="images/applyBusiness/businessLicense/"+accountNumber+".jpg";//相对路径images/applyBusiness/businessLicense/账号.jpg
         String businessLicenseAbsoluteUrl= ImageApi.getImgAbsolutePath()+businessLicenseRelativeUrl;//绝对路径
         ImageApi.GenerateImage(businessLicenseImgBase64,businessLicenseAbsoluteUrl);//保存图片
-
-
-
         //根据账号获得用户的userId
         User user=new User();
         user.setAccountNumber(accountNumber);
@@ -83,6 +82,45 @@ public class ShoppingController {
         business.setUserId(userId);//用户id
         business.setIntroduction("暂无介绍");
         businessService.insertSelective(business);
+        return "{\"flat\":true}";
+    }
+
+
+    /**
+     * Created by simple on 2017/03/01.
+     * 上传商家衣服商品
+     * 上传成功，返回{flat:true},否则返回{flat:false}
+     */
+    @RequestMapping("/shangjiaUploadCloth_authority")
+    public @ResponseBody String shangjiaUploadCloth(HttpServletResponse response,HttpServletRequest request)
+            throws IOException, NoSuchAlgorithmException {
+        String accountNumber=request.getParameter("accountNumber");//账号
+        String caption=request.getParameter("caption");//衣服商品标题
+        int price=Integer.parseInt(request.getParameter("price"));//衣服商品标题
+        String introduction=request.getParameter("introduction");//商品描述
+        String shangjiaClothImgBase64=request.getParameter("shangjiaClothImg");//商家衣服图片base64
+        //通过账号获得userId,保存在user里
+        User user=new User();
+        user.setAccountNumber(accountNumber);
+        user=userService.selectBySelective(user);
+        int userId=user.getId();
+        //保存商家衣服商品数据到数据库
+        String uuid= UUID.randomUUID().toString();//生成唯一值
+        String clothImgRelativeUrl="images/business/cloth/"+uuid+"_"+accountNumber+".png";//商家衣服保存的相对路径image/business/cloth/uuid_账号.jpg
+        String clothImgAbsoluteUrl=ImageApi.getImgAbsolutePath()+clothImgRelativeUrl;//商家衣服保存的绝对路径
+        BusinessCloth businessCloth=new BusinessCloth();
+        businessCloth.setBusinesser(userId);
+        businessCloth.setCaption(caption);
+        businessCloth.setPrice(price);
+        businessCloth.setIntroduction(introduction);
+        businessCloth.setImgUrl(clothImgRelativeUrl);
+
+        int count= businessClothService.insertSelective(businessCloth);
+        if(count!=1){
+            return "{\"flat\":false}";
+        }
+        //保存商家衣服商品图片
+        ImageApi.GenerateImage(shangjiaClothImgBase64,clothImgAbsoluteUrl);//保存图片
         return "{\"flat\":true}";
     }
 
