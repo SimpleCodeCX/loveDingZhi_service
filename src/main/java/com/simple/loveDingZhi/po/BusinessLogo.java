@@ -8,6 +8,7 @@ public class BusinessLogo {
     private String imgUrl;
 
     private Integer businesser;
+
     private String introduction;
 
     public Integer getId() {
@@ -41,6 +42,7 @@ public class BusinessLogo {
     public void setBusinesser(Integer businesser) {
         this.businesser = businesser;
     }
+
     public String getIntroduction() {
         return introduction;
     }

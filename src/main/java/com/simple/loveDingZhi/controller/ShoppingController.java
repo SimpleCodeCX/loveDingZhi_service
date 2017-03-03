@@ -140,8 +140,7 @@ public class ShoppingController {
         BusinessLogo businessLogo=new BusinessLogo();
         businessLogo.setBusinesser(userId);
         businessLogo.setCaption(caption);
-        /*businessLogo.setIntroduction(introduction);*/
-        System.out.println(introduction);
+        businessLogo.setIntroduction(introduction);
         businessLogo.setImgUrl(logoImgRelativeUrl);
 
         int count= businessLogoService.insertSelective(businessLogo);

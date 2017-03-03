@@ -6,6 +6,7 @@
     <result column="caption" property="caption" jdbcType="VARCHAR" />
     <result column="img_url" property="imgUrl" jdbcType="VARCHAR" />
     <result column="businesser" property="businesser" jdbcType="INTEGER" />
+    <result column="sale_count" property="saleCount" jdbcType="INTEGER" />
     <result column="price" property="price" jdbcType="INTEGER" />
   </resultMap>
   <resultMap id="ResultMapWithBLOBs" type="com.simple.loveDingZhi.po.BusinessCloth" extends="BaseResultMap" >
@@ -70,7 +71,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, caption, img_url, businesser, price
+    id, caption, img_url, businesser, sale_count, price
   </sql>
   <sql id="Blob_Column_List" >
     introduction
@@ -106,7 +107,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
-    select 
+    select
     <include refid="Base_Column_List" />
     ,
     <include refid="Blob_Column_List" />
@@ -124,12 +125,12 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.simple.loveDingZhi.po.BusinessCloth" >
-    insert into business_cloth (id, caption, img_url, 
-      businesser, price, introduction
-      )
-    values (#{id,jdbcType=INTEGER}, #{caption,jdbcType=VARCHAR}, #{imgUrl,jdbcType=VARCHAR}, 
-      #{businesser,jdbcType=INTEGER}, #{price,jdbcType=INTEGER}, #{introduction,jdbcType=LONGVARCHAR}
-      )
+    insert into business_cloth (id, caption, img_url,
+    businesser, sale_count, price,
+    introduction)
+    values (#{id,jdbcType=INTEGER}, #{caption,jdbcType=VARCHAR}, #{imgUrl,jdbcType=VARCHAR},
+    #{businesser,jdbcType=INTEGER}, #{saleCount,jdbcType=INTEGER}, #{price,jdbcType=INTEGER},
+    #{introduction,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.simple.loveDingZhi.po.BusinessCloth" >
     insert into business_cloth
@@ -145,6 +146,9 @@
       </if>
       <if test="businesser != null" >
         businesser,
+      </if>
+      <if test="saleCount != null" >
+        sale_count,
       </if>
       <if test="price != null" >
         price,
@@ -165,6 +169,9 @@
       </if>
       <if test="businesser != null" >
         #{businesser,jdbcType=INTEGER},
+      </if>
+      <if test="saleCount != null" >
+        #{saleCount,jdbcType=INTEGER},
       </if>
       <if test="price != null" >
         #{price,jdbcType=INTEGER},
@@ -195,6 +202,9 @@
       <if test="record.businesser != null" >
         businesser = #{record.businesser,jdbcType=INTEGER},
       </if>
+      <if test="record.saleCount != null" >
+        sale_count = #{record.saleCount,jdbcType=INTEGER},
+      </if>
       <if test="record.price != null" >
         price = #{record.price,jdbcType=INTEGER},
       </if>
@@ -209,11 +219,12 @@
   <update id="updateByExampleWithBLOBs" parameterType="map" >
     update business_cloth
     set id = #{record.id,jdbcType=INTEGER},
-      caption = #{record.caption,jdbcType=VARCHAR},
-      img_url = #{record.imgUrl,jdbcType=VARCHAR},
-      businesser = #{record.businesser,jdbcType=INTEGER},
-      price = #{record.price,jdbcType=INTEGER},
-      introduction = #{record.introduction,jdbcType=LONGVARCHAR}
+    caption = #{record.caption,jdbcType=VARCHAR},
+    img_url = #{record.imgUrl,jdbcType=VARCHAR},
+    businesser = #{record.businesser,jdbcType=INTEGER},
+    sale_count = #{record.saleCount,jdbcType=INTEGER},
+    price = #{record.price,jdbcType=INTEGER},
+    introduction = #{record.introduction,jdbcType=LONGVARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -221,10 +232,11 @@
   <update id="updateByExample" parameterType="map" >
     update business_cloth
     set id = #{record.id,jdbcType=INTEGER},
-      caption = #{record.caption,jdbcType=VARCHAR},
-      img_url = #{record.imgUrl,jdbcType=VARCHAR},
-      businesser = #{record.businesser,jdbcType=INTEGER},
-      price = #{record.price,jdbcType=INTEGER}
+    caption = #{record.caption,jdbcType=VARCHAR},
+    img_url = #{record.imgUrl,jdbcType=VARCHAR},
+    businesser = #{record.businesser,jdbcType=INTEGER},
+    sale_count = #{record.saleCount,jdbcType=INTEGER},
+    price = #{record.price,jdbcType=INTEGER}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -241,6 +253,9 @@
       <if test="businesser != null" >
         businesser = #{businesser,jdbcType=INTEGER},
       </if>
+      <if test="saleCount != null" >
+        sale_count = #{saleCount,jdbcType=INTEGER},
+      </if>
       <if test="price != null" >
         price = #{price,jdbcType=INTEGER},
       </if>
@@ -253,10 +268,11 @@
   <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.simple.loveDingZhi.po.BusinessCloth" >
     update business_cloth
     set caption = #{caption,jdbcType=VARCHAR},
-      img_url = #{imgUrl,jdbcType=VARCHAR},
-      businesser = #{businesser,jdbcType=INTEGER},
-      price = #{price,jdbcType=INTEGER},
-      introduction = #{introduction,jdbcType=LONGVARCHAR}
+    img_url = #{imgUrl,jdbcType=VARCHAR},
+    businesser = #{businesser,jdbcType=INTEGER},
+    sale_count = #{saleCount,jdbcType=INTEGER},
+    price = #{price,jdbcType=INTEGER},
+    introduction = #{introduction,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.simple.loveDingZhi.po.BusinessCloth" >
@@ -264,6 +280,7 @@
     set caption = #{caption,jdbcType=VARCHAR},
       img_url = #{imgUrl,jdbcType=VARCHAR},
       businesser = #{businesser,jdbcType=INTEGER},
+      sale_count = #{saleCount,jdbcType=INTEGER},
       price = #{price,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>

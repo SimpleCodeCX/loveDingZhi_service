@@ -9,6 +9,8 @@ public class BusinessCloth {
 
     private Integer businesser;
 
+    private Integer saleCount;
+
     private Integer price;
 
     private String introduction;
@@ -43,6 +45,14 @@ public class BusinessCloth {
 
     public void setBusinesser(Integer businesser) {
         this.businesser = businesser;
+    }
+
+    public Integer getSaleCount() {
+        return saleCount;
+    }
+
+    public void setSaleCount(Integer saleCount) {
+        this.saleCount = saleCount;
     }
 
     public Integer getPrice() {
