@@ -167,7 +167,7 @@ public class AccountController {
             map.put("address",userData.getAddress());
             map.put("isDesigner",userData.getIsDesigner());
             map.put("isBusiness",userData.getIsBusiness());
-            map.put("touXiangUrl","data:image/jpeg;base64,"+ImageApi.GetImageStr(ImageApi.getImgAbsolutePath()+userData.getTouXiangUrl()));
+            map.put("touXiangUrl","data:image/jpeg;base64,"+ImageApi.GetImageBase64ByUrl(ImageApi.getImgAbsolutePath()+userData.getTouXiangUrl()));
             /*头像url:"http://"+request.getServerName()+":"+request.getServerPort()+"/"+userData.getTouXiangUrl()*/
             /*map.put("touXiangUrl","../img/sjg/sjg3.jpg");*/
             map.put("nickname",userData.getNickname());
