@@ -35,6 +35,9 @@ public class ShoppingController {
     @Autowired
     private IBusinessLogoService businessLogoService;
 
+    @Autowired
+    private IMyDiyClothService myDiyClothService;
+
 
     /**
      * Created by simple on 2017/2/27.
@@ -178,6 +181,40 @@ public class ShoppingController {
         List<BusinessLogo> businessLogoList=businessLogoService.selectListOnePage(page);
 
         return businessLogoList;
+    }
+    /**
+     * Created by simple on 2017/03/17.
+     * 保存用户从商城diy的衣服，需要登录
+     * 返回衣服商品列表数据：List<BusinessCloth>
+     */
+    @RequestMapping("/saveDiyCloth_authority")
+    public @ResponseBody String saveDiyCloth(HttpServletResponse response,HttpServletRequest request)
+            throws IOException, NoSuchAlgorithmException {
+        Integer businessClothId=Integer.parseInt(request.getParameter("businessClothId"));
+        Integer logoId=Integer.parseInt(request.getParameter("logoId"));
+        String isBusinessLogo=request.getParameter("isBusinessLogo");
+        String diyImgBase64=request.getParameter("diyImgBase64");
+
+        //保存图片
+        String uuid=UUID.randomUUID().toString();
+        String diyImgRelativeUrl="images/diyCloth/"+uuid+".png";
+        String diyImgAbsoluteUrl=ImageApi.getImgAbsolutePath()+diyImgRelativeUrl;
+        ImageApi.GenerateImage(diyImgBase64,diyImgAbsoluteUrl);
+
+        MyDiyCloth myDiyCloth=new MyDiyCloth();
+        myDiyCloth.setBusinessClothId(businessClothId);
+        if(isBusinessLogo=="true"){
+            myDiyCloth.setIsBusinessLogo(true);
+        }
+        else {
+            myDiyCloth.setIsBusinessLogo(false);
+        }
+        myDiyCloth.setLogoId(logoId);
+        myDiyCloth.setDiyImgUrl(diyImgRelativeUrl);
+        System.out.println("1");
+        Integer myDiyClothId=myDiyClothService.insertSelectiveReturnId(myDiyCloth);
+        System.out.println("2");
+        return "{\"myDiyClothId\":\""+myDiyClothId+"\",\"imgUrl\":\""+diyImgRelativeUrl+"\"}";
     }
 
 }

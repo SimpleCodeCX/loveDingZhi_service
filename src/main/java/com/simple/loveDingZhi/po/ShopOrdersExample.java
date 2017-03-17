@@ -225,193 +225,63 @@ public class ShopOrdersExample {
             return (Criteria) this;
         }
 
-        public Criteria andBussinessClothIdIsNull() {
-            addCriterion("bussiness_cloth_id is null");
+        public Criteria andMyDiyClothIdIsNull() {
+            addCriterion("my_diy_cloth_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andBussinessClothIdIsNotNull() {
-            addCriterion("bussiness_cloth_id is not null");
+        public Criteria andMyDiyClothIdIsNotNull() {
+            addCriterion("my_diy_cloth_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andBussinessClothIdEqualTo(Integer value) {
-            addCriterion("bussiness_cloth_id =", value, "bussinessClothId");
+        public Criteria andMyDiyClothIdEqualTo(Integer value) {
+            addCriterion("my_diy_cloth_id =", value, "myDiyClothId");
             return (Criteria) this;
         }
 
-        public Criteria andBussinessClothIdNotEqualTo(Integer value) {
-            addCriterion("bussiness_cloth_id <>", value, "bussinessClothId");
+        public Criteria andMyDiyClothIdNotEqualTo(Integer value) {
+            addCriterion("my_diy_cloth_id <>", value, "myDiyClothId");
             return (Criteria) this;
         }
 
-        public Criteria andBussinessClothIdGreaterThan(Integer value) {
-            addCriterion("bussiness_cloth_id >", value, "bussinessClothId");
+        public Criteria andMyDiyClothIdGreaterThan(Integer value) {
+            addCriterion("my_diy_cloth_id >", value, "myDiyClothId");
             return (Criteria) this;
         }
 
-        public Criteria andBussinessClothIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("bussiness_cloth_id >=", value, "bussinessClothId");
+        public Criteria andMyDiyClothIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("my_diy_cloth_id >=", value, "myDiyClothId");
             return (Criteria) this;
         }
 
-        public Criteria andBussinessClothIdLessThan(Integer value) {
-            addCriterion("bussiness_cloth_id <", value, "bussinessClothId");
+        public Criteria andMyDiyClothIdLessThan(Integer value) {
+            addCriterion("my_diy_cloth_id <", value, "myDiyClothId");
             return (Criteria) this;
         }
 
-        public Criteria andBussinessClothIdLessThanOrEqualTo(Integer value) {
-            addCriterion("bussiness_cloth_id <=", value, "bussinessClothId");
+        public Criteria andMyDiyClothIdLessThanOrEqualTo(Integer value) {
+            addCriterion("my_diy_cloth_id <=", value, "myDiyClothId");
             return (Criteria) this;
         }
 
-        public Criteria andBussinessClothIdIn(List<Integer> values) {
-            addCriterion("bussiness_cloth_id in", values, "bussinessClothId");
+        public Criteria andMyDiyClothIdIn(List<Integer> values) {
+            addCriterion("my_diy_cloth_id in", values, "myDiyClothId");
             return (Criteria) this;
         }
 
-        public Criteria andBussinessClothIdNotIn(List<Integer> values) {
-            addCriterion("bussiness_cloth_id not in", values, "bussinessClothId");
+        public Criteria andMyDiyClothIdNotIn(List<Integer> values) {
+            addCriterion("my_diy_cloth_id not in", values, "myDiyClothId");
             return (Criteria) this;
         }
 
-        public Criteria andBussinessClothIdBetween(Integer value1, Integer value2) {
-            addCriterion("bussiness_cloth_id between", value1, value2, "bussinessClothId");
+        public Criteria andMyDiyClothIdBetween(Integer value1, Integer value2) {
+            addCriterion("my_diy_cloth_id between", value1, value2, "myDiyClothId");
             return (Criteria) this;
         }
 
-        public Criteria andBussinessClothIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("bussiness_cloth_id not between", value1, value2, "bussinessClothId");
-            return (Criteria) this;
-        }
-
-        public Criteria andBusinessLogoIdIsNull() {
-            addCriterion("business_logo_id is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andBusinessLogoIdIsNotNull() {
-            addCriterion("business_logo_id is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andBusinessLogoIdEqualTo(Integer value) {
-            addCriterion("business_logo_id =", value, "businessLogoId");
-            return (Criteria) this;
-        }
-
-        public Criteria andBusinessLogoIdNotEqualTo(Integer value) {
-            addCriterion("business_logo_id <>", value, "businessLogoId");
-            return (Criteria) this;
-        }
-
-        public Criteria andBusinessLogoIdGreaterThan(Integer value) {
-            addCriterion("business_logo_id >", value, "businessLogoId");
-            return (Criteria) this;
-        }
-
-        public Criteria andBusinessLogoIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("business_logo_id >=", value, "businessLogoId");
-            return (Criteria) this;
-        }
-
-        public Criteria andBusinessLogoIdLessThan(Integer value) {
-            addCriterion("business_logo_id <", value, "businessLogoId");
-            return (Criteria) this;
-        }
-
-        public Criteria andBusinessLogoIdLessThanOrEqualTo(Integer value) {
-            addCriterion("business_logo_id <=", value, "businessLogoId");
-            return (Criteria) this;
-        }
-
-        public Criteria andBusinessLogoIdIn(List<Integer> values) {
-            addCriterion("business_logo_id in", values, "businessLogoId");
-            return (Criteria) this;
-        }
-
-        public Criteria andBusinessLogoIdNotIn(List<Integer> values) {
-            addCriterion("business_logo_id not in", values, "businessLogoId");
-            return (Criteria) this;
-        }
-
-        public Criteria andBusinessLogoIdBetween(Integer value1, Integer value2) {
-            addCriterion("business_logo_id between", value1, value2, "businessLogoId");
-            return (Criteria) this;
-        }
-
-        public Criteria andBusinessLogoIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("business_logo_id not between", value1, value2, "businessLogoId");
-            return (Criteria) this;
-        }
-
-        public Criteria andDiyImgUrlIsNull() {
-            addCriterion("diy_img_url is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andDiyImgUrlIsNotNull() {
-            addCriterion("diy_img_url is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andDiyImgUrlEqualTo(String value) {
-            addCriterion("diy_img_url =", value, "diyImgUrl");
-            return (Criteria) this;
-        }
-
-        public Criteria andDiyImgUrlNotEqualTo(String value) {
-            addCriterion("diy_img_url <>", value, "diyImgUrl");
-            return (Criteria) this;
-        }
-
-        public Criteria andDiyImgUrlGreaterThan(String value) {
-            addCriterion("diy_img_url >", value, "diyImgUrl");
-            return (Criteria) this;
-        }
-
-        public Criteria andDiyImgUrlGreaterThanOrEqualTo(String value) {
-            addCriterion("diy_img_url >=", value, "diyImgUrl");
-            return (Criteria) this;
-        }
-
-        public Criteria andDiyImgUrlLessThan(String value) {
-            addCriterion("diy_img_url <", value, "diyImgUrl");
-            return (Criteria) this;
-        }
-
-        public Criteria andDiyImgUrlLessThanOrEqualTo(String value) {
-            addCriterion("diy_img_url <=", value, "diyImgUrl");
-            return (Criteria) this;
-        }
-
-        public Criteria andDiyImgUrlLike(String value) {
-            addCriterion("diy_img_url like", value, "diyImgUrl");
-            return (Criteria) this;
-        }
-
-        public Criteria andDiyImgUrlNotLike(String value) {
-            addCriterion("diy_img_url not like", value, "diyImgUrl");
-            return (Criteria) this;
-        }
-
-        public Criteria andDiyImgUrlIn(List<String> values) {
-            addCriterion("diy_img_url in", values, "diyImgUrl");
-            return (Criteria) this;
-        }
-
-        public Criteria andDiyImgUrlNotIn(List<String> values) {
-            addCriterion("diy_img_url not in", values, "diyImgUrl");
-            return (Criteria) this;
-        }
-
-        public Criteria andDiyImgUrlBetween(String value1, String value2) {
-            addCriterion("diy_img_url between", value1, value2, "diyImgUrl");
-            return (Criteria) this;
-        }
-
-        public Criteria andDiyImgUrlNotBetween(String value1, String value2) {
-            addCriterion("diy_img_url not between", value1, value2, "diyImgUrl");
+        public Criteria andMyDiyClothIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("my_diy_cloth_id not between", value1, value2, "myDiyClothId");
             return (Criteria) this;
         }
 

@@ -4,9 +4,7 @@
   <resultMap id="BaseResultMap" type="com.simple.loveDingZhi.po.ShopOrders" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="order_detail_id" property="orderDetailId" jdbcType="INTEGER" />
-    <result column="bussiness_cloth_id" property="bussinessClothId" jdbcType="INTEGER" />
-    <result column="business_logo_id" property="businessLogoId" jdbcType="INTEGER" />
-    <result column="diy_img_url" property="diyImgUrl" jdbcType="VARCHAR" />
+    <result column="my_diy_cloth_id" property="myDiyClothId" jdbcType="INTEGER" />
     <result column="price" property="price" jdbcType="INTEGER" />
     <result column="date" property="date" jdbcType="TIMESTAMP" />
   </resultMap>
@@ -69,7 +67,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, order_detail_id, bussiness_cloth_id, business_logo_id, diy_img_url, price, date
+    id, order_detail_id, my_diy_cloth_id, price, date
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.simple.loveDingZhi.po.ShopOrdersExample" >
     select
@@ -102,12 +100,10 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.simple.loveDingZhi.po.ShopOrders" >
-    insert into shop_orders (id, order_detail_id, bussiness_cloth_id, 
-      business_logo_id, diy_img_url, price, 
-      date)
-    values (#{id,jdbcType=INTEGER}, #{orderDetailId,jdbcType=INTEGER}, #{bussinessClothId,jdbcType=INTEGER}, 
-      #{businessLogoId,jdbcType=INTEGER}, #{diyImgUrl,jdbcType=VARCHAR}, #{price,jdbcType=INTEGER}, 
-      #{date,jdbcType=TIMESTAMP})
+    insert into shop_orders (id, order_detail_id, my_diy_cloth_id, 
+      price, date)
+    values (#{id,jdbcType=INTEGER}, #{orderDetailId,jdbcType=INTEGER}, #{myDiyClothId,jdbcType=INTEGER}, 
+      #{price,jdbcType=INTEGER}, #{date,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.simple.loveDingZhi.po.ShopOrders" >
     insert into shop_orders
@@ -118,14 +114,8 @@
       <if test="orderDetailId != null" >
         order_detail_id,
       </if>
-      <if test="bussinessClothId != null" >
-        bussiness_cloth_id,
-      </if>
-      <if test="businessLogoId != null" >
-        business_logo_id,
-      </if>
-      <if test="diyImgUrl != null" >
-        diy_img_url,
+      <if test="myDiyClothId != null" >
+        my_diy_cloth_id,
       </if>
       <if test="price != null" >
         price,
@@ -141,14 +131,8 @@
       <if test="orderDetailId != null" >
         #{orderDetailId,jdbcType=INTEGER},
       </if>
-      <if test="bussinessClothId != null" >
-        #{bussinessClothId,jdbcType=INTEGER},
-      </if>
-      <if test="businessLogoId != null" >
-        #{businessLogoId,jdbcType=INTEGER},
-      </if>
-      <if test="diyImgUrl != null" >
-        #{diyImgUrl,jdbcType=VARCHAR},
+      <if test="myDiyClothId != null" >
+        #{myDiyClothId,jdbcType=INTEGER},
       </if>
       <if test="price != null" >
         #{price,jdbcType=INTEGER},
@@ -173,14 +157,8 @@
       <if test="record.orderDetailId != null" >
         order_detail_id = #{record.orderDetailId,jdbcType=INTEGER},
       </if>
-      <if test="record.bussinessClothId != null" >
-        bussiness_cloth_id = #{record.bussinessClothId,jdbcType=INTEGER},
-      </if>
-      <if test="record.businessLogoId != null" >
-        business_logo_id = #{record.businessLogoId,jdbcType=INTEGER},
-      </if>
-      <if test="record.diyImgUrl != null" >
-        diy_img_url = #{record.diyImgUrl,jdbcType=VARCHAR},
+      <if test="record.myDiyClothId != null" >
+        my_diy_cloth_id = #{record.myDiyClothId,jdbcType=INTEGER},
       </if>
       <if test="record.price != null" >
         price = #{record.price,jdbcType=INTEGER},
@@ -197,9 +175,7 @@
     update shop_orders
     set id = #{record.id,jdbcType=INTEGER},
       order_detail_id = #{record.orderDetailId,jdbcType=INTEGER},
-      bussiness_cloth_id = #{record.bussinessClothId,jdbcType=INTEGER},
-      business_logo_id = #{record.businessLogoId,jdbcType=INTEGER},
-      diy_img_url = #{record.diyImgUrl,jdbcType=VARCHAR},
+      my_diy_cloth_id = #{record.myDiyClothId,jdbcType=INTEGER},
       price = #{record.price,jdbcType=INTEGER},
       date = #{record.date,jdbcType=TIMESTAMP}
     <if test="_parameter != null" >
@@ -212,14 +188,8 @@
       <if test="orderDetailId != null" >
         order_detail_id = #{orderDetailId,jdbcType=INTEGER},
       </if>
-      <if test="bussinessClothId != null" >
-        bussiness_cloth_id = #{bussinessClothId,jdbcType=INTEGER},
-      </if>
-      <if test="businessLogoId != null" >
-        business_logo_id = #{businessLogoId,jdbcType=INTEGER},
-      </if>
-      <if test="diyImgUrl != null" >
-        diy_img_url = #{diyImgUrl,jdbcType=VARCHAR},
+      <if test="myDiyClothId != null" >
+        my_diy_cloth_id = #{myDiyClothId,jdbcType=INTEGER},
       </if>
       <if test="price != null" >
         price = #{price,jdbcType=INTEGER},
@@ -233,9 +203,7 @@
   <update id="updateByPrimaryKey" parameterType="com.simple.loveDingZhi.po.ShopOrders" >
     update shop_orders
     set order_detail_id = #{orderDetailId,jdbcType=INTEGER},
-      bussiness_cloth_id = #{bussinessClothId,jdbcType=INTEGER},
-      business_logo_id = #{businessLogoId,jdbcType=INTEGER},
-      diy_img_url = #{diyImgUrl,jdbcType=VARCHAR},
+      my_diy_cloth_id = #{myDiyClothId,jdbcType=INTEGER},
       price = #{price,jdbcType=INTEGER},
       date = #{date,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
