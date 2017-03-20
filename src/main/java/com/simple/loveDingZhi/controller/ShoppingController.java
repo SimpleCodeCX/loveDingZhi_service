@@ -192,9 +192,11 @@ public class ShoppingController {
             throws IOException, NoSuchAlgorithmException {
         Integer businessClothId=Integer.parseInt(request.getParameter("businessClothId"));
         Integer logoId=Integer.parseInt(request.getParameter("logoId"));
-        String isBusinessLogo=request.getParameter("isBusinessLogo");
+        Integer isBusinessLogo=Integer.parseInt(request.getParameter("isBusinessLogo"));
         String diyImgBase64=request.getParameter("diyImgBase64");
-
+        System.out.println("-------------------------------------------------");
+        System.out.println(isBusinessLogo);
+        System.out.println("-------------------------------------------------");
         //保存图片
         String uuid=UUID.randomUUID().toString();
         String diyImgRelativeUrl="images/diyCloth/"+uuid+".png";
@@ -203,18 +205,31 @@ public class ShoppingController {
 
         MyDiyCloth myDiyCloth=new MyDiyCloth();
         myDiyCloth.setBusinessClothId(businessClothId);
-        if(isBusinessLogo=="true"){
+        if(isBusinessLogo ==1){
             myDiyCloth.setIsBusinessLogo(true);
         }
         else {
             myDiyCloth.setIsBusinessLogo(false);
         }
+
         myDiyCloth.setLogoId(logoId);
         myDiyCloth.setDiyImgUrl(diyImgRelativeUrl);
-        System.out.println("1");
-        Integer myDiyClothId=myDiyClothService.insertSelectiveReturnId(myDiyCloth);
-        System.out.println("2");
+        myDiyClothService.insertSelectiveReturnId(myDiyCloth);
+        Integer myDiyClothId=myDiyCloth.getMyDiyClothId();
         return "{\"myDiyClothId\":\""+myDiyClothId+"\",\"imgUrl\":\""+diyImgRelativeUrl+"\"}";
+    }
+
+    /**
+     * Created by simple on 2017/03/20.
+     * 根据diyCloth的id获得diy衣服的详情,需要登录
+     * 返回衣服商品列表数据：MyDiyClothVo
+     */
+    @RequestMapping("/getDiyClothDetails_authority")
+    public @ResponseBody MyDiyClothVo getDiyClothDetails(HttpServletResponse response,HttpServletRequest request)
+            throws IOException, NoSuchAlgorithmException {
+        Integer myDiyClothId=Integer.parseInt(request.getParameter("myDiyClothId"));
+        MyDiyClothVo myDiyClothVo=myDiyClothService.selectDiyClothDetailsByMyDiyClothId(myDiyClothId);
+        return myDiyClothVo;
     }
 
 }

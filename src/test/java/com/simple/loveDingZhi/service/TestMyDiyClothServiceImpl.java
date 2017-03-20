@@ -22,4 +22,11 @@ public class TestMyDiyClothServiceImpl {
         myDiyClothService.insertSelectiveReturnId(myDiyCloth);
         System.out.println("......");
     }
+    @Test
+    public void testSelectDiyClothDetailsByMyDiyClothId(){
+        ApplicationContext applicationContext=new ClassPathXmlApplicationContext("classpath:spring/applicationContext-*.xml");
+        IMyDiyClothService myDiyClothService=(IMyDiyClothService)applicationContext.getBean("myDiyClothService");
+        MyDiyCloth myDiyCloth= myDiyClothService.selectDiyClothDetailsByMyDiyClothId(50);
+        System.out.println("......");
+    }
 }

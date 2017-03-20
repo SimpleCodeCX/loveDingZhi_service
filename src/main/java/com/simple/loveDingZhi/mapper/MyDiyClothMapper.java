@@ -2,6 +2,7 @@ package com.simple.loveDingZhi.mapper;
 
 import com.simple.loveDingZhi.po.MyDiyCloth;
 import com.simple.loveDingZhi.po.MyDiyClothExample;
+import com.simple.loveDingZhi.po.MyDiyClothVo;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -31,4 +32,5 @@ public interface MyDiyClothMapper {
 
    /**************************************************************************************************/
    int insertSelectiveReturnId(MyDiyCloth myDiyCloth);
+    MyDiyClothVo selectDiyClothDetailsByMyDiyClothId(Integer myDiyClothId);
 }
