@@ -3,6 +3,7 @@
 <mapper namespace="com.simple.loveDingZhi.mapper.MyDiyClothMapper" >
   <resultMap id="BaseResultMap" type="com.simple.loveDingZhi.po.MyDiyCloth" >
     <id column="my_diy_cloth_id" property="myDiyClothId" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
     <result column="business_cloth_id" property="businessClothId" jdbcType="INTEGER" />
     <result column="logo_id" property="logoId" jdbcType="INTEGER" />
     <result column="is_business_logo" property="isBusinessLogo" jdbcType="BIT" />
@@ -67,7 +68,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    my_diy_cloth_id, business_cloth_id, logo_id, is_business_logo, diy_img_url
+    my_diy_cloth_id, user_id, business_cloth_id, logo_id, is_business_logo, diy_img_url
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.simple.loveDingZhi.po.MyDiyClothExample" >
     select
@@ -100,16 +101,21 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.simple.loveDingZhi.po.MyDiyCloth" >
-    insert into my_diy_cloth (my_diy_cloth_id, business_cloth_id, logo_id, 
-      is_business_logo, diy_img_url)
-    values (#{myDiyClothId,jdbcType=INTEGER}, #{businessClothId,jdbcType=INTEGER}, #{logoId,jdbcType=INTEGER}, 
-      #{isBusinessLogo,jdbcType=BIT}, #{diyImgUrl,jdbcType=VARCHAR})
+    insert into my_diy_cloth (my_diy_cloth_id, user_id, business_cloth_id, 
+      logo_id, is_business_logo, diy_img_url
+      )
+    values (#{myDiyClothId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{businessClothId,jdbcType=INTEGER}, 
+      #{logoId,jdbcType=INTEGER}, #{isBusinessLogo,jdbcType=BIT}, #{diyImgUrl,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.simple.loveDingZhi.po.MyDiyCloth" >
     insert into my_diy_cloth
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="myDiyClothId != null" >
         my_diy_cloth_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
       </if>
       <if test="businessClothId != null" >
         business_cloth_id,
@@ -127,6 +133,9 @@
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="myDiyClothId != null" >
         #{myDiyClothId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
       </if>
       <if test="businessClothId != null" >
         #{businessClothId,jdbcType=INTEGER},
@@ -154,6 +163,9 @@
       <if test="record.myDiyClothId != null" >
         my_diy_cloth_id = #{record.myDiyClothId,jdbcType=INTEGER},
       </if>
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=INTEGER},
+      </if>
       <if test="record.businessClothId != null" >
         business_cloth_id = #{record.businessClothId,jdbcType=INTEGER},
       </if>
@@ -174,6 +186,7 @@
   <update id="updateByExample" parameterType="map" >
     update my_diy_cloth
     set my_diy_cloth_id = #{record.myDiyClothId,jdbcType=INTEGER},
+      user_id = #{record.userId,jdbcType=INTEGER},
       business_cloth_id = #{record.businessClothId,jdbcType=INTEGER},
       logo_id = #{record.logoId,jdbcType=INTEGER},
       is_business_logo = #{record.isBusinessLogo,jdbcType=BIT},
@@ -185,6 +198,9 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.simple.loveDingZhi.po.MyDiyCloth" >
     update my_diy_cloth
     <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
       <if test="businessClothId != null" >
         business_cloth_id = #{businessClothId,jdbcType=INTEGER},
       </if>
@@ -202,7 +218,8 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.simple.loveDingZhi.po.MyDiyCloth" >
     update my_diy_cloth
-    set business_cloth_id = #{businessClothId,jdbcType=INTEGER},
+    set user_id = #{userId,jdbcType=INTEGER},
+      business_cloth_id = #{businessClothId,jdbcType=INTEGER},
       logo_id = #{logoId,jdbcType=INTEGER},
       is_business_logo = #{isBusinessLogo,jdbcType=BIT},
       diy_img_url = #{diyImgUrl,jdbcType=VARCHAR}
@@ -248,6 +265,9 @@
       <if test="myDiyClothId != null" >
         my_diy_cloth_id,
       </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
       <if test="businessClothId != null" >
         business_cloth_id,
       </if>
@@ -265,6 +285,9 @@
       <if test="myDiyClothId != null" >
         #{myDiyClothId,jdbcType=INTEGER},
       </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
       <if test="businessClothId != null" >
         #{businessClothId,jdbcType=INTEGER},
       </if>
@@ -281,12 +304,12 @@
   </insert>
 
   <select id="selectDiyClothDetailsByMyDiyClothId" parameterType="java.lang.Integer" resultMap="MyDiyClothVoResultMap">
-   select tb_my_diy_cloth.business_cloth_id,
-          tb_my_diy_cloth.is_business_logo,
-          tb_business_cloth.price,
-          tb_user.user_name
-   from my_diy_cloth tb_my_diy_cloth LEFT JOIN business_cloth tb_business_cloth on tb_my_diy_cloth.business_cloth_id=tb_business_cloth.id
-                                     left join user tb_user on tb_business_cloth.businesser=tb_user.id
-   where tb_my_diy_cloth.my_diy_cloth_id=#{myDiyClothId}
+    select tb_my_diy_cloth.business_cloth_id,
+    tb_my_diy_cloth.is_business_logo,
+    tb_business_cloth.price,
+    tb_user.user_name
+    from my_diy_cloth tb_my_diy_cloth LEFT JOIN business_cloth tb_business_cloth on tb_my_diy_cloth.business_cloth_id=tb_business_cloth.id
+    left join user tb_user on tb_business_cloth.businesser=tb_user.id
+    where tb_my_diy_cloth.my_diy_cloth_id=#{myDiyClothId}
   </select>
 </mapper>

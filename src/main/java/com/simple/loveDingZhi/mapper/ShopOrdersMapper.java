@@ -28,4 +28,7 @@ public interface ShopOrdersMapper {
     int updateByPrimaryKeySelective(ShopOrders record);
 
     int updateByPrimaryKey(ShopOrders record);
+    /**************************************************************************************************/
+    //插入数据，会返回自增主键id，存在shopOrders的id里
+    int insertSelectiveReturnId(ShopOrders shopOrders );
 }

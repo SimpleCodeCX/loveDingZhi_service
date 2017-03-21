@@ -3,7 +3,9 @@ package com.simple.loveDingZhi.po;
 public class ShopOrdersDetail {
     private Integer id;
 
-    private Integer size;
+    private Integer shopOrdersId;
+
+    private String size;
 
     private Integer count;
 
@@ -15,12 +17,20 @@ public class ShopOrdersDetail {
         this.id = id;
     }
 
-    public Integer getSize() {
+    public Integer getShopOrdersId() {
+        return shopOrdersId;
+    }
+
+    public void setShopOrdersId(Integer shopOrdersId) {
+        this.shopOrdersId = shopOrdersId;
+    }
+
+    public String getSize() {
         return size;
     }
 
-    public void setSize(Integer size) {
-        this.size = size;
+    public void setSize(String size) {
+        this.size = size == null ? null : size.trim();
     }
 
     public Integer getCount() {

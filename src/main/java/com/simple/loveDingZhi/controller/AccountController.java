@@ -43,6 +43,8 @@ public class AccountController {
     @Autowired
     private IBusinessLogoService businessLogoService;
 
+    @Autowired
+    private IUserAddressService userAddressService;
 
     /**
      * Created by simple on 2016/11/27.
@@ -292,7 +294,44 @@ public class AccountController {
         List<BusinessLogo> businessClothList = businessLogoService.selectListByUserName(userName);
         return businessClothList;
     }
+    /**
+     * Created by simple on 2017/03/21.
+     * 保存用户的收货地址  需要登录
+     * 保存成功，返回{flat:true},否则返回{flat:false}
+     */
+    @RequestMapping("/saveUserAddress_authority")
+    public @ResponseBody String saveUserAddress(HttpServletResponse response,HttpServletRequest request)
+            throws IOException, NoSuchAlgorithmException {
+        Integer userId= Integer.parseInt("userId");
+        String realName=request.getParameter("realName");
+        String phoneNumber=request.getParameter("phoneNumber");
+        String sheng=request.getParameter("sheng");
+        String shi=request.getParameter("shi");
+        String qu=request.getParameter("qu");
+        String detailAddress=request.getParameter("detailAddress");
+        String postalcode=request.getParameter("postalcode");
 
+
+        //保存用户收货地址
+        UserAddress userAddress=new UserAddress();
+        userAddress.setSheng(sheng);
+        userAddress.setShi(shi);
+        userAddress.setQu(qu);
+        userAddress.setDetailAddress(detailAddress);
+        userAddress.setPostalcode(postalcode);
+        userAddress.setRealName(realName);
+        userAddress.setPhoneNumber(phoneNumber);
+        int  count= userAddressService.insertSelective(userAddress);
+
+        if(count==1)
+        {
+            return "{\"flat\":true}";
+        }
+        else{
+            return "{\"flat\":false}";
+        }
+
+    }
 
 
 

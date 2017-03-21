@@ -3,7 +3,8 @@
 <mapper namespace="com.simple.loveDingZhi.mapper.ShopOrdersDetailMapper" >
   <resultMap id="BaseResultMap" type="com.simple.loveDingZhi.po.ShopOrdersDetail" >
     <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="size" property="size" jdbcType="INTEGER" />
+    <result column="shop_orders_id" property="shopOrdersId" jdbcType="INTEGER" />
+    <result column="size" property="size" jdbcType="VARCHAR" />
     <result column="count" property="count" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Example_Where_Clause" >
@@ -65,7 +66,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, size, count
+    id, shop_orders_id, size, count
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.simple.loveDingZhi.po.ShopOrdersDetailExample" >
     select
@@ -98,16 +99,19 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.simple.loveDingZhi.po.ShopOrdersDetail" >
-    insert into shop_orders_detail (id, size, count
-      )
-    values (#{id,jdbcType=INTEGER}, #{size,jdbcType=INTEGER}, #{count,jdbcType=INTEGER}
-      )
+    insert into shop_orders_detail (id, shop_orders_id, size, 
+      count)
+    values (#{id,jdbcType=INTEGER}, #{shopOrdersId,jdbcType=INTEGER}, #{size,jdbcType=VARCHAR}, 
+      #{count,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.simple.loveDingZhi.po.ShopOrdersDetail" >
     insert into shop_orders_detail
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
+      </if>
+      <if test="shopOrdersId != null" >
+        shop_orders_id,
       </if>
       <if test="size != null" >
         size,
@@ -120,8 +124,11 @@
       <if test="id != null" >
         #{id,jdbcType=INTEGER},
       </if>
+      <if test="shopOrdersId != null" >
+        #{shopOrdersId,jdbcType=INTEGER},
+      </if>
       <if test="size != null" >
-        #{size,jdbcType=INTEGER},
+        #{size,jdbcType=VARCHAR},
       </if>
       <if test="count != null" >
         #{count,jdbcType=INTEGER},
@@ -140,8 +147,11 @@
       <if test="record.id != null" >
         id = #{record.id,jdbcType=INTEGER},
       </if>
+      <if test="record.shopOrdersId != null" >
+        shop_orders_id = #{record.shopOrdersId,jdbcType=INTEGER},
+      </if>
       <if test="record.size != null" >
-        size = #{record.size,jdbcType=INTEGER},
+        size = #{record.size,jdbcType=VARCHAR},
       </if>
       <if test="record.count != null" >
         count = #{record.count,jdbcType=INTEGER},
@@ -154,7 +164,8 @@
   <update id="updateByExample" parameterType="map" >
     update shop_orders_detail
     set id = #{record.id,jdbcType=INTEGER},
-      size = #{record.size,jdbcType=INTEGER},
+      shop_orders_id = #{record.shopOrdersId,jdbcType=INTEGER},
+      size = #{record.size,jdbcType=VARCHAR},
       count = #{record.count,jdbcType=INTEGER}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -163,8 +174,11 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.simple.loveDingZhi.po.ShopOrdersDetail" >
     update shop_orders_detail
     <set >
+      <if test="shopOrdersId != null" >
+        shop_orders_id = #{shopOrdersId,jdbcType=INTEGER},
+      </if>
       <if test="size != null" >
-        size = #{size,jdbcType=INTEGER},
+        size = #{size,jdbcType=VARCHAR},
       </if>
       <if test="count != null" >
         count = #{count,jdbcType=INTEGER},
@@ -174,7 +188,8 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.simple.loveDingZhi.po.ShopOrdersDetail" >
     update shop_orders_detail
-    set size = #{size,jdbcType=INTEGER},
+    set shop_orders_id = #{shopOrdersId,jdbcType=INTEGER},
+      size = #{size,jdbcType=VARCHAR},
       count = #{count,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>

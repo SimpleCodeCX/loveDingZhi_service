@@ -49,7 +49,6 @@
     </properties>
 
     <dependencies>
-
         <!--spring包 Start-->
         <dependency>
             <groupId>org.springframework</groupId>
@@ -171,31 +170,31 @@
             <version>${javassist.version}</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/log4j/log4j -->
-       <!-- <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-            <version>${log4j.version}</version>
-        </dependency>-->
+        <!-- <dependency>
+             <groupId>log4j</groupId>
+             <artifactId>log4j</artifactId>
+             <version>${log4j.version}</version>
+         </dependency>-->
         <!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-api -->
-       <!-- <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-api</artifactId>
-            <version>${log4j-api.version}</version>
-        </dependency>-->
+        <!-- <dependency>
+             <groupId>org.apache.logging.log4j</groupId>
+             <artifactId>log4j-api</artifactId>
+             <version>${log4j-api.version}</version>
+         </dependency>-->
         <!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core -->
-     <!--   <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-core</artifactId>
-            <version>${log4j-core.version}</version>
-        </dependency>-->
+        <!--   <dependency>
+               <groupId>org.apache.logging.log4j</groupId>
+               <artifactId>log4j-core</artifactId>
+               <version>${log4j-core.version}</version>
+           </dependency>-->
         <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
 
         <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-log4j12 -->
-       <!-- <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-log4j12</artifactId>
-            <version>${slf4j-log4j12.version}</version>
-        </dependency>-->
+        <!-- <dependency>
+             <groupId>org.slf4j</groupId>
+             <artifactId>slf4j-log4j12</artifactId>
+             <version>${slf4j-log4j12.version}</version>
+         </dependency>-->
         <!--mybatis依赖包 End-->
         <!--mysql驱动包-->
         <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
@@ -294,6 +293,14 @@
             <groupId>com.thetransactioncompany</groupId>
             <artifactId>java-property-utils</artifactId>
             <version>1.9</version>
+        </dependency>
+
+        <!--json-lib-->
+        <dependency>
+            <groupId>net.sf.json-lib</groupId>
+            <artifactId>json-lib</artifactId>
+            <version>2.4</version>
+            <classifier>jdk15</classifier>
         </dependency>
 
 

@@ -3,6 +3,8 @@ package com.simple.loveDingZhi.po;
 public class MyDiyCloth {
     private Integer myDiyClothId;
 
+    private Integer userId;
+
     private Integer businessClothId;
 
     private Integer logoId;
@@ -17,6 +19,14 @@ public class MyDiyCloth {
 
     public void setMyDiyClothId(Integer myDiyClothId) {
         this.myDiyClothId = myDiyClothId;
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
     public Integer getBusinessClothId() {

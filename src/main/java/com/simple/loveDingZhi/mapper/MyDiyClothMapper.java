@@ -29,8 +29,7 @@ public interface MyDiyClothMapper {
     int updateByPrimaryKeySelective(MyDiyCloth record);
 
     int updateByPrimaryKey(MyDiyCloth record);
-
-   /**************************************************************************************************/
-   int insertSelectiveReturnId(MyDiyCloth myDiyCloth);
+    /**************************************************************************************************/
+    int insertSelectiveReturnId(MyDiyCloth myDiyCloth);
     MyDiyClothVo selectDiyClothDetailsByMyDiyClothId(Integer myDiyClothId);
 }

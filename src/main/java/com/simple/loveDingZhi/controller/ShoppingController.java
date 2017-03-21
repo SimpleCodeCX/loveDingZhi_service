@@ -6,16 +6,16 @@ package com.simple.loveDingZhi.controller;
 
 import com.simple.loveDingZhi.po.*;
 import com.simple.loveDingZhi.service.*;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -38,6 +38,14 @@ public class ShoppingController {
     @Autowired
     private IMyDiyClothService myDiyClothService;
 
+    @Autowired
+    private IUserAddressService userAddressService;
+
+    @Autowired
+    private IShopOrdersService shopOrdersService;
+
+    @Autowired
+    private IShopOrdersDetailService shopOrdersDetailService;
 
     /**
      * Created by simple on 2017/2/27.
@@ -190,13 +198,17 @@ public class ShoppingController {
     @RequestMapping("/saveDiyCloth_authority")
     public @ResponseBody String saveDiyCloth(HttpServletResponse response,HttpServletRequest request)
             throws IOException, NoSuchAlgorithmException {
+        String accountNumber=request.getParameter("accountNumber");//账号
         Integer businessClothId=Integer.parseInt(request.getParameter("businessClothId"));
         Integer logoId=Integer.parseInt(request.getParameter("logoId"));
         Integer isBusinessLogo=Integer.parseInt(request.getParameter("isBusinessLogo"));
         String diyImgBase64=request.getParameter("diyImgBase64");
-        System.out.println("-------------------------------------------------");
-        System.out.println(isBusinessLogo);
-        System.out.println("-------------------------------------------------");
+
+        //通过账号获得userId,保存在user里
+        User user=new User();
+        user.setAccountNumber(accountNumber);
+        user=userService.selectBySelective(user);
+        int userId=user.getId();
         //保存图片
         String uuid=UUID.randomUUID().toString();
         String diyImgRelativeUrl="images/diyCloth/"+uuid+".png";
@@ -211,7 +223,7 @@ public class ShoppingController {
         else {
             myDiyCloth.setIsBusinessLogo(false);
         }
-
+        myDiyCloth.setUserId(userId);
         myDiyCloth.setLogoId(logoId);
         myDiyCloth.setDiyImgUrl(diyImgRelativeUrl);
         myDiyClothService.insertSelectiveReturnId(myDiyCloth);
@@ -230,6 +242,102 @@ public class ShoppingController {
         Integer myDiyClothId=Integer.parseInt(request.getParameter("myDiyClothId"));
         MyDiyClothVo myDiyClothVo=myDiyClothService.selectDiyClothDetailsByMyDiyClothId(myDiyClothId);
         return myDiyClothVo;
+    }
+
+    /**
+     * Created by simple on 2017/03/22.
+     * 商城订单支付   需要登录
+     * 支付成功，返回{flat:true},否则返回{flat:false}
+     */
+    @RequestMapping("/shoppingMakeOrder_authority")
+    public @ResponseBody String shoppingMakeOrder(HttpServletResponse response,HttpServletRequest request)
+            throws IOException, NoSuchAlgorithmException {
+
+        Integer myDiyClothId= Integer.parseInt(request.getParameter("myDiyClothId"));//diy衣服的id
+        Integer price= Integer.parseInt(request.getParameter("price"));//单间衣服的总价格（总价格=原价+logo价格）
+        Integer clothCount= Integer.parseInt(request.getParameter("totalCount"));//总件数
+        Integer totalPrice= Integer.parseInt(request.getParameter("totalPrice"));//总费用
+        String clothSizeItems= request.getParameter("clothSizeItems");//尺码json字符串，需要转化为json格式才能操作
+
+        //保存订单
+        ShopOrders shopOrders = new ShopOrders();
+        shopOrders.setIsPay(false);
+        shopOrders.setMyDiyClothId(myDiyClothId);
+        shopOrders.setCount(clothCount);
+        shopOrders.setPrice(price);
+        shopOrders.setTotalprice(totalPrice);
+        int count = shopOrdersService.insertSelectiveReturnId(shopOrders);
+        Integer shopOrdersId = shopOrders.getId();
+
+
+        //保存订单详情
+        ShopOrdersDetail shopOrdersDetail = new ShopOrdersDetail();
+        shopOrdersDetail.setShopOrdersId(shopOrdersId);
+        JSONArray jsonArray = JSONArray.fromObject(clothSizeItems);
+        for(int i=0;i<jsonArray.size();i++){
+            shopOrdersDetail.setSize(jsonArray.getJSONObject(i).getString("clothSize"));
+            shopOrdersDetail.setCount(jsonArray.getJSONObject(i).getInt("quantity"));
+            shopOrdersDetailService.insertSelective(shopOrdersDetail);
+        }
+
+        if(count==1)
+        {
+            return "{\"flat\":true}";
+        }
+        else{
+            return "{\"flat\":false}";
+        }
+    }
+
+    /**
+     * Created by simple on 2017/03/22.
+     * 商城订单支付   需要登录
+     * 支付成功，返回{flat:true},否则返回{flat:false}
+     */
+    @RequestMapping("/saveAddressAndshoppingOrderPay_authority")
+    public @ResponseBody String shoppingPay(HttpServletResponse response,HttpServletRequest request)
+            throws IOException, NoSuchAlgorithmException {
+        Integer userId= Integer.parseInt(request.getParameter("myDiyClothId"));
+        Integer shopOrdersId= Integer.parseInt(request.getParameter("shopOrdersId"));
+        String realName=request.getParameter("realName");
+        String phoneNumber=request.getParameter("phoneNumber");
+        String sheng=request.getParameter("sheng");
+        String shi=request.getParameter("shi");
+        String qu=request.getParameter("qu");
+        String detailAddress=request.getParameter("detailAddress");
+        String postalcode=request.getParameter("postalcode");
+
+
+        //保存用户收货地址
+        UserAddress userAddress=new UserAddress();
+        userAddress.setSheng(sheng);
+        userAddress.setShi(shi);
+        userAddress.setQu(qu);
+        userAddress.setDetailAddress(detailAddress);
+        userAddress.setPostalcode(postalcode);
+        userAddress.setRealName(realName);
+        userAddress.setPhoneNumber(phoneNumber);
+        userAddressService.insertSelectiveReturnId(userAddress);
+        int userAddressId=userAddress.getUserAddressId();
+
+
+
+        //为订单添加用户的收货地址，并设置订单的支付状态为已支付
+        ShopOrders shopOrders=new ShopOrders();
+        shopOrders.setIsPay(true);
+        shopOrders.setUserAddressId(userAddressId);
+        shopOrders.setId(shopOrdersId);
+
+        int count=shopOrdersService.updateByPrimaryKeySelective(shopOrders);
+
+
+        if(count==1)
+        {
+            return "{\"flat\":true}";
+        }
+        else{
+            return "{\"flat\":false}";
+        }
     }
 
 }
