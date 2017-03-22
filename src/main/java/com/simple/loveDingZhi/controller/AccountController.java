@@ -297,12 +297,12 @@ public class AccountController {
     /**
      * Created by simple on 2017/03/21.
      * 保存用户的收货地址  需要登录
-     * 保存成功，返回{flat:true},否则返回{flat:false}
+     * 保存成功，返回{flat:true,userAddressId:number},否则返回{flat:false}
      */
     @RequestMapping("/saveUserAddress_authority")
     public @ResponseBody String saveUserAddress(HttpServletResponse response,HttpServletRequest request)
             throws IOException, NoSuchAlgorithmException {
-        Integer userId= Integer.parseInt("userId");
+        String accountNumber=request.getParameter("accountNumber");//账号
         String realName=request.getParameter("realName");
         String phoneNumber=request.getParameter("phoneNumber");
         String sheng=request.getParameter("sheng");
@@ -310,10 +310,15 @@ public class AccountController {
         String qu=request.getParameter("qu");
         String detailAddress=request.getParameter("detailAddress");
         String postalcode=request.getParameter("postalcode");
-
+        //通过账号获得userId,保存在user里
+        User user=new User();
+        user.setAccountNumber(accountNumber);
+        user=userService.selectBySelective(user);
+        int userId=user.getId();
 
         //保存用户收货地址
         UserAddress userAddress=new UserAddress();
+        userAddress.setUserId(userId);
         userAddress.setSheng(sheng);
         userAddress.setShi(shi);
         userAddress.setQu(qu);
@@ -321,11 +326,12 @@ public class AccountController {
         userAddress.setPostalcode(postalcode);
         userAddress.setRealName(realName);
         userAddress.setPhoneNumber(phoneNumber);
-        int  count= userAddressService.insertSelective(userAddress);
+        int  count= userAddressService.insertSelectiveReturnId(userAddress);
+        Integer userAddressId=userAddress.getUserAddressId();
 
         if(count==1)
         {
-            return "{\"flat\":true}";
+            return "{\"flat\":true,\"userAddressId\":"+userAddressId+"}";
         }
         else{
             return "{\"flat\":false}";
@@ -333,6 +339,7 @@ public class AccountController {
 
     }
 
+   
 
 
 }

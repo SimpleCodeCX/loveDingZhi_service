@@ -3,6 +3,8 @@ package com.simple.loveDingZhi.po;
 public class UserAddress {
     private Integer userAddressId;
 
+    private Integer userId;
+
     private String sheng;
 
     private String shi;
@@ -23,6 +25,14 @@ public class UserAddress {
 
     public void setUserAddressId(Integer userAddressId) {
         this.userAddressId = userAddressId;
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
     public String getSheng() {
