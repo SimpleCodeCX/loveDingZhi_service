@@ -31,4 +31,5 @@ public interface UserAddressMapper {
     /**************************************************************************************************/
     //插入数据，会返回自增主键id，存在userAddress的userAddressId里
     int insertSelectiveReturnId(UserAddress userAddress);
+    List<UserAddress> selectByUserId(Integer userId);
 }

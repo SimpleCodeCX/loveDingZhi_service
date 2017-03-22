@@ -274,6 +274,12 @@
     where user_address_id = #{userAddressId,jdbcType=INTEGER}
   </update>
   <!--****************************************************************************************************-->
+  <select id="selectByUserId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from user_address
+    where user_id = #{userId,jdbcType=INTEGER}
+  </select>
   <insert id="insertSelectiveReturnId" parameterType="com.simple.loveDingZhi.po.UserAddress" >
     <selectKey keyProperty="userAddressId" order="AFTER" resultType="java.lang.Integer">
       select LAST_INSERT_ID()
