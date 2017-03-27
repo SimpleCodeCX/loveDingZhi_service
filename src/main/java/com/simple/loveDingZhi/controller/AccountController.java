@@ -253,6 +253,7 @@ public class AccountController {
     public @ResponseBody List<DesignDrawing> getMySjgList(HttpServletResponse response,HttpServletRequest request)
             throws IOException, NoSuchAlgorithmException {
         String userName= request.getParameter("userName");
+        System.out.println(userName);
         List<DesignDrawing> designDrawingList = designDrawingService.selectListByUserName(userName);
         return designDrawingList;
     }
