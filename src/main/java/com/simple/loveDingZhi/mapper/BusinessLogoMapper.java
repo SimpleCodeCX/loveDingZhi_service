@@ -2,9 +2,8 @@ package com.simple.loveDingZhi.mapper;
 
 import com.simple.loveDingZhi.po.BusinessLogo;
 import com.simple.loveDingZhi.po.BusinessLogoExample;
-import org.apache.ibatis.annotations.Param;
-
 import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
 public interface BusinessLogoMapper {
     int countByExample(BusinessLogoExample example);
@@ -17,15 +16,21 @@ public interface BusinessLogoMapper {
 
     int insertSelective(BusinessLogo record);
 
+    List<BusinessLogo> selectByExampleWithBLOBs(BusinessLogoExample example);
+
     List<BusinessLogo> selectByExample(BusinessLogoExample example);
 
     BusinessLogo selectByPrimaryKey(Integer id);
 
     int updateByExampleSelective(@Param("record") BusinessLogo record, @Param("example") BusinessLogoExample example);
 
+    int updateByExampleWithBLOBs(@Param("record") BusinessLogo record, @Param("example") BusinessLogoExample example);
+
     int updateByExample(@Param("record") BusinessLogo record, @Param("example") BusinessLogoExample example);
 
     int updateByPrimaryKeySelective(BusinessLogo record);
+
+    int updateByPrimaryKeyWithBLOBs(BusinessLogo record);
 
     int updateByPrimaryKey(BusinessLogo record);
     /**************************************************************************************************/

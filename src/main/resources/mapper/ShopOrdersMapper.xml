@@ -3,12 +3,13 @@
 <mapper namespace="com.simple.loveDingZhi.mapper.ShopOrdersMapper" >
   <resultMap id="BaseResultMap" type="com.simple.loveDingZhi.po.ShopOrders" >
     <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="order_detail_id" property="orderDetailId" jdbcType="INTEGER" />
-    <result column="bussiness_cloth_id" property="bussinessClothId" jdbcType="INTEGER" />
-    <result column="business_logo_id" property="businessLogoId" jdbcType="INTEGER" />
-    <result column="diy_img_url" property="diyImgUrl" jdbcType="VARCHAR" />
+    <result column="my_diy_cloth_id" property="myDiyClothId" jdbcType="INTEGER" />
     <result column="price" property="price" jdbcType="INTEGER" />
     <result column="date" property="date" jdbcType="TIMESTAMP" />
+    <result column="is_pay" property="isPay" jdbcType="BIT" />
+    <result column="user_address_id" property="userAddressId" jdbcType="INTEGER" />
+    <result column="count" property="count" jdbcType="INTEGER" />
+    <result column="totalPrice" property="totalprice" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -69,7 +70,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, order_detail_id, bussiness_cloth_id, business_logo_id, diy_img_url, price, date
+    id, my_diy_cloth_id, price, date, is_pay, user_address_id, count, totalPrice
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.simple.loveDingZhi.po.ShopOrdersExample" >
     select
@@ -102,12 +103,12 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.simple.loveDingZhi.po.ShopOrders" >
-    insert into shop_orders (id, order_detail_id, bussiness_cloth_id, 
-      business_logo_id, diy_img_url, price, 
-      date)
-    values (#{id,jdbcType=INTEGER}, #{orderDetailId,jdbcType=INTEGER}, #{bussinessClothId,jdbcType=INTEGER}, 
-      #{businessLogoId,jdbcType=INTEGER}, #{diyImgUrl,jdbcType=VARCHAR}, #{price,jdbcType=INTEGER}, 
-      #{date,jdbcType=TIMESTAMP})
+    insert into shop_orders (id, my_diy_cloth_id, price, 
+      date, is_pay, user_address_id, 
+      count, totalPrice)
+    values (#{id,jdbcType=INTEGER}, #{myDiyClothId,jdbcType=INTEGER}, #{price,jdbcType=INTEGER}, 
+      #{date,jdbcType=TIMESTAMP}, #{isPay,jdbcType=BIT}, #{userAddressId,jdbcType=INTEGER}, 
+      #{count,jdbcType=INTEGER}, #{totalprice,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.simple.loveDingZhi.po.ShopOrders" >
     insert into shop_orders
@@ -115,17 +116,8 @@
       <if test="id != null" >
         id,
       </if>
-      <if test="orderDetailId != null" >
-        order_detail_id,
-      </if>
-      <if test="bussinessClothId != null" >
-        bussiness_cloth_id,
-      </if>
-      <if test="businessLogoId != null" >
-        business_logo_id,
-      </if>
-      <if test="diyImgUrl != null" >
-        diy_img_url,
+      <if test="myDiyClothId != null" >
+        my_diy_cloth_id,
       </if>
       <if test="price != null" >
         price,
@@ -133,28 +125,43 @@
       <if test="date != null" >
         date,
       </if>
+      <if test="isPay != null" >
+        is_pay,
+      </if>
+      <if test="userAddressId != null" >
+        user_address_id,
+      </if>
+      <if test="count != null" >
+        count,
+      </if>
+      <if test="totalprice != null" >
+        totalPrice,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         #{id,jdbcType=INTEGER},
       </if>
-      <if test="orderDetailId != null" >
-        #{orderDetailId,jdbcType=INTEGER},
-      </if>
-      <if test="bussinessClothId != null" >
-        #{bussinessClothId,jdbcType=INTEGER},
-      </if>
-      <if test="businessLogoId != null" >
-        #{businessLogoId,jdbcType=INTEGER},
-      </if>
-      <if test="diyImgUrl != null" >
-        #{diyImgUrl,jdbcType=VARCHAR},
+      <if test="myDiyClothId != null" >
+        #{myDiyClothId,jdbcType=INTEGER},
       </if>
       <if test="price != null" >
         #{price,jdbcType=INTEGER},
       </if>
       <if test="date != null" >
         #{date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isPay != null" >
+        #{isPay,jdbcType=BIT},
+      </if>
+      <if test="userAddressId != null" >
+        #{userAddressId,jdbcType=INTEGER},
+      </if>
+      <if test="count != null" >
+        #{count,jdbcType=INTEGER},
+      </if>
+      <if test="totalprice != null" >
+        #{totalprice,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -170,23 +177,26 @@
       <if test="record.id != null" >
         id = #{record.id,jdbcType=INTEGER},
       </if>
-      <if test="record.orderDetailId != null" >
-        order_detail_id = #{record.orderDetailId,jdbcType=INTEGER},
-      </if>
-      <if test="record.bussinessClothId != null" >
-        bussiness_cloth_id = #{record.bussinessClothId,jdbcType=INTEGER},
-      </if>
-      <if test="record.businessLogoId != null" >
-        business_logo_id = #{record.businessLogoId,jdbcType=INTEGER},
-      </if>
-      <if test="record.diyImgUrl != null" >
-        diy_img_url = #{record.diyImgUrl,jdbcType=VARCHAR},
+      <if test="record.myDiyClothId != null" >
+        my_diy_cloth_id = #{record.myDiyClothId,jdbcType=INTEGER},
       </if>
       <if test="record.price != null" >
         price = #{record.price,jdbcType=INTEGER},
       </if>
       <if test="record.date != null" >
         date = #{record.date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.isPay != null" >
+        is_pay = #{record.isPay,jdbcType=BIT},
+      </if>
+      <if test="record.userAddressId != null" >
+        user_address_id = #{record.userAddressId,jdbcType=INTEGER},
+      </if>
+      <if test="record.count != null" >
+        count = #{record.count,jdbcType=INTEGER},
+      </if>
+      <if test="record.totalprice != null" >
+        totalPrice = #{record.totalprice,jdbcType=INTEGER},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -196,12 +206,13 @@
   <update id="updateByExample" parameterType="map" >
     update shop_orders
     set id = #{record.id,jdbcType=INTEGER},
-      order_detail_id = #{record.orderDetailId,jdbcType=INTEGER},
-      bussiness_cloth_id = #{record.bussinessClothId,jdbcType=INTEGER},
-      business_logo_id = #{record.businessLogoId,jdbcType=INTEGER},
-      diy_img_url = #{record.diyImgUrl,jdbcType=VARCHAR},
+      my_diy_cloth_id = #{record.myDiyClothId,jdbcType=INTEGER},
       price = #{record.price,jdbcType=INTEGER},
-      date = #{record.date,jdbcType=TIMESTAMP}
+      date = #{record.date,jdbcType=TIMESTAMP},
+      is_pay = #{record.isPay,jdbcType=BIT},
+      user_address_id = #{record.userAddressId,jdbcType=INTEGER},
+      count = #{record.count,jdbcType=INTEGER},
+      totalPrice = #{record.totalprice,jdbcType=INTEGER}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -209,17 +220,8 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.simple.loveDingZhi.po.ShopOrders" >
     update shop_orders
     <set >
-      <if test="orderDetailId != null" >
-        order_detail_id = #{orderDetailId,jdbcType=INTEGER},
-      </if>
-      <if test="bussinessClothId != null" >
-        bussiness_cloth_id = #{bussinessClothId,jdbcType=INTEGER},
-      </if>
-      <if test="businessLogoId != null" >
-        business_logo_id = #{businessLogoId,jdbcType=INTEGER},
-      </if>
-      <if test="diyImgUrl != null" >
-        diy_img_url = #{diyImgUrl,jdbcType=VARCHAR},
+      <if test="myDiyClothId != null" >
+        my_diy_cloth_id = #{myDiyClothId,jdbcType=INTEGER},
       </if>
       <if test="price != null" >
         price = #{price,jdbcType=INTEGER},
@@ -227,17 +229,89 @@
       <if test="date != null" >
         date = #{date,jdbcType=TIMESTAMP},
       </if>
+      <if test="isPay != null" >
+        is_pay = #{isPay,jdbcType=BIT},
+      </if>
+      <if test="userAddressId != null" >
+        user_address_id = #{userAddressId,jdbcType=INTEGER},
+      </if>
+      <if test="count != null" >
+        count = #{count,jdbcType=INTEGER},
+      </if>
+      <if test="totalprice != null" >
+        totalPrice = #{totalprice,jdbcType=INTEGER},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.simple.loveDingZhi.po.ShopOrders" >
     update shop_orders
-    set order_detail_id = #{orderDetailId,jdbcType=INTEGER},
-      bussiness_cloth_id = #{bussinessClothId,jdbcType=INTEGER},
-      business_logo_id = #{businessLogoId,jdbcType=INTEGER},
-      diy_img_url = #{diyImgUrl,jdbcType=VARCHAR},
+    set my_diy_cloth_id = #{myDiyClothId,jdbcType=INTEGER},
       price = #{price,jdbcType=INTEGER},
-      date = #{date,jdbcType=TIMESTAMP}
+      date = #{date,jdbcType=TIMESTAMP},
+      is_pay = #{isPay,jdbcType=BIT},
+      user_address_id = #{userAddressId,jdbcType=INTEGER},
+      count = #{count,jdbcType=INTEGER},
+      totalPrice = #{totalprice,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <!--****************************************************************************************************-->
+  <insert id="insertSelectiveReturnId" parameterType="com.simple.loveDingZhi.po.ShopOrders" >
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      select LAST_INSERT_ID()
+    </selectKey>
+  insert into shop_orders
+  <trim prefix="(" suffix=")" suffixOverrides="," >
+    <if test="id != null" >
+      id,
+    </if>
+    <if test="myDiyClothId != null" >
+      my_diy_cloth_id,
+    </if>
+    <if test="price != null" >
+      price,
+    </if>
+    <if test="date != null" >
+      date,
+    </if>
+    <if test="isPay != null" >
+      is_pay,
+    </if>
+    <if test="userAddressId != null" >
+      user_address_id,
+    </if>
+    <if test="count != null" >
+      count,
+    </if>
+    <if test="totalprice != null" >
+      totalPrice,
+    </if>
+  </trim>
+  <trim prefix="values (" suffix=")" suffixOverrides="," >
+    <if test="id != null" >
+      #{id,jdbcType=INTEGER},
+    </if>
+    <if test="myDiyClothId != null" >
+      #{myDiyClothId,jdbcType=INTEGER},
+    </if>
+    <if test="price != null" >
+      #{price,jdbcType=INTEGER},
+    </if>
+    <if test="date != null" >
+      #{date,jdbcType=TIMESTAMP},
+    </if>
+    <if test="isPay != null" >
+      #{isPay,jdbcType=BIT},
+    </if>
+    <if test="userAddressId != null" >
+      #{userAddressId,jdbcType=INTEGER},
+    </if>
+    <if test="count != null" >
+      #{count,jdbcType=INTEGER},
+    </if>
+    <if test="totalprice != null" >
+      #{totalprice,jdbcType=INTEGER},
+    </if>
+  </trim>
+  </insert>
 </mapper>

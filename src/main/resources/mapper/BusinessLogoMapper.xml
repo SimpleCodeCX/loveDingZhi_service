@@ -7,6 +7,9 @@
     <result column="img_url" property="imgUrl" jdbcType="VARCHAR" />
     <result column="businesser" property="businesser" jdbcType="INTEGER" />
   </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.simple.loveDingZhi.po.BusinessLogo" extends="BaseResultMap" >
+    <result column="introduction" property="introduction" jdbcType="LONGVARCHAR" />
+  </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >
@@ -68,6 +71,25 @@
   <sql id="Base_Column_List" >
     id, caption, img_url, businesser
   </sql>
+  <sql id="Blob_Column_List" >
+    introduction
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.simple.loveDingZhi.po.BusinessLogoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from business_logo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.simple.loveDingZhi.po.BusinessLogoExample" >
     select
     <if test="distinct" >
@@ -82,9 +104,11 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select
     <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
     from business_logo
     where id = #{id,jdbcType=INTEGER}
   </select>
@@ -99,10 +123,10 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.simple.loveDingZhi.po.BusinessLogo" >
-    insert into business_logo (id, caption, img_url, 
-      businesser)
-    values (#{id,jdbcType=INTEGER}, #{caption,jdbcType=VARCHAR}, #{imgUrl,jdbcType=VARCHAR}, 
-      #{businesser,jdbcType=INTEGER})
+    insert into business_logo (id, caption, img_url,
+    businesser, introduction)
+    values (#{id,jdbcType=INTEGER}, #{caption,jdbcType=VARCHAR}, #{imgUrl,jdbcType=VARCHAR},
+    #{businesser,jdbcType=INTEGER}, #{introduction,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.simple.loveDingZhi.po.BusinessLogo" >
     insert into business_logo
@@ -119,6 +143,9 @@
       <if test="businesser != null" >
         businesser,
       </if>
+      <if test="introduction != null" >
+        introduction,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -132,6 +159,9 @@
       </if>
       <if test="businesser != null" >
         #{businesser,jdbcType=INTEGER},
+      </if>
+      <if test="introduction != null" >
+        #{introduction,jdbcType=LONGVARCHAR},
       </if>
     </trim>
   </insert>
@@ -156,7 +186,21 @@
       <if test="record.businesser != null" >
         businesser = #{record.businesser,jdbcType=INTEGER},
       </if>
+      <if test="record.introduction != null" >
+        introduction = #{record.introduction,jdbcType=LONGVARCHAR},
+      </if>
     </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update business_logo
+    set id = #{record.id,jdbcType=INTEGER},
+    caption = #{record.caption,jdbcType=VARCHAR},
+    img_url = #{record.imgUrl,jdbcType=VARCHAR},
+    businesser = #{record.businesser,jdbcType=INTEGER},
+    introduction = #{record.introduction,jdbcType=LONGVARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -164,9 +208,9 @@
   <update id="updateByExample" parameterType="map" >
     update business_logo
     set id = #{record.id,jdbcType=INTEGER},
-      caption = #{record.caption,jdbcType=VARCHAR},
-      img_url = #{record.imgUrl,jdbcType=VARCHAR},
-      businesser = #{record.businesser,jdbcType=INTEGER}
+    caption = #{record.caption,jdbcType=VARCHAR},
+    img_url = #{record.imgUrl,jdbcType=VARCHAR},
+    businesser = #{record.businesser,jdbcType=INTEGER}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -183,7 +227,18 @@
       <if test="businesser != null" >
         businesser = #{businesser,jdbcType=INTEGER},
       </if>
+      <if test="introduction != null" >
+        introduction = #{introduction,jdbcType=LONGVARCHAR},
+      </if>
     </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.simple.loveDingZhi.po.BusinessLogo" >
+    update business_logo
+    set caption = #{caption,jdbcType=VARCHAR},
+    img_url = #{imgUrl,jdbcType=VARCHAR},
+    businesser = #{businesser,jdbcType=INTEGER},
+    introduction = #{introduction,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.simple.loveDingZhi.po.BusinessLogo" >
@@ -194,10 +249,10 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
   <!--****************************************************************************************************-->
-  <select id="selectListOnePage" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <select id="selectListOnePage" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
     select * from business_logo LIMIT #{pageFirst},10
   </select>
-  <select id="selectListByUserName" resultMap="BaseResultMap" parameterType="java.lang.String">
+  <select id="selectListByUserName" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String">
     select business_logo.* from business_logo
     LEFT JOIN user on user.id=business_logo.businesser
     where user.user_name=#{userName}

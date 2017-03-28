@@ -164,6 +164,66 @@ public class ShopOrdersDetailExample {
             return (Criteria) this;
         }
 
+        public Criteria andShopOrdersIdIsNull() {
+            addCriterion("shop_orders_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopOrdersIdIsNotNull() {
+            addCriterion("shop_orders_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopOrdersIdEqualTo(Integer value) {
+            addCriterion("shop_orders_id =", value, "shopOrdersId");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopOrdersIdNotEqualTo(Integer value) {
+            addCriterion("shop_orders_id <>", value, "shopOrdersId");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopOrdersIdGreaterThan(Integer value) {
+            addCriterion("shop_orders_id >", value, "shopOrdersId");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopOrdersIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("shop_orders_id >=", value, "shopOrdersId");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopOrdersIdLessThan(Integer value) {
+            addCriterion("shop_orders_id <", value, "shopOrdersId");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopOrdersIdLessThanOrEqualTo(Integer value) {
+            addCriterion("shop_orders_id <=", value, "shopOrdersId");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopOrdersIdIn(List<Integer> values) {
+            addCriterion("shop_orders_id in", values, "shopOrdersId");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopOrdersIdNotIn(List<Integer> values) {
+            addCriterion("shop_orders_id not in", values, "shopOrdersId");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopOrdersIdBetween(Integer value1, Integer value2) {
+            addCriterion("shop_orders_id between", value1, value2, "shopOrdersId");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopOrdersIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("shop_orders_id not between", value1, value2, "shopOrdersId");
+            return (Criteria) this;
+        }
+
         public Criteria andSizeIsNull() {
             addCriterion("size is null");
             return (Criteria) this;
@@ -174,52 +234,62 @@ public class ShopOrdersDetailExample {
             return (Criteria) this;
         }
 
-        public Criteria andSizeEqualTo(Integer value) {
+        public Criteria andSizeEqualTo(String value) {
             addCriterion("size =", value, "size");
             return (Criteria) this;
         }
 
-        public Criteria andSizeNotEqualTo(Integer value) {
+        public Criteria andSizeNotEqualTo(String value) {
             addCriterion("size <>", value, "size");
             return (Criteria) this;
         }
 
-        public Criteria andSizeGreaterThan(Integer value) {
+        public Criteria andSizeGreaterThan(String value) {
             addCriterion("size >", value, "size");
             return (Criteria) this;
         }
 
-        public Criteria andSizeGreaterThanOrEqualTo(Integer value) {
+        public Criteria andSizeGreaterThanOrEqualTo(String value) {
             addCriterion("size >=", value, "size");
             return (Criteria) this;
         }
 
-        public Criteria andSizeLessThan(Integer value) {
+        public Criteria andSizeLessThan(String value) {
             addCriterion("size <", value, "size");
             return (Criteria) this;
         }
 
-        public Criteria andSizeLessThanOrEqualTo(Integer value) {
+        public Criteria andSizeLessThanOrEqualTo(String value) {
             addCriterion("size <=", value, "size");
             return (Criteria) this;
         }
 
-        public Criteria andSizeIn(List<Integer> values) {
+        public Criteria andSizeLike(String value) {
+            addCriterion("size like", value, "size");
+            return (Criteria) this;
+        }
+
+        public Criteria andSizeNotLike(String value) {
+            addCriterion("size not like", value, "size");
+            return (Criteria) this;
+        }
+
+        public Criteria andSizeIn(List<String> values) {
             addCriterion("size in", values, "size");
             return (Criteria) this;
         }
 
-        public Criteria andSizeNotIn(List<Integer> values) {
+        public Criteria andSizeNotIn(List<String> values) {
             addCriterion("size not in", values, "size");
             return (Criteria) this;
         }
 
-        public Criteria andSizeBetween(Integer value1, Integer value2) {
+        public Criteria andSizeBetween(String value1, String value2) {
             addCriterion("size between", value1, value2, "size");
             return (Criteria) this;
         }
 
-        public Criteria andSizeNotBetween(Integer value1, Integer value2) {
+        public Criteria andSizeNotBetween(String value1, String value2) {
             addCriterion("size not between", value1, value2, "size");
             return (Criteria) this;
         }

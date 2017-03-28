@@ -21,6 +21,7 @@ public class CorsInterceptor extends HandlerInterceptorAdapter {
         //获得访问者域名
         String originUrl=request.getHeader("origin");
         //允许跨域
+
         response.setHeader("Access-Control-Allow-Origin", originUrl);
         /*允许响应cookie*/
         response.setHeader("Access-Control-Allow-Credentials", "true");

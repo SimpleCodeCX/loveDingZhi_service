@@ -28,4 +28,5 @@ public interface ShopOrdersDetailMapper {
     int updateByPrimaryKeySelective(ShopOrdersDetail record);
 
     int updateByPrimaryKey(ShopOrdersDetail record);
+
 }

@@ -12,4 +12,9 @@
        <bean id="businessService" class="com.simple.loveDingZhi.service.BusinessServiceImpl"></bean>
        <bean id="businessClothService" class="com.simple.loveDingZhi.service.BusinessClothServiceImpl"></bean>
        <bean id="businessLogoService" class="com.simple.loveDingZhi.service.BusinessLogoServiceImpl"></bean>
+       <bean id="myDiyClothService" class="com.simple.loveDingZhi.service.MyDiyClothServiceImpl"></bean>
+       <bean id="userAddressService" class="com.simple.loveDingZhi.service.UserAddressServiceImpl"></bean>
+       <bean id="shopOrdersService" class="com.simple.loveDingZhi.service.ShopOrdersServiceImpl"></bean>
+       <bean id="shopOrdersDetailService" class="com.simple.loveDingZhi.service.ShopOrdersDetailServiceImpl"></bean>
+
 </beans>

@@ -364,6 +364,66 @@ public class BusinessClothExample {
             return (Criteria) this;
         }
 
+        public Criteria andSaleCountIsNull() {
+            addCriterion("sale_count is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSaleCountIsNotNull() {
+            addCriterion("sale_count is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSaleCountEqualTo(Integer value) {
+            addCriterion("sale_count =", value, "saleCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andSaleCountNotEqualTo(Integer value) {
+            addCriterion("sale_count <>", value, "saleCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andSaleCountGreaterThan(Integer value) {
+            addCriterion("sale_count >", value, "saleCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andSaleCountGreaterThanOrEqualTo(Integer value) {
+            addCriterion("sale_count >=", value, "saleCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andSaleCountLessThan(Integer value) {
+            addCriterion("sale_count <", value, "saleCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andSaleCountLessThanOrEqualTo(Integer value) {
+            addCriterion("sale_count <=", value, "saleCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andSaleCountIn(List<Integer> values) {
+            addCriterion("sale_count in", values, "saleCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andSaleCountNotIn(List<Integer> values) {
+            addCriterion("sale_count not in", values, "saleCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andSaleCountBetween(Integer value1, Integer value2) {
+            addCriterion("sale_count between", value1, value2, "saleCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andSaleCountNotBetween(Integer value1, Integer value2) {
+            addCriterion("sale_count not between", value1, value2, "saleCount");
+            return (Criteria) this;
+        }
+
         public Criteria andPriceIsNull() {
             addCriterion("price is null");
             return (Criteria) this;

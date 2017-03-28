@@ -5,17 +5,19 @@ import java.util.Date;
 public class ShopOrders {
     private Integer id;
 
-    private Integer orderDetailId;
-
-    private Integer bussinessClothId;
-
-    private Integer businessLogoId;
-
-    private String diyImgUrl;
+    private Integer myDiyClothId;
 
     private Integer price;
 
     private Date date;
+
+    private Boolean isPay;
+
+    private Integer userAddressId;
+
+    private Integer count;
+
+    private Integer totalprice;
 
     public Integer getId() {
         return id;
@@ -25,36 +27,12 @@ public class ShopOrders {
         this.id = id;
     }
 
-    public Integer getOrderDetailId() {
-        return orderDetailId;
+    public Integer getMyDiyClothId() {
+        return myDiyClothId;
     }
 
-    public void setOrderDetailId(Integer orderDetailId) {
-        this.orderDetailId = orderDetailId;
-    }
-
-    public Integer getBussinessClothId() {
-        return bussinessClothId;
-    }
-
-    public void setBussinessClothId(Integer bussinessClothId) {
-        this.bussinessClothId = bussinessClothId;
-    }
-
-    public Integer getBusinessLogoId() {
-        return businessLogoId;
-    }
-
-    public void setBusinessLogoId(Integer businessLogoId) {
-        this.businessLogoId = businessLogoId;
-    }
-
-    public String getDiyImgUrl() {
-        return diyImgUrl;
-    }
-
-    public void setDiyImgUrl(String diyImgUrl) {
-        this.diyImgUrl = diyImgUrl == null ? null : diyImgUrl.trim();
+    public void setMyDiyClothId(Integer myDiyClothId) {
+        this.myDiyClothId = myDiyClothId;
     }
 
     public Integer getPrice() {
@@ -71,5 +49,37 @@ public class ShopOrders {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public Boolean getIsPay() {
+        return isPay;
+    }
+
+    public void setIsPay(Boolean isPay) {
+        this.isPay = isPay;
+    }
+
+    public Integer getUserAddressId() {
+        return userAddressId;
+    }
+
+    public void setUserAddressId(Integer userAddressId) {
+        this.userAddressId = userAddressId;
+    }
+
+    public Integer getCount() {
+        return count;
+    }
+
+    public void setCount(Integer count) {
+        this.count = count;
+    }
+
+    public Integer getTotalprice() {
+        return totalprice;
+    }
+
+    public void setTotalprice(Integer totalprice) {
+        this.totalprice = totalprice;
     }
 }

@@ -1,5 +1,6 @@
 package com.simple.loveDingZhi.controller;
 
+import com.simple.loveDingZhi.mapper.UserAddressMapper;
 import com.simple.loveDingZhi.po.*;
 import com.simple.loveDingZhi.service.*;
 import org.slf4j.Logger;
@@ -43,6 +44,8 @@ public class AccountController {
     @Autowired
     private IBusinessLogoService businessLogoService;
 
+    @Autowired
+    private IUserAddressService userAddressService;
 
     /**
      * Created by simple on 2016/11/27.
@@ -167,7 +170,7 @@ public class AccountController {
             map.put("address",userData.getAddress());
             map.put("isDesigner",userData.getIsDesigner());
             map.put("isBusiness",userData.getIsBusiness());
-            map.put("touXiangUrl","data:image/jpeg;base64,"+ImageApi.GetImageStr(ImageApi.getImgAbsolutePath()+userData.getTouXiangUrl()));
+            map.put("touXiangUrl","data:image/jpeg;base64,"+ImageApi.GetImageBase64ByUrl(ImageApi.getImgAbsolutePath()+userData.getTouXiangUrl()));
             /*头像url:"http://"+request.getServerName()+":"+request.getServerPort()+"/"+userData.getTouXiangUrl()*/
             /*map.put("touXiangUrl","../img/sjg/sjg3.jpg");*/
             map.put("nickname",userData.getNickname());
@@ -250,6 +253,7 @@ public class AccountController {
     public @ResponseBody List<DesignDrawing> getMySjgList(HttpServletResponse response,HttpServletRequest request)
             throws IOException, NoSuchAlgorithmException {
         String userName= request.getParameter("userName");
+        System.out.println(userName);
         List<DesignDrawing> designDrawingList = designDrawingService.selectListByUserName(userName);
         return designDrawingList;
     }
@@ -292,8 +296,120 @@ public class AccountController {
         List<BusinessLogo> businessClothList = businessLogoService.selectListByUserName(userName);
         return businessClothList;
     }
+    /**
+     * Created by simple on 2017/03/21.
+     * 保存用户的收货地址  需要登录
+     * 保存成功，返回{flat:true,userAddressId:number},否则返回{flat:false}
+     */
+    @RequestMapping("/saveUserAddress_authority")
+    public @ResponseBody String saveUserAddress(HttpServletResponse response,HttpServletRequest request)
+            throws IOException, NoSuchAlgorithmException {
+        String accountNumber=request.getParameter("accountNumber");//账号
+        String realName=request.getParameter("realName");
+        String phoneNumber=request.getParameter("phoneNumber");
+        String sheng=request.getParameter("sheng");
+        String shi=request.getParameter("shi");
+        String qu=request.getParameter("qu");
+        String detailAddress=request.getParameter("detailAddress");
+        String postalcode=request.getParameter("postalcode");
+        //通过账号获得userId,保存在user里
+        User user=new User();
+        user.setAccountNumber(accountNumber);
+        user=userService.selectBySelective(user);
+        int userId=user.getId();
 
+        //保存用户收货地址
+        UserAddress userAddress=new UserAddress();
+        userAddress.setUserId(userId);
+        userAddress.setSheng(sheng);
+        userAddress.setShi(shi);
+        userAddress.setQu(qu);
+        userAddress.setDetailAddress(detailAddress);
+        userAddress.setPostalcode(postalcode);
+        userAddress.setRealName(realName);
+        userAddress.setPhoneNumber(phoneNumber);
+        int  count= userAddressService.insertSelectiveReturnId(userAddress);
+        Integer userAddressId=userAddress.getUserAddressId();
 
+        if(count==1)
+        {
+            return "{\"flat\":true,\"userAddressId\":"+userAddressId+"}";
+        }
+        else{
+            return "{\"flat\":false}";
+        }
+
+    }
+
+    /**
+     * Created by simple on 2017/03/22.
+     * 根据用户的userId获得我的收货地址列表  需要登录
+     * 返回List<UserAddress>
+     */
+    @RequestMapping("/getUserAddressList_authority")
+    public @ResponseBody List<UserAddress> getUserAddressList(HttpServletResponse response,HttpServletRequest request)
+            throws IOException, NoSuchAlgorithmException {
+        String accountNumber = request.getParameter("accountNumber");//账号
+
+        //通过账号获得userId,保存在user里
+        User user = new User();
+        user.setAccountNumber(accountNumber);
+        user = userService.selectBySelective(user);
+        int userId = user.getId();
+
+        List<UserAddress> userAddressList = userAddressService.selectByUserId(userId);
+        return userAddressList;
+    }
+    /**
+     * Created by simple on 2017/03/22.
+     * 根据用户的userAddressId获得我的收货地址数据  需要登录
+     * 返回UserAddress
+     */
+    @RequestMapping("/getUserAddressByUserAddressId_authority")
+    public @ResponseBody UserAddress getUserAddressByUserAddressId(HttpServletResponse response,HttpServletRequest request)
+            throws IOException, NoSuchAlgorithmException {
+
+        Integer userAddressId = Integer.parseInt(request.getParameter("userAddressId"));
+        UserAddress userAddress = userAddressService.selectByPrimaryKey(userAddressId);
+        return userAddress;
+    }
+    /**
+     * Created by simple on 2017/03/22.
+     * 根据用户的userAddressId更新我的收货地址数据  需要登录
+     * 更新成功，返回{flat:true},否则返回{flat:false}
+     */
+    @RequestMapping("/updateUserAddressByUserAddressId_authority")
+    public @ResponseBody String updateUserAddressByUserAddressId(HttpServletResponse response,HttpServletRequest request)
+            throws IOException, NoSuchAlgorithmException {
+
+        Integer userAddressId = Integer.parseInt(request.getParameter("userAddressId"));
+        String realName=request.getParameter("realName");
+        String phoneNumber=request.getParameter("phoneNumber");
+        String sheng=request.getParameter("sheng");
+        String shi=request.getParameter("shi");
+        String qu=request.getParameter("qu");
+        String detailAddress=request.getParameter("detailAddress");
+        String postalcode=request.getParameter("postalcode");
+
+        UserAddress userAddress=new UserAddress();
+        userAddress.setUserAddressId(userAddressId);
+        userAddress.setSheng(sheng);
+        userAddress.setShi(shi);
+        userAddress.setQu(qu);
+        userAddress.setDetailAddress(detailAddress);
+        userAddress.setPostalcode(postalcode);
+        userAddress.setRealName(realName);
+        userAddress.setPhoneNumber(phoneNumber);
+
+        int count = userAddressService.updateByPrimaryKeySelective(userAddress);
+        if(count==1)
+        {
+            return "{\"flat\":true,\"userAddressId\":"+userAddressId+"}";
+        }
+        else{
+            return "{\"flat\":false}";
+        }
+    }
 
 
 }

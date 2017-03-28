@@ -28,6 +28,10 @@
         <mapper resource="mapper/BusinessMapper.xml"/>
         <mapper resource="mapper/BusinessClothMapper.xml"/>
         <mapper resource="mapper/BusinessLogoMapper.xml"/>
+        <mapper resource="mapper/MyDiyClothMapper.xml"/>
+        <mapper resource="mapper/UserAddressMapper.xml"/>
+        <mapper resource="mapper/ShopOrdersMapper.xml"/>
+        <mapper resource="mapper/ShopOrdersDetailMapper.xml"/>
     </mappers>
 
 </configuration>

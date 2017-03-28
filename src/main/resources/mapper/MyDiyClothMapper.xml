@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.simple.loveDingZhi.mapper.MyDiyClothMapper" >
+  <resultMap id="BaseResultMap" type="com.simple.loveDingZhi.po.MyDiyCloth" >
+    <id column="my_diy_cloth_id" property="myDiyClothId" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="business_cloth_id" property="businessClothId" jdbcType="INTEGER" />
+    <result column="logo_id" property="logoId" jdbcType="INTEGER" />
+    <result column="is_business_logo" property="isBusinessLogo" jdbcType="BIT" />
+    <result column="diy_img_url" property="diyImgUrl" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    my_diy_cloth_id, user_id, business_cloth_id, logo_id, is_business_logo, diy_img_url
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.simple.loveDingZhi.po.MyDiyClothExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from my_diy_cloth
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from my_diy_cloth
+    where my_diy_cloth_id = #{myDiyClothId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from my_diy_cloth
+    where my_diy_cloth_id = #{myDiyClothId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.simple.loveDingZhi.po.MyDiyClothExample" >
+    delete from my_diy_cloth
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.simple.loveDingZhi.po.MyDiyCloth" >
+    insert into my_diy_cloth (my_diy_cloth_id, user_id, business_cloth_id, 
+      logo_id, is_business_logo, diy_img_url
+      )
+    values (#{myDiyClothId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{businessClothId,jdbcType=INTEGER}, 
+      #{logoId,jdbcType=INTEGER}, #{isBusinessLogo,jdbcType=BIT}, #{diyImgUrl,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.simple.loveDingZhi.po.MyDiyCloth" >
+    insert into my_diy_cloth
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="myDiyClothId != null" >
+        my_diy_cloth_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="businessClothId != null" >
+        business_cloth_id,
+      </if>
+      <if test="logoId != null" >
+        logo_id,
+      </if>
+      <if test="isBusinessLogo != null" >
+        is_business_logo,
+      </if>
+      <if test="diyImgUrl != null" >
+        diy_img_url,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="myDiyClothId != null" >
+        #{myDiyClothId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="businessClothId != null" >
+        #{businessClothId,jdbcType=INTEGER},
+      </if>
+      <if test="logoId != null" >
+        #{logoId,jdbcType=INTEGER},
+      </if>
+      <if test="isBusinessLogo != null" >
+        #{isBusinessLogo,jdbcType=BIT},
+      </if>
+      <if test="diyImgUrl != null" >
+        #{diyImgUrl,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.simple.loveDingZhi.po.MyDiyClothExample" resultType="java.lang.Integer" >
+    select count(*) from my_diy_cloth
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update my_diy_cloth
+    <set >
+      <if test="record.myDiyClothId != null" >
+        my_diy_cloth_id = #{record.myDiyClothId,jdbcType=INTEGER},
+      </if>
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=INTEGER},
+      </if>
+      <if test="record.businessClothId != null" >
+        business_cloth_id = #{record.businessClothId,jdbcType=INTEGER},
+      </if>
+      <if test="record.logoId != null" >
+        logo_id = #{record.logoId,jdbcType=INTEGER},
+      </if>
+      <if test="record.isBusinessLogo != null" >
+        is_business_logo = #{record.isBusinessLogo,jdbcType=BIT},
+      </if>
+      <if test="record.diyImgUrl != null" >
+        diy_img_url = #{record.diyImgUrl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update my_diy_cloth
+    set my_diy_cloth_id = #{record.myDiyClothId,jdbcType=INTEGER},
+      user_id = #{record.userId,jdbcType=INTEGER},
+      business_cloth_id = #{record.businessClothId,jdbcType=INTEGER},
+      logo_id = #{record.logoId,jdbcType=INTEGER},
+      is_business_logo = #{record.isBusinessLogo,jdbcType=BIT},
+      diy_img_url = #{record.diyImgUrl,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.simple.loveDingZhi.po.MyDiyCloth" >
+    update my_diy_cloth
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="businessClothId != null" >
+        business_cloth_id = #{businessClothId,jdbcType=INTEGER},
+      </if>
+      <if test="logoId != null" >
+        logo_id = #{logoId,jdbcType=INTEGER},
+      </if>
+      <if test="isBusinessLogo != null" >
+        is_business_logo = #{isBusinessLogo,jdbcType=BIT},
+      </if>
+      <if test="diyImgUrl != null" >
+        diy_img_url = #{diyImgUrl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where my_diy_cloth_id = #{myDiyClothId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.simple.loveDingZhi.po.MyDiyCloth" >
+    update my_diy_cloth
+    set user_id = #{userId,jdbcType=INTEGER},
+      business_cloth_id = #{businessClothId,jdbcType=INTEGER},
+      logo_id = #{logoId,jdbcType=INTEGER},
+      is_business_logo = #{isBusinessLogo,jdbcType=BIT},
+      diy_img_url = #{diyImgUrl,jdbcType=VARCHAR}
+    where my_diy_cloth_id = #{myDiyClothId,jdbcType=INTEGER}
+  </update>
+  <!--****************************************************************************************************-->
+  <resultMap id="MyDiyClothVoResultMap" type="com.simple.loveDingZhi.po.MyDiyClothVo" extends="BaseResultMap" >
+    <!--MyDiyCloth表使用继承-->
+
+    <!--BusinessCloth表-->
+    <association property="businessCloth" javaType="com.simple.loveDingZhi.po.BusinessCloth">
+      <id column="business_cloth_id" property="id" jdbcType="INTEGER" />
+      <result column="caption" property="caption" jdbcType="VARCHAR" />
+      <result column="img_url" property="imgUrl" jdbcType="VARCHAR" />
+      <result column="businesser" property="businesser" jdbcType="INTEGER" />
+      <result column="sale_count" property="saleCount" jdbcType="INTEGER" />
+      <result column="price" property="price" jdbcType="INTEGER" />
+      <result column="introduction" property="introduction" jdbcType="LONGVARCHAR" />
+    </association>
+    <!--user表-->
+    <association property="user" javaType="com.simple.loveDingZhi.po.User">
+      <!-- 这里的id为user的id，如果写上表示给user的id属性赋值 -->
+      <id column="businesser" property="id" jdbcType="INTEGER" />
+      <result column="account_number" property="accountNumber" jdbcType="VARCHAR" />
+      <result column="real_name" property="realName" jdbcType="VARCHAR" />
+      <result column="password" property="password" jdbcType="VARCHAR" />
+      <result column="user_name" property="userName" jdbcType="VARCHAR" />
+      <result column="phone_number" property="phoneNumber" jdbcType="VARCHAR" />
+      <result column="is_designer" property="isDesigner" jdbcType="BIT" />
+      <result column="is_business" property="isBusiness" jdbcType="BIT" />
+      <result column="tou_xiang_url" property="touXiangUrl" jdbcType="VARCHAR" />
+      <result column="address" property="address" jdbcType="VARCHAR" />
+      <result column="nickname" property="nickname" jdbcType="VARCHAR" />
+    </association>
+  </resultMap>
+
+  <insert id="insertSelectiveReturnId" parameterType="com.simple.loveDingZhi.po.MyDiyCloth" >
+    <selectKey keyProperty="myDiyClothId" order="AFTER" resultType="java.lang.Integer">
+      select LAST_INSERT_ID()
+    </selectKey>
+    insert into my_diy_cloth
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="myDiyClothId != null" >
+        my_diy_cloth_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="businessClothId != null" >
+        business_cloth_id,
+      </if>
+      <if test="logoId != null" >
+        logo_id,
+      </if>
+      <if test="isBusinessLogo != null" >
+        is_business_logo,
+      </if>
+      <if test="diyImgUrl != null" >
+        diy_img_url,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="myDiyClothId != null" >
+        #{myDiyClothId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="businessClothId != null" >
+        #{businessClothId,jdbcType=INTEGER},
+      </if>
+      <if test="logoId != null" >
+        #{logoId,jdbcType=INTEGER},
+      </if>
+      <if test="isBusinessLogo != null" >
+        #{isBusinessLogo,jdbcType=BIT},
+      </if>
+      <if test="diyImgUrl != null" >
+        #{diyImgUrl,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+  <select id="selectDiyClothDetailsByMyDiyClothId" parameterType="java.lang.Integer" resultMap="MyDiyClothVoResultMap">
+    select tb_my_diy_cloth.business_cloth_id,
+    tb_my_diy_cloth.is_business_logo,
+    tb_business_cloth.price,
+    tb_user.user_name
+    from my_diy_cloth tb_my_diy_cloth LEFT JOIN business_cloth tb_business_cloth on tb_my_diy_cloth.business_cloth_id=tb_business_cloth.id
+    left join user tb_user on tb_business_cloth.businesser=tb_user.id
+    where tb_my_diy_cloth.my_diy_cloth_id=#{myDiyClothId}
+  </select>
+</mapper>
